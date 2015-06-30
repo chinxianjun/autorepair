@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Repairmen:</b>
+  <%= @dispatching.repairmen %>
+</p>
+
+<p>
+  <b>Dispatcher:</b>
+  <%= @dispatching.dispatcher_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_dispatching_path(@dispatching) %> |
+<%= link_to 'Back', dispatchings_path %>

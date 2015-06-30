@@ -1,0 +1,41 @@
+<div class="content-set">
+  <div class="bd">
+    <dl class="details-info">
+      <dd>
+        <!--table样式{-->
+        <table class="admin-table table-style1">
+          <thead>
+          <tr>
+            <th>名称</th>
+            <td>图号</td>
+            <td>厂家代码</td>
+            <td>厂家名称</td>
+            <td>数量</td>
+            <td>单价</td>
+            <td>状态</td>
+            <td colspan="2">操作</td>
+          </tr>
+          </thead>
+          <tbody>
+          <% if @drawing_uniq.nil? %>
+              <tr><td>没有可供显示的数据!</td></tr>
+          <% else %>
+              <% @drawing_uniq.each do |du| %>
+                  <tr>
+                    <th><%= du.name %></th>
+                    <td><%= du.drawing %></td>
+                    <td><%= du.factory_code %></td>
+                    <td><%= du.factory %></td>
+                    <td><%= Oldpart.where(:drawing => du.drawing).size %></td>
+                    <td><%= du.price %></td>
+                    <td><%= du.status %></td>
+                    <td></td>
+                  </tr>
+              <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      </dd>
+    </dl>
+  </div>
+</div>

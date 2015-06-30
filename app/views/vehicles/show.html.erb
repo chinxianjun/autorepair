@@ -1,0 +1,210 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>车辆详情<span class="info"></span></h2>
+        <!--客户信息{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>车主信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>车主姓名</th>
+                                    <td><%= @owner.fullname unless @owner.nil? %></td>
+                                </tr>
+                                <tr>
+                                    <th>联系电话</th>
+                                    <td><%= @owner.phone unless @owner.nil? %></td>
+                                </tr>
+                                <tr>
+                                    <th>作业地点</th>
+                                    <td><%= @owner.workplace unless @owner.nil? %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="content-set">
+            <div class="hd">
+                <h2>保修信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>行驶里程</th>
+                                    <td><%= @vehicle.driving_range %></td>
+                                </tr>
+                                <tr>
+                                    <th>购车日期</th>
+                                    <td><%= @vehicle.purchase_on %></td>
+                                </tr>
+                                <tr>
+                                    <th>保修卡号</th>
+                                    <td><%= @vehicle.warranty_card %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="content-set">
+            <div class="hd">
+                <h2>发动机信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>发动机编号</th>
+                                    <td><%= @vehicle.engine_number %></td>
+                                </tr>
+                                <tr>
+                                    <th>发动机型号</th>
+                                    <td><%= @vehicle.engine %></td>
+                                </tr>
+                                <tr>
+                                    <th>订货号</th>
+                                    <td><%= @vehicle.order_number %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="content-set">
+            <div class="hd">
+                <h2>变速箱信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>变速箱型号</th>
+                                    <td><%= @vehicle.gearbox_type %></td>
+                                </tr>
+                                <tr>
+                                    <th>变速箱编号</th>
+                                    <td><%= @vehicle.gearbox_drawing %></td>
+                                </tr>
+                                <tr>
+                                    <th>用户编号</th>
+                                    <td><%= @vehicle.user_number %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="content-set">
+            <div class="hd">
+                <h2>整车信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                  <th>底盘号</th>
+                                  <td><%= @vehicle.chassis_number %></td>
+                                </tr>
+                                <tr>
+                                    <th>车型</th>
+                                    <td><%= @vehicle.model %></td>
+                                </tr>
+                                <tr>
+                                  <th>车牌号</th>
+                                  <td><%= @vehicle.car_number %></td>
+                                </tr>
+                                <tr>
+                                    <th>第一传动图号</th>
+                                    <td><%= @vehicle.first_drive_shaft_drawing %></td>
+                                </tr>
+                                <tr>
+                                    <th>第一传动厂家代码</th>
+                                    <td><%= @vehicle.first_drive_shaft_code %></td>
+                                </tr>
+                                <tr>
+                                    <th>第二传动图号</th>
+                                    <td><%= @vehicle.second_drive_shaft_drawing %></td>
+                                </tr>
+                                <tr>
+                                    <th>第二传动厂家代码</th>
+                                    <td><%= @vehicle.second_drive_shaft_code %></td>
+                                </tr>
+                                <tr>
+                                    <th>第三传动图号</th>
+                                    <td><%= @vehicle.third_drive_shaft_drawing %></td>
+                                </tr>
+                                <tr>
+                                    <th>第三传动厂家代码</th>
+                                    <td><%= @vehicle.third_drive_shaft_code %></td>
+                                </tr>
+                                <tr>
+                                    <th>水箱图号</th>
+                                    <td><%= @vehicle.tank_drawing %></td>
+                                </tr>
+                                <tr>
+                                    <th>水箱厂家代码</th>
+                                    <td><%= @vehicle.tank_code %></td>
+                                </tr>
+                                <tr>
+                                    <th>板簧图号</th>
+                                    <td><%= @vehicle.spring_drawing %></td>
+                                </tr>
+                                <tr>
+                                    <th>板簧厂家代码</th>
+                                    <td><%= @vehicle.spring_code %></td>
+                                </tr>
+                                <tr>
+                                  <th>车牌号</th>
+                                  <td><%= @vehicle.car_number %></td>
+                                </tr>
+                                <tr>
+                                    <th>第一桥</th>
+                                    <td><%= @vehicle.first_bridge %></td>
+                                </tr>
+                                <tr>
+                                    <th>第二桥</th>
+                                    <td><%= @vehicle.second_bridge %></td>
+                                </tr>
+                                <tr>
+                                    <th>第三桥</th>
+                                    <td><%= @vehicle.third_bridge %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="tool-bar tr clrfix">
+            <button class="edit-btn editVehicle">编辑</button>
+            <button class="cancel-btn">返回</button>
+        </div>
+        <!----}}}}}}content-set---->
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

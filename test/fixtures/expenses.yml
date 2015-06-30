@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  material_cost: 1.5
+  working_hours_cost: 1.5
+  communication_cost: 1.5
+  service_cat_cost: 1.5
+  meal_cost: 1.5
+  travel_expense: 1.5
+
+two:
+  material_cost: 1.5
+  working_hours_cost: 1.5
+  communication_cost: 1.5
+  service_cat_cost: 1.5
+  meal_cost: 1.5
+  travel_expense: 1.5

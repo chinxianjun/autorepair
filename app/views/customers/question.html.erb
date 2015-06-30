@@ -1,0 +1,798 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= javascript_include_tag "car_buying" %>
+    <%= javascript_include_tag "part_buying" %>
+    <%= javascript_include_tag "customer_flow" %>
+    <%= javascript_include_tag "complaint" %>
+    <%= javascript_include_tag "consulting" %>
+<% end %>
+
+<!---main-content{{{{--->
+<div class="main-content">
+<!---admin-content{{{{{--->
+<div class="admin-content">
+<h2>选择客户问题类别<span class="info"></span></h2>
+
+<div class="tabs">
+  <ul>
+    <% if current_user.allowed_to?(current_user, :view_customer, @current_company) %>
+        <li><a href="javascript:void(0)" id="J-flowCreate"><span>维修</span></a>
+        </li>
+    <% end %>
+    <% if current_user.allowed_to?(current_user, :view_car_buying, @current_company) %>
+        <li><a href="javascript:void(0)" id="J-carBuying"><span>购车</span></a>
+        </li>
+    <% end %>
+    <% if current_user.allowed_to?(current_user, :view_part_buying, @current_company) %>
+        <li><a href="javascript:void(0)" id="J-partBuying"><span>购件</span></a>
+        </li>
+    <% end %>
+    <% if current_user.allowed_to?(current_user, :view_consulting, @current_company) %>
+        <li><a href="javascript:void(0)" id="J-consulting"><span>咨询</span></a>
+        </li>
+    <% end %>
+    <% if current_user.allowed_to?(current_user, :view_complaint, @current_company) %>
+        <li><a href="javascript:void(0)" id="J-complaint"><span>投诉</span></a>
+        </li>
+    <% end %>
+  </ul>
+</div>
+<!----J-flow_create{---->
+<div id="J-flow_create">
+  <div class="workflow-set">
+    <div class="bd">
+      <h2>维修列表<span class="info"></span></h2>
+      <!--无联系人时显示 同时保留下面的“添加联系人按钮”{{
+      <div class="no-content">暂无联系人信息</div>
+      <ul class="contact-list"></ul>
+      }}无联系人时显示-->
+      <ul class="workflow-list" id="J-repairs">
+        <li class="workflow-title clrfix">
+          <span class="customer">客户姓名</span>
+          <span class="phone">客户电话</span>
+          <span class="workflowDate">创建日期</span>
+          <span class="workflowRepair">维修工程师</span>
+          <span class="workflowCreator">创建人</span>
+          <span class="workflowStatus">状态</span>
+          <span class="tool">操作</span>
+        </li>
+        <% if (@customer.workflows.any?) %>
+            <% @customer.workflows.each do |workflow| %>
+                <li>
+                  <div class="workflow-item clrfix">
+                    <span class="customer"><%= @customer.fullname %></span>
+                    <span class="phone"><%= @customer.phone %></span>
+                    <span class="workflowDate"><%= workflow.created_at.strftime('%Y-%m-%d %H:%M:%S') %></span>
+                    <span class="workflowRepair"><%= workflow.users.first unless workflow.users.nil? %></span>
+                    <span class="workflowCreator"><%= workflow.creator %></span>
+                    <span class="workflowStatus"><%= workflow.status %></span>
+                                    <span class="tool" id="J-r-1">
+                                      <a href="javascript:void(0)" class="edit-workflow"
+                                         rel="<%= @customer.fullname %>|<%= @customer.phone %>|<%= workflow.created_at.strftime('%Y-%m-%d %H:%M:%S') %>|<%= workflow.creator %>|<%= workflow.status %>|<%= workflow.faultdesc.place %>|<%= workflow.faultdesc.car_number %>|<%= workflow.faultdesc.description %>|<%= workflow.id %>|">编辑</a>
+                                      <a href="/workflows/<%= workflow.id %>" class="delete-workflow deleteItem">删除</a></span>
+                  </div>
+                  <div class="workflowEditor"></div>
+                </li>
+            <% end %>
+        <% end %>
+      </ul>
+    </div>
+    <!----}}bd---->
+    <div class="add-workflow">
+      <div class="btn-box">
+        <button type="button" class="add-workflow-btn">创建维修流程</button>
+      </div>
+      <div id="J-add-workflow-container" class="workflowEditor">
+        <!--添加workflow表单-->
+        <div id="J-add-workflow" class="workflow-form">
+          <h3>添加维修流程信息</h3>
+
+          <form method="post" action="" id="J-add-workflow-form">
+            <dl class="clrfix">
+              <dt>客户姓名</dt>
+              <dd>
+                <input type="text" name="customer_name" readonly="readonly" class="inp inp2" value="<%= @customer.fullname %>"/>
+              </dd>
+              <input type="hidden" id="J-workflow_customer_id" value="<%= @customer.id %>"/>
+              <dt>客户电话</dt>
+              <dd>
+                <input type="text" name="customer_phone" readonly="readonly" class="inp inp2"
+                       value="<%= @customer.phone %>"/></dd>
+              <dt>备用电话</dt>
+              <dd>
+                <input type="text" name="customer_phone_swap" readonly="readonly" class="inp inp2" value="<%= @customer.phone_swap %>"/>
+              <dd>
+              <dt>创建人</dt>
+              <dd>
+                <input type="text" name="workflow_creator" readonly="readonly" class="inp inp2" value="<%= current_user.fullname %>"/>
+              <dd>
+              <dt>故障地点</dt>
+              <dd>
+                <input type="text" name="fault_place" class="inp inp2" value=""/>
+              </dd>
+              <dt>车牌号</dt>
+              <dd>
+                <input type="text" name="fault_car_number" class="inp inp2" value=""/>
+              </dd>
+              <dt style="height: 150px;">故障描述</dt>
+              <dd  style="height: 150px;">
+                <textarea type="text" name="fault_description" class="textarea-business"></textarea>
+              </dd>
+            </dl>
+            <div class="save-workflow-btn">
+              <button type="submit" class="button add-workflow-save">保存</button>
+              <button type="cancel" class="button add-workflow-cancel cancel-btn">取消</button>
+            </div>
+          </form>
+        </div>
+        <!--添加workflow表单-->
+      </div>
+    </div>
+  </div>
+  <!--编辑workflow表单信息-->
+  <div id="J-edit-workflow" class="workflow-form">
+    <h3>编辑维修流程表单</h3>
+
+    <form method="post" action="" id="J-edit-workflow-form">
+      <dl class="clrfix">
+        <dt>客户姓名</dt>
+        <dd>
+          <input type="text" name="customer_name" readonly="readonly" class="inp inp2" value="<%= @customer.fullname %>"/>
+        </dd>
+        <dt>客户电话</dt>
+        <dd>
+          <input type="text" name="customer_phone" readonly="readonly" class="inp inp2" value="<%= @customer.phone %>"/>
+        </dd>
+        <dt>备用电话</dt>
+        <dd>
+          <input type="text" name="customer_phone_swap" readonly="readonly" class="inp inp2" value="<%= @customer.phone_swap %>"/>
+        </dd>
+        <dt>创建人</dt>
+        <dd>
+          <input type="text" name="workflow_creator" readonly="readonly" class="inp inp2" value="<%= current_user.fullname %>"/>
+        </dd>
+        <dt>故障地点</dt>
+        <dd><input type="text" name="fault_place" class="inp inp2" value=""/>
+        </dd>
+        <dt>车牌号</dt>
+        <dd>
+          <input type="text" name="fault_car_number" class="inp inp2" value=""/>
+        </dd>
+        <dt  style="height: 150px;">故障描述</dt>
+        <dd  style="height: 150px;">
+          <textarea type="text" name="fault_description" class="textarea-business"></textarea>
+        </dd>
+      </dl>
+      <div class="save-workflow-btn">
+        <input type="hidden" name="workflow_id" value="" id="U-workflow_id"/>
+        <button type="submit" class="button edit-workflow-save">保存</button>
+        <button type="cancel" class="button edit-workflow-cancel cancel-btn">取消</button>
+      </div>
+    </form>
+  </div>
+  <!--编辑购件表单信息-->
+</div>
+<!----}J-flow_create---->
+<!----J-car_buying{---->
+<div id="J-car_buying" style="display: none;">
+  <div class="content-set">
+    <div class="bd">
+      <h2>购车列表<span class="info"></span></h2>
+      <!--无联系人时显示 同时保留下面的“添加联系人按钮”{{
+      <div class="no-content">暂无联系人信息</div>
+      <ul class="contact-list"></ul>
+      }}无联系人时显示-->
+      <ul class="contact-list" id="J-car_buyings">
+        <li class="contact-title clrfix">
+          <span class="customer">客户姓名</span>
+          <span class="phone">客户电话</span>
+          <span class="factory">厂家</span>
+          <span class="kind">车型</span>
+          <span class="price_range">价位</span>
+          <span class="referral">推荐人</span>
+          <span class="manager">业务经理</span>
+          <span class="salesman">业务员</span>
+          <span class="status">状态</span>
+          <span class="tool">操作</span>
+        </li>
+        <% if (@customer.car_buyings.any?) %>
+            <% @customer.car_buyings.each do |carbuying| %>
+                <li>
+                  <div class="contact-item clrfix">
+                    <span class="customer"><%= @customer.fullname %></span>
+                    <span class="phone"><%= @customer.phone %></span>
+                    <span class="factory"><%= carbuying.factory %></span>
+                    <span class="kind"><%= carbuying.kind %></span>
+                    <span class="price_range"><%= carbuying.price_range %></span>
+                    <span class="referral"><%= carbuying.referral %></span>
+                    <span class="manager"><%= carbuying.manager %></span>
+                    <span class="salesman"><%= carbuying.salesman %></span>
+                    <span class="status"><%= carbuying.status %></span>
+                                    <span class="tool" id="J-c-1">
+                                      <a href="javascript:void(0)" class="edit-contact"
+                                         rel="<%= @customer.fullname %>|<%= @customer.phone %>|<%= carbuying.factory %>|<%= carbuying.kind %>|<%= carbuying.price_range %>|<%= carbuying.referral %>|<%= carbuying.manager %>|<%= carbuying.salesman %>|<%= carbuying.status %>|<%= carbuying.id %>|">编辑</a>
+                                      <a href="/car_buyings/<%= carbuying.id %>" class="delete-contact deleteItem">删除</a></span>
+                  </div>
+                  <div class="editor"></div>
+                </li>
+            <% end %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="add-contact">
+      <div class="btn-box">
+        <button type="button" class="add-contact-btn">添加购车信息</button>
+      </div>
+      <div id="J-add-contact-container" class="editor">
+        <!--添加购车表单-->
+        <div id="J-add-contact" class="contact-form">
+          <h3>添加购车信息</h3>
+
+          <form method="post" action="" id="J-add-contact-form">
+            <dl class="clrfix">
+              <dt>客户姓名</dt>
+              <dd>
+                <input type="text" name="contact_name" value="<%= @customer.fullname %>" readonly="readonly" class="inp inp2 focus"/>
+              </dd>
+              <input type="hidden" name="customer_id" id="customer_id" value="<%= @customer.id %>"/>
+              <dt>客户电话</dt>
+              <dd>
+                <input type="text" name="phone" value="<%= @customer.phone %>" readonly="readonly" class="inp inp2 focus"/>
+              </dd>
+              <dt>厂家</dt>
+              <dd>
+                <input type="text" name="factory" value="" class="inp inp2 focus"/>
+              </dd>
+              <dt>车型</dt>
+              <dd>
+                <input type="text" name="kind" value="" class="inp inp2 focus"/>
+              </dd>
+              <dt>价位</dt>
+              <dd>
+                <div class="radio" id="J-price_range">
+                  <input type="radio" id="J-price_range1" name="price_range" value="0"/>
+                  <label for="J-price_range1">20万以内</label>
+                  <input type="radio" id="J-price_range2" name="price_range" value="1"/>
+                  <label for="J-price_range2">20-30万</label>
+                  <input type="radio" id="J-price_range3" name="price_range" value="2"/>
+                  <label for="J-price_range3">30-40万</label>
+                  <input type="radio" id="J-price_range4" name="price_range" value="3"/>
+                  <label for="J-price_range4">40万以上</label>
+                </div>
+              </dd>
+              <dt>推荐人</dt>
+              <dd>
+                <input type="text" name="referral" value="" class="inp inp2 focus"/>
+              </dd>
+              <dt>业务经理</dt>
+              <dd>
+                <input type="text" name="manager" value="" class="inp inp2 focus"/>
+              </dd>
+              <dt>业务员</dt>
+              <dd>
+                <input type="text" name="salesman" value="" class="inp inp2 focus"/>
+              </dd>
+            </dl>
+            <div class="save-btn">
+              <button type="submit" class="button add-save">保存</button>
+              <button type="cancel" class="button add-cancel cancel-btn">取消</button>
+            </div>
+          </form>
+        </div>
+        <!--添加购车表单-->
+      </div>
+    </div>
+  </div>
+  <!--编辑购车表单信息-->
+  <div id="J-edit-contact" class="contact-form">
+    <h3>编辑购车表单</h3>
+
+    <form method="post" action="" id="J-edit-contact-form">
+      <dl class="clrfix">
+        <dt>客户姓名</dt>
+        <dd>
+          <input type="text" name="contact_name" value="" class="inp inp2 focus"/>
+        </dd>
+        <dt>客户电话</dt>
+        <dd><input type="text" name="phone" value="" class="inp inp2 focus"/>
+        </dd>
+        <dt>厂家</dt>
+        <dd><input type="text" name="factory" value="" class="inp inp2 focus"/>
+        </dd>
+        <dt>车型</dt>
+        <dd><input type="text" name="kind" value="" class="inp inp2 focus"/>
+        </dd>
+        <dt>价位</dt>
+        <dd>
+          <div class="radio" id="U-price_range">
+            <input type="radio" id="U-price_range1" name="price_range" value="0" checked="checked"/>
+            <label for="U-price_range1">20万以内</label>
+            <input type="radio" id="U-price_range2" name="price_range" value="1"/>
+            <label for="U-price_range2">20-30万</label>
+            <input type="radio" id="U-price_range3" name="price_range" value="2"/>
+            <label for="U-price_range3">30-40万</label>
+            <input type="radio" id="U-price_range4" name="price_range" value="3"/>
+            <label for="U-price_range4">40万以上</label>
+          </div>
+        </dd>
+        <dt>推荐人</dt>
+        <dd><input type="text" name="referral" value="" class="inp inp2 focus"/>
+        </dd>
+        <dt>业务经理</dt>
+        <dd><input type="text" name="manager" value="" class="inp inp2 focus"/>
+        </dd>
+        <dt>业务员</dt>
+        <dd><input type="text" name="salesman" value="" class="inp inp2 focus"/>
+        </dd>
+        <dt>状态</dt>
+        <dd>
+          <div class="radio" id="U-status">
+            <input type="radio" id="U-status1" name="status" value="0"/>
+            <label for="U-status1">洽谈</label>
+            <input type="radio" id="U-status2" name="status" value="1"/>
+            <label for="U-status2">已购</label>
+            <input type="radio" id="U-status3" name="status" value="2"/>
+            <label for="U-status3">未购</label>
+          </div>
+        </dd>
+      </dl>
+      <div class="save-btn">
+        <input type="hidden" name="car_buying_id" value="" id="U-car_buying_id"/>
+        <button type="submit" class="button edit-save">保存</button>
+        <button type="cancel" class="button edit-cancel cancel-btn">取消</button>
+      </div>
+    </form>
+  </div>
+  <!--编辑购车表单信息-->
+</div>
+<!----}J-car_buying ---->
+<!----J-part_buying{---->
+<div id="J-part_buying" style="display: none;">
+  <div class="part-set">
+    <div class="bd">
+      <h2>购件列表<span class="info"></span></h2>
+      <!--无联系人时显示 同时保留下面的“添加联系人按钮”{{
+      <div class="no-content">暂无联系人信息</div>
+      <ul class="contact-list"></ul>
+      }}无联系人时显示-->
+      <ul class="part-list">
+        <li class="part-title clrfix">
+          <span class="customer">客户姓名</span>
+          <span class="phone">客户电话</span>
+          <span class="partName">配件名称</span>
+          <span class="partDrawing">配件图号</span>
+          <span class="partType">配件类别</span>
+          <span class="partFactoryName">配件厂家</span>
+          <span class="partCount">数量</span>
+          <span class="partUnitPrice">单价</span>
+          <span class="tool">操作</span>
+        </li>
+        <% if (@customer.part_buyings.any?) %>
+            <% @customer.part_buyings.each do |part| %>
+                <li>
+                  <div class="part-item clrfix">
+                    <span class="customer"><%= @customer.fullname %></span>
+                    <span class="phone"><%= @customer.phone %></span>
+                    <span class="partName"><%= part.part_name %></span>
+                    <span class="partDrawing"><%= part.part_drawing %></span>
+                    <span class="partType"><%= part.part_type %></span>
+                    <span class="partFactoryName"><%= part.factory_name %></span>
+                    <span class="partCount"><%= part.count %></span>
+                    <span class="partUnitPrice"><%= part.part_unit_price %></span>
+                                    <span class="tool" id="J-p-1">
+                                      <a href="#" class="edit-part"
+                                         rel="<%= @customer.fullname %>|<%= @customer.phone %>|<%= part.part_name %>|<%= part.part_drawing %>|<%= part.part_type %>|<%= part.factory_name %>|<%= part.count %>|<%= part.part_unit_price %>|<%= part.part_sub_total %>|<%= part.id %>">编辑</a>
+                                      <a href="/part_buyings/<%= part.id %>" class="delete-part deleteItem">删除</a></span>
+                  </div>
+                  <div class="partEditor"></div>
+                </li>
+            <% end %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="add-part">
+      <div class="btn-box">
+        <button type="button" class="add-part-btn">添加购件信息</button>
+      </div>
+      <div id="J-add-part-container" class="partEditor">
+        <!--添加购件表单-->
+        <div id="J-add-part" class="part-form">
+          <h3>添加购买配件信息</h3>
+
+          <form method="post" action="" id="J-add-part-form">
+            <dl class="clrfix">
+              <dt>客户姓名</dt>
+              <dd>
+                <input type="text" name="customer" value="<%= @customer.fullname %>" readonly="readonly" class="inp inp2 focus"/>
+              </dd>
+              <dt>客户电话</dt>
+              <dd>
+                <input type="text" name="phone" value="<%= @customer.phone %>" readonly="readonly" class="inp inp2 focus"/>
+              </dd>
+              <dt>配件名称</dt>
+              <dd>
+                <input type="text" name="partName" value="" class="inp inp2 focus"/>
+              </dd>
+              <dt>配件图号</dt>
+              <dd>
+                <input type="text" name="partDrawing" value="" class="inp inp2 focus"/>
+              </dd>
+              <dt>配件类别</dt>
+              <dd>
+                <div class="radio" id="J-partType">
+                  <input type="radio" id="J-partType1" name="partType" value="0"/>
+                  <label for="J-partType1">潍柴</label>
+                  <input type="radio" id="J-partType2" name="partType" value="1"/>
+                  <label for="J-partType2">陕汽</label>
+                  <input type="radio" id="J-partType3" name="partType" value="2"/>
+                  <label for="J-partType3">北奔</label>
+                  <input type="radio" id="J-partType4" name="partType" value="3"/>
+                  <label for="J-partType4">法士特</label>
+                </div>
+              </dd>
+              <dt>厂家名称</dt>
+              <dd>
+                <input type="text" name="partFactoryName" value="" class="inp inp2 focus"/>
+              </dd>
+              <dt>厂家代码</dt>
+              <dd>
+                <input type="text" name="partFactoryCode" value="" class="inp inp2 focus"/>
+              </dd>
+              <dt>数量</dt>
+              <dd>
+                <input type="text" name="partCount" value="" class="inp inp2 focus"/>
+              </dd>
+              <dt>单价</dt>
+              <dd>
+                <input type="text" name="partUnitPrice" value="" class="inp inp2 focus"/>
+              </dd>
+            </dl>
+            <div class="save-part-btn">
+              <button type="submit" class="button add-part-save">保存</button>
+              <button type="cancel" class="button add-part-cancel cancel-btn">取消</button>
+            </div>
+          </form>
+        </div>
+        <!--添加购件表单-->
+      </div>
+    </div>
+  </div>
+  <!--编辑购件表单信息-->
+  <div id="J-edit-part" class="part-form">
+    <h3>编辑购件表单</h3>
+
+    <form method="post" action="" id="J-edit-part-form">
+      <dl class="clrfix">
+        <dt>客户姓名</dt>
+        <dd>
+          <input type="text" name="customer" value="<%= @customer.fullname %>" readonly="readonly" class="inp inp2 focus"/>
+        </dd>
+        <input type="hidden" name="customer_id" value="<%= @customer.id %>" id="J-part_customer_id"/>
+        <dt>客户电话</dt>
+        <dd>
+          <input type="text" name="phone" value="" readonly="readonly" class="inp inp2 focus"/>
+        </dd>
+        <dt>配件名称</dt>
+        <dd><input type="text" name="partName" value="" class="inp inp2 focus"/>
+        </dd>
+        <dt>配件图号</dt>
+        <dd>
+          <input type="text" name="partDrawing" value="" class="inp inp2 focus"/>
+        </dd>
+        <dt>配件类别</dt>
+        <dd>
+          <div class="radio" id="U-partType">
+            <input type="radio" id="U-partType1" name="partType" value="0"/>
+            <label for="J-partType1">潍柴</label>
+            <input type="radio" id="U-partType2" name="partType" value="1"/>
+            <label for="J-partType2">陕汽</label>
+            <input type="radio" id="U-partType3" name="partType" value="2"/>
+            <label for="J-partType3">北奔</label>
+            <input type="radio" id="U-partType4" name="partType" value="3"/>
+            <label for="J-partType4">法士特</label>
+          </div>
+        </dd>
+        <dt>厂家名称</dt>
+        <dd>
+          <input type="text" name="partFactoryName" value="" class="inp inp2 focus"/>
+        </dd>
+        <dt>厂家代码</dt>
+        <dd>
+          <input type="text" name="partFactoryCode" value="" class="inp inp2 focus"/>
+        </dd>
+        <dt>数量</dt>
+        <dd>
+          <input type="text" name="partCount" value="" class="inp inp2 focus"/>
+        </dd>
+        <dt>单价</dt>
+        <dd>
+          <input type="text" name="partUnitPrice" value="" class="inp inp2 focus"/>
+        </dd>
+      </dl>
+      <div class="save-part-btn">
+        <input type="hidden" name="part_buying_id" value="" id="U-part_buying_id"/>
+        <button type="submit" class="button edit-part-save">保存</button>
+        <button type="cancel" class="button edit-part-cancel cancel-btn">取消</button>
+      </div>
+    </form>
+  </div>
+  <!--编辑购件表单信息-->
+</div>
+<!----}J-part_buying---->
+<!----J-consulting_create{---->
+<div id="J-consulting_create" style="display: none;">
+  <div class="consulting-set">
+    <div class="bd">
+      <h2>维修列表<span class="info"></span></h2>
+      <!--无联系人时显示 同时保留下面的“添加联系人按钮”{{
+      <div class="no-content">暂无联系人信息</div>
+      <ul class="contact-list"></ul>
+      }}无联系人时显示-->
+      <ul class="consulting-list" id="J-consult">
+        <li class="consulting-title clrfix">
+          <span class="customer">客户姓名</span>
+          <span class="phone">客户电话</span>
+          <span class="consultingDate">创建日期</span>
+          <span class="consultingQuestion">问题</span>
+          <span class="consultingAnswer">答案</span>
+          <span class="consultingStatus">状态</span>
+          <span class="tool">操作</span>
+        </li>
+        <% if (@customer.consultings.any?) %>
+            <% @customer.consultings.each do |consulting| %>
+                <li>
+                  <div class="consulting-item clrfix">
+                    <span class="customer"><%= @customer.fullname %></span>
+                    <span class="phone"><%= @customer.phone %></span>
+                    <span class="consultingDate"><%= consulting.created_at.strftime('%Y-%m-%d %H:%M:%S') %></span>
+                    <span class="consultingQuestion"><%= consulting.question %></span>
+                    <span class="consultingAnswer"><%= consulting.answer %></span>
+                    <span class="consultingStatus"><%= consulting.status %></span>
+                                    <span class="tool" id="J-consult-1">
+                                      <a href="javascript:void(0)" class="edit-consulting"
+                                         rel="<%= @customer.fullname %>|<%= @customer.phone %>|<%= consulting.created_at.strftime('%Y-%m-%d %H:%M:%S') %>|<%= consulting.question %>|<%= consulting.answer %>|<%= consulting.status %>|<%= consulting.id %>|">编辑</a>
+                                      <a href="/consultings/<%= consulting.id %>" class="delete-consulting deleteItem">删除</a></span>
+                  </div>
+                  <div class="consultingEditor"></div>
+                </li>
+            <% end %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="add-consulting">
+      <div class="btn-box">
+        <button type="button" class="add-consulting-btn">添加咨询信息</button>
+      </div>
+      <div id="J-add-consulting-container" class="consultingEditor">
+        <!--添加咨询表单-->
+        <div id="J-add-consulting" class="consulting-form">
+          <h3>添加咨询表单</h3>
+
+          <form method="post" action="" id="J-add-consulting-form">
+            <dl class="clrfix">
+              <dt>客户姓名</dt>
+              <dd>
+                <input type="text" name="customer_name" readonly="readonly" class="inp inp2" value="<%= @customer.fullname %>"/>
+              </dd>
+              <dt>客户电话</dt>
+              <dd>
+                <input type="text" name="customer_phone" readonly="readonly" class="inp inp2" value="<%= @customer.phone %>"/>
+              </dd>
+              <dt>备用电话</dt>
+              <dd>
+                <input type="text" name="customer_phone_swap" readonly="readonly" class="inp inp2" value="<%= @customer.phone_swap %>"/>
+              </dd>
+              <dt  style="height: 150px;">问题</dt>
+              <dd  style="height: 150px;">
+                <textarea type="text" name="consultingQuestion" class="textarea-business"></textarea>
+              </dd>
+              <dt  style="height: 150px;">答案</dt>
+              <dd  style="height: 150px;">
+                <textarea type="text" name="consultingAnswer" class="textarea-business"></textarea>
+              </dd>
+            </dl>
+            <div class="save-consulting-btn">
+              <button type="submit" class="button add-consulting-save">保存</button>
+              <button type="cancel" class="button add-consulting-cancel cancel-btn">取消</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--编辑咨询表单信息-->
+    <div id="J-edit-consulting" class="consulting-form">
+      <h3>编辑咨询表单</h3>
+
+      <form method="post" action="" id="J-edit-consulting-form">
+        <dl class="clrfix">
+          <dt>客户姓名</dt>
+          <dd>
+            <input type="text" name="customer_name" readonly="readonly" class="inp inp2" value="<%= @customer.fullname %>"/>
+          </dd>
+          <dt>客户电话</dt>
+          <dd>
+            <input type="text" name="customer_phone" readonly="readonly" class="inp inp2" value="<%= @customer.phone %>"/>
+          </dd>
+          <dt>备用电话</dt>
+          <dd>
+            <input type="text" name="customer_phone_swap" readonly="readonly" class="inp inp2" value="<%= @customer.phone_swap %>"/>
+          </dd>
+          <dt>创建日期</dt>
+          <dd>
+            <input type="text" name="consultingDate" readonly="readonly" class="inp inp2" value="<%= current_user.fullname %>"/>
+          </dd>
+          <dt  style="height: 150px;">问题</dt>
+          <dd  style="height: 150px;">
+            <textarea type="text" name="consultingQuestion" class="textarea-business"></textarea>
+          </dd>
+          <dt  style="height: 150px;">答案</dt>
+          <dd  style="height: 150px;">
+            <textarea type="text" name="consultingAnswer" class="textarea-business"></textarea>
+          </dd>
+          <dt>状态</dt>
+          <dd>
+            <input type="text" name="consultingStatus" class="inp inp2" value=""/>
+          </dd>
+        </dl>
+        <div class="save-consulting-btn">
+          <input type="hidden" name="consulting_id" value="" id="U-consulting_id"/>
+          <button type="submit" class="button edit-consulting-save">保存</button>
+          <button type="cancel" class="button edit-consulting-cancel cancel-btn">取消</button>
+        </div>
+      </form>
+    </div>
+    <!--编辑咨询信息-->
+  </div>
+</div>
+<!----}J-consulting_create---->
+<!----J-complaint_create{---->
+<div id="J-complaint_create" style="display: none;">
+  <div class="complaint-set">
+    <div class="bd">
+      <h2>投诉列表<span class="info"></span></h2>
+      <!--无联系人时显示 同时保留下面的“添加联系人按钮”{{
+      <div class="no-content">暂无联系人信息</div>
+      <ul class="contact-list"></ul>
+      }}无联系人时显示-->
+      <ul class="complaint-list" id="J-complaint_list">
+        <li class="complaint-title clrfix">
+          <span class="customer">客户姓名</span>
+          <span class="phone">客户电话</span>
+          <span class="complaintDate">创建日期</span>
+          <span class="complaintCategory">类别</span>
+          <span class="complaintDescription">投诉信息</span>
+          <span class="complaintStatus">状态</span>
+          <span class="tool">操作</span>
+        </li>
+        <% if (@customer.complaints.any?) %>
+            <% @customer.complaints.each do |complaint| %>
+                <li>
+                  <div class="complaint-item clrfix">
+                    <span class="customer"><%= @customer.fullname %></span>
+                    <span class="phone"><%= @customer.phone %></span>
+                    <span class="complaintDate"><%= complaint.created_at.strftime('%Y-%m-%d %H:%M:%S') %></span>
+                    <span class="complaintCategory"><%= complaint.category %></span>
+                    <span class="complaintDescription"><%= complaint.description %></span>
+                    <span class="complaintStatus"><%= complaint.status %></span>
+                    <span class="tool" id="J-complaint-1">
+                      <a href="javascript:void(0)" class="edit-complaint"
+                         rel="<%= @customer.fullname %>|<%= @customer.phone %>|<%= complaint.created_at.strftime('%Y-%m-%d %H:%M:%S') %>|<%= complaint.category %>|<%= complaint.description %>|<%= complaint.status %>|<%= complaint.id %>|">编辑</a>
+                      <a href="/complaints/<%= complaint.id %>" class="delete-complaint deleteItem">删除</a></span>
+                  </div>
+                  <div class="complaintEditor"></div>
+                </li>
+            <% end %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="add-complaint">
+      <div class="btn-box">
+        <button type="button" class="add-complaint-btn">添加投诉信息</button>
+      </div>
+      <div id="J-add-complaint-container" class="complaintEditor">
+        <!--添加投诉表单-->
+        <div id="J-add-complaint" class="complaint-form">
+          <h3>添加投诉表单</h3>
+
+          <form method="post" action="" id="J-add-complaint-form">
+            <dl class="clrfix">
+              <dt>客户姓名</dt>
+              <dd>
+                <input type="text" name="customer_name" readonly="readonly" class="inp inp2" value="<%= @customer.fullname %>"/>
+              </dd>
+              <dt>客户电话</dt>
+              <dd>
+                <input type="text" name="customer_phone" readonly="readonly" class="inp inp2" value="<%= @customer.phone %>"/>
+              </dd>
+              <dt>备用电话</dt>
+              <dd>
+                <input type="text" name="customer_phone_swap" readonly="readonly" class="inp inp2" value="<%= @customer.phone_swap %>"/>
+              </dd>
+              <dt>类别</dt>
+              <dd>
+                <div class="radio" id="J-complaintType_add">
+                  <input type="radio" id="J-complaintType_add1" name="complaintType" value="0"/>
+                  <label for="J-complaintType_add1">维修</label>
+                  <input type="radio" id="J-complaintType_add2" name="complaintType" value="1"/>
+                  <label for="J-complaintType_add2">购车</label>
+                  <input type="radio" id="J-complaintType_add3" name="complaintType" value="2"/>
+                  <label for="J-complaintType_add3">购件</label>
+                  <input type="radio" id="J-complaintType_add4" name="complaintType" value="3"/>
+                  <label for="J-complaintType_add4">接待</label>
+                </div>
+              </dd>
+              <dt  style="height: 150px;">投诉信息</dt>
+              <dd  style="height: 150px;">
+                <textarea type="text" name="complaintDescription" class="textarea-business"></textarea>
+              </dd>
+            </dl>
+            <div class="save-complaint-btn">
+              <input type="hidden" name="complaint_id" value="" id="J-complaint_id"/>
+              <input type="hidden" value="" id="J-complaint_customer_id"/>
+              <button type="submit" class="button add-complaint-save">保存</button>
+              <button type="cancel" class="button add-complaint-cancel cancel-btn">取消</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--编辑投诉表单信息-->
+    <div id="J-edit-complaint" class="complaint-form">
+      <h3>编辑投诉表单</h3>
+
+      <form method="post" action="" id="J-edit-complaint-form">
+        <dl class="clrfix">
+          <dt>客户姓名</dt>
+          <dd>
+            <input type="text" name="customer_name" readonly="readonly" class="inp inp2" value="<%= @customer.fullname %>"/>
+          </dd>
+          <dt>客户电话</dt>
+          <dd>
+            <input type="text" name="customer_phone" readonly="readonly" class="inp inp2" value="<%= @customer.phone %>"/>
+          </dd>
+          <dt>备用电话</dt>
+          <dd>
+            <input type="text" name="customer_phone_swap" readonly="readonly" class="inp inp2" value="<%= @customer.phone_swap %>"/>
+          </dd>
+          <dt>创建日期</dt>
+          <dd>
+            <input type="text" name="complaintDate" readonly="readonly" class="inp inp2" value="<%= current_user.fullname %>"/>
+          </dd>
+          <dt>类别</dt>
+          <dd>
+            <div class="radio" id="J-complaintType">
+              <input type="radio" id="J-complaintType1" name="complaintType" value="0"/>
+              <label for="J-complaintType1">维修</label>
+              <input type="radio" id="J-complaintType2" name="complaintType" value="1"/>
+              <label for="J-complaintType2">购车</label>
+              <input type="radio" id="J-complaintType3" name="complaintType" value="2"/>
+              <label for="J-complaintType3">购件</label>
+              <input type="radio" id="J-complaintType4" name="complaintType" value="3"/>
+              <label for="J-complaintType4">接待</label>
+            </div>
+          </dd>
+          <dt  style="height: 150px;">投诉信息</dt>
+          <dd  style="height: 150px;">
+            <textarea type="text" name="complaintDescription" class="textarea-business"></textarea>
+          </dd>
+          <dt>状态</dt>
+          <dd>
+            <input type="text" name="complaintStatus" class="inp inp2" value=""/>
+          </dd>
+        </dl>
+        <div class="save-complaint-btn">
+          <input type="hidden" name="complaint_id" value="" id="U-complaint_id"/>
+          <button type="submit" class="button edit-complaint-save">保存</button>
+          <button type="cancel" class="button edit-complaint-cancel cancel-btn">取消</button>
+        </div>
+      </form>
+    </div>
+    <!----编辑投诉信息---->
+  </div>
+  <!----}}}}}}complaint-set---->
+</div>
+<!----}J-complaint---->
+</div>
+<!---}}}}admin-content--->
+</div>
+<!---}}}}main-content--->

@@ -1,0 +1,34 @@
+# encoding: utf-8
+excel_document(:filename => "#{Time.now.strftime('%Y-%m-%d,%H：%M：%S')}-customers.xls") do |workbook|
+  sheet = workbook.create_worksheet
+  sheet.name = "What's in a name"
+
+  sheet.row(0).concat %w{用户}
+  # 下面注释的为  可以写入Excel的方法
+  # sheet[1,0] = 'Japan'
+  # row = sheet.row(1)
+  # row.push 'Creator of Ruby'
+  # row.push 'Creator of rails'
+  # row.unshift 'Yukihiro Matsumoto'
+  # sheet.row(5).unshift 'HaHa'
+  # sheet.row(3).push 'Charles Lowe', 'Author of the ruby-ole Library'
+  # sheet.row(3).insert 1, 'Unknown'
+  # sheet.update_row 4, 'Hannes Wyss', 'Switzerland', 'Author'
+  th = [ 'ID号', '客户姓名','客户电话','性别','级别','生日','地址','创建时间' ]
+  sheet.row(1).replace th
+
+  sheet.row(0).height = 18
+  sheet.row(0).height = 18
+
+  format = Spreadsheet::Format.new :color => :blue,:weight => :bold,:size => 18
+
+  sheet.row(0).default_format = format
+
+  # 设置表格的标题栏为粗体
+  bold = Spreadsheet::Format.new :weight => :bold,:horizontal_align => :center
+  th.length.times do |x| sheet.row(1).set_format(x, bold) end
+
+  @search.all.each_with_index do |customer,index|
+    sheet.row(index + 2).push customer.id,customer.fullname,customer.phone,customer.gender,customer.category,customer.address,customer.created_at
+  end
+end

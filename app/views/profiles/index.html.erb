@@ -1,0 +1,56 @@
+<%= content_for :topmenu do %>
+    <ul>
+      <li><%= link_to I18n.t('views.menu.customers'), customers_path %></li>
+      <li><%= link_to I18n.t('views.menu.vehicles'), vehicles_path %></li>
+      <li><%= link_to I18n.t('views.menu.faults'), faults_path %></li>
+      <li><%= link_to I18n.t('views.menu.old_parts'), oldparts_path %></li>
+      <li><%= link_to I18n.t('views.menu.new_parts'), newparts_path %></li>
+      <li><%= link_to I18n.t('views.menu.repairs'), repairs_path %></li>
+      <li><%= link_to I18n.t('views.menu.expenses'), expenses_path %></li>
+      <li><%= link_to I18n.t('views.menu.work_flow'), workflow_flow_workflows_path %></li>
+      <li><%= link_to I18n.t("views.menu.user_manage"), users_path %></li>
+      <li class="current"><%= link_to I18n.t("views.menu.profile"), profiles_path %></li>
+    </ul>
+<% end %>
+<h3 class="reallynow">
+  <span><%= I18n.t("views.profile.index") %></span>
+  <%= link_to I18n.t("views.links.users.change_password"), edit_user_path(current_user), class: "key" %>
+  <%= link_to I18n.t("views.links.profiles.edit"), edit_profile_path, class: "edit" %>
+  <br/>
+</h3>
+<table class="contact">
+  <% if @profile.empty? %>
+      <%=	 I18n.t("views.nodata") %>
+  <%	 else %>
+      <% @profile.each do |profile| %>
+      <tr>
+        <th><%= I18n.t("views.user.user_number") %></th>
+        <td><%= current_user.user_number %></td>
+      </tr>
+      <tr>
+        <th><%= I18n.t("views.user.username") %></th>
+        <td><%= current_user.username %></td>
+      </tr>
+      <tr>
+        <th><%= I18n.t("views.user.gender") %></th>
+        <td><%= profile.gender %></td>
+      </tr>
+      <tr>
+        <th><%= I18n.t("views.user.phone") %></th>
+        <td><%= profile.phone %></td>
+      </tr>
+      <tr>
+        <th><%= I18n.t("views.user.email") %></th>
+        <td><%= profile.email %></td>
+      </tr>
+      <tr>
+        <th><%= I18n.t("views.user.address") %></th>
+        <td><%= profile.address %></td>
+      </tr>
+      <tr>
+        <th><%= I18n.t("views.user.birthday") %></th>
+        <td><%= profile.birthday %></td>
+      </tr>
+     <%	 end %>
+  <%	 end %>
+</table>

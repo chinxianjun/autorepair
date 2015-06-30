@@ -1,0 +1,104 @@
+客户管理：
+1.增加客户
+  new_customer GET    /customers/new(.:format)  {:action=>"new", :controller=>"customers"}
+              POST   /customers(.:format)   {:action=>"create", :controller=>"customers"}
+2.编辑客户
+  edit_customer GET    /customers/:id/edit(.:format) {:action=>"edit", :controller=>"customers"}
+                PUT    /customers/:id(.:format) {:action=>"update", :controller=>"customers"}
+3.查看客户
+  customer GET    /customers/:id(.:format) {:action=>"show", :controller=>"customers"}
+  所有客户
+  customers GET    /customers(.:format)   {:action=>"index", :controller=>"customers"}
+4.删除客户
+         DELETE /customers/:id(.:format) {:action=>"destroy", :controller=>"customers"}
+
+问题管理
+1.增加问题
+  new_question GET    /questions/new(.:format) {:action=>"new", :controller=>"questions"}
+               POST   /questions(.:format) {:action=>"create", :controller=>"questions"}
+  json格式：
+    'question':{
+                'category':category,    问题分类：
+                'description': complaint_desc,    问题描述，咨询、投诉、购车、购件描述
+                'status':"未处理"    问题状态： 新建默认为未处理
+            },
+    'faultdesc':{
+        'place':faultplace,  故障地点
+        'car_number':carnumber,车牌号
+        'description':faultdescription,  故障描述
+        'warranty':repairtype维修类型:进厂和救援
+    },
+    'customer_id':customer_id, 客户ID
+    'referral': buy_car_referral,  购车推荐人
+
+2.编辑问题
+  edit_question GET    /questions/:id/edit(.:format) {:action=>"edit", :controller=>"questions"}
+                PUT    /questions/:id(.:format) {:action=>"update", :controller=>"questions"}
+3.查看问题
+  question GET    /questions/:id(.:format)   {:action=>"show", :controller=>"questions"}
+  questions GET    /questions(.:format)  {:action=>"index", :controller=>"questions"}
+  repair_questions GET    /questions/repair(.:format)  {:action=>"repair", :controller=>"questions"}
+  buy_car_questions GET    /questions/buy_car(.:format)  {:action=>"buy_car", :controller=>"questions"}
+  buy_part_questions GET    /questions/buy_part(.:format)  {:action=>"buy_part", :controller=>"questions"}
+  consulting_questions GET    /questions/consulting(.:format)  {:action=>"consulting", :controller=>"questions"}
+  complaint_questions GET    /questions/complaint(.:format)  {:action=>"complaint", :controller=>"questions"}
+4.删除问题
+         DELETE /questions/:id(.:format)  {:action=>"destroy", :controller=>"questions"}
+5.咨询问题
+  a.增加咨询问题
+    new_question_consulting GET    /questions/:question_id/consultings/new(.:format)  {:action=>"new", :controller=>"consultings"}
+                            POST   /questions/:question_id/consultings(.:format)  {:action=>"create", :controller=>"consultings"}
+  b.编辑咨询问题
+    edit_question_consulting GET    /questions/:question_id/consultings/:id/edit(.:format)  {:action=>"edit", :controller=>"consultings"}
+                             PUT    /questions/:question_id/consultings/:id(.:format)  {:action=>"update", :controller=>"consultings"}
+  c.查看咨询问题
+    question_consultings GET    /questions/:question_id/consultings(.:format) {:action=>"index", :controller=>"consultings"}
+    question_consulting GET    /questions/:question_id/consultings/:id(.:format) {:action=>"show", :controller=>"consultings"}
+6.投诉问题
+  a.增加投诉问题
+    new_question_complaint GET    /questions/:question_id/complaints/new(.:format) {:action=>"new", :controller=>"complaints"}
+                           POST   /questions/:question_id/complaints(.:format) {:action=>"create", :controller=>"complaints"}
+  b.编辑投诉问题
+    edit_question_complaint GET    /questions/:question_id/complaints/:id/edit(.:format) {:action=>"edit", :controller=>"complaints"}
+                            PUT    /questions/:question_id/complaints/:id(.:format) {:action=>"update", :controller=>"complaints"}
+  c.查看投诉问题
+    question_complaints GET    /questions/:question_id/complaints(.:format)  {:action=>"index", :controller=>"complaints"}
+    question_complaint GET    /questions/:question_id/complaints/:id(.:format)  {:action=>"show", :controller=>"complaints"}
+7.购件问题
+  a.增加购件问题
+    new_question_part_buying GET  /questions/:question_id/part_buyings/new(.:format) {:action=>"new", :controller=>"part_buyings"}
+                             POST  /questions/:question_id/part_buyings(.:format) {:action=>"create", :controller=>"part_buyings"}
+  b.编辑购件问题
+    edit_question_part_buying GET  /questions/:question_id/part_buyings/:id/edit(.:format) {:action=>"edit", :controller=>"part_buyings"}
+                              PUT  /questions/:question_id/part_buyings/:id(.:format) {:action=>"update", :controller=>"part_buyings"}
+  c.查看购件问题
+    question_part_buyings GET    /questions/:question_id/part_buyings(.:format) {:action=>"index", :controller=>"part_buyings"}
+    question_part_buying GET    /questions/:question_id/part_buyings/:id(.:format) {:action=>"show", :controller=>"part_buyings"}
+  d.添加业务员
+    add_salesman_question_part_buying GET    /questions/:question_id/part_buyings/:id/add_salesman(.:format) {:action=>"add_salesman", :controller=>"part_buyings"}
+                                      POST   /questions/:question_id/part_buyings/:id/add_salesman(.:format) {:action=>"add_salesman", :controller=>"part_buyings"}
+8.购车问题
+a.增加购车问题
+  new_question_car_buying GET    /questions/:question_id/car_buyings/new(.:format)  {:action=>"new", :controller=>"car_buyings"}
+                          POST   /questions/:question_id/car_buyings(.:format)  {:action=>"create", :controller=>"car_buyings"}
+b.编辑购车问题
+  edit_question_car_buying GET    /questions/:question_id/car_buyings/:id/edit(.:format) {:action=>"edit", :controller=>"car_buyings"}
+                           PUT    /questions/:question_id/car_buyings/:id(.:format) {:action=>"update", :controller=>"car_buyings"}
+
+c.查看购车问题
+  question_car_buyings GET    /questions/:question_id/car_buyings(.:format)  {:action=>"index", :controller=>"car_buyings"}
+  question_car_buying GET    /questions/:question_id/car_buyings/:id(.:format)  {:action=>"show", :controller=>"car_buyings"}
+d.添加业务员
+  add_salesman_question_car_buying GET    /questions/:question_id/car_buyings/:id/add_salesman(.:format)  {:action=>"add_salesman", :controller=>"car_buyings"}
+                                  POST   /questions/:question_id/car_buyings/:id/add_salesman(.:format)  {:action=>"add_salesman", :controller=>"car_buyings"}
+
+
+1. 配件管理：必要功能有那些
+2. 旧件与配件的功能性分开
+3. 配件数据能否导出？
+4. 配件供应商上下游。
+5. 三包件质保期电子文档
+
+
+
+                                

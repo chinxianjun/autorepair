@@ -1,0 +1,39 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="info-content">
+        <h2>编辑员工信息<span class="info"></span></h2>
+        <!--修改员工信息{-->
+        <div class="form-set">
+            <%= form_for ([:admin,@user]) do |f| %>
+                <dl>
+                    <dt><%= f.label :username %></dt>
+                    <dd>
+                      <%= f.text_field :username, :class=>"inp inp2", :readonly => "readonly" %>
+                    </dd>
+                    <dt><%= f.label :fullname %></dt>
+                    <dd>
+                      <%= f.text_field :fullname, :class=>"inp inp2" %>
+                    </dd>
+                    <dt><%= f.label :phone %></dt>
+                    <dd>
+                      <%= f.text_field :phone, :class=>"inp inp2" %>
+                    </dd>
+                    <dt hidden="hidden"><%= f.label :email, :hidden=>"hidden" %></dt>
+                    <dd hidden="hidden">
+                      <%= f.text_field :email, :class=>"inp inp2",  :hidden=>"hidden" %>
+                    </dd>
+                </dl>
+                <div class="tool-bar tr clrfix">
+                    <%= button_tag "保存", :class =>"submit-btn" %>
+                    <%= button_tag "取消", :class => "cancel-btn" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

@@ -1,0 +1,16 @@
+<h3><%= I18n.t("views.profile.edit") %></h3>
+<div>
+  <% form_for @profile, url: {controller: "profiles", action: "update", id: @profile, method: :put} do |f| %>
+      <p><%= f.label :phone, I18n.t("views.user.phone") %></p>
+
+      <p><%= f.text_field :phone %></p>
+
+      <p><%= f.label :phone, I18n.t("views.user.address") %></p>
+
+      <p><%= f.text_field :address %></p>
+
+      <p><%= f.label :phone, I18n.t("views.user.birthday") %></p>
+
+      <p><%= f.text_field :birthday %></p>
+  <% end %>
+</div>

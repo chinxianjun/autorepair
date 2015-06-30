@@ -1,0 +1,51 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "part" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+    <!--配件库信息{-->
+    <div class="content-set">
+      <div class="hd">
+        <h2><%=  link_to "配件库列表", parts_path %>&gt;&gt;编辑配件库信息<span class="info"></span></h2>
+      </div>
+      <div class="bd">
+        <%= form_for @part, :url => part_path(@part), :method => :put do |f| %>
+            <dl>
+              <input type="hidden" value="<%= @part.id %>" id="J-part_id"/>
+              <dt><%= f.label "配件库名称" %></dt>
+              <dd><%= f.text_field :name, :class=>"inp inp2" %></dd>
+              <br/><dt><%= f.label "配件库管理员" %></dt>
+              <dd><%= f.text_field :manager, :class=>"inp inp2" %></dd>
+              <br/><dt><%= f.label "配件库类别" %></dt>
+              <dd>
+                <div class="">
+                  <% if @part.category == "旧件" %>
+                    <input type="radio" id="U-part_category1" name="part_category" value="旧件" checked="true" />
+                      <label for="U-part_category1">旧件</label>
+                    <input type="radio" id="U-part_category2" name="part_category" value="新件" />
+                      <label for="U-part_category2">新件</label>
+                  <% elsif @part.category == "新件" %>
+                    <input type="radio" id="U-part_category1" name="part_category" value="旧件"/>
+                      <label for="U-part_category1">旧件</label>
+                    <input type="radio" id="U-part_category2" name="part_category" value="新件" checked="true"/>
+                      <label for="U-part_category2">新件</label>
+                  <% end %>
+                </div>
+              </dd>
+              <br/>
+            </dl>
+        <% end %>
+      </div>
+    </div>
+    <div class="tool-bar clrfix">
+      <button class="submit-btn editPart">保存</button>
+      <button class="cancel-btn">返回</button>
+    </div>
+    <!----}}}}}}content-set---->
+  </div>
+  <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

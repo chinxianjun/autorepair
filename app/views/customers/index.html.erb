@@ -1,0 +1,31 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= stylesheet_link_tag "jquery.tooltip" %>
+    <%= javascript_include_tag "jquery.tooltip" %>
+    <%= javascript_include_tag "customer" %>
+    <%= javascript_include_tag "user" %>
+<% end %>
+
+
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>客户列表<span class="info"></span>
+          <% if current_user.allowed_to?(current_user, :add_customer, @current_company) %>
+              <button class="newCustomer add-btn fr">新建客户</button><% url = request.url %>
+              <%= link_to "导出excel", customers_path(:format => 'xls')%>
+          <% end %>
+        </h2>
+        <%= form_tag customers_path, :method => "get", :id => "customers_search" do %>
+            <div class="tool-bar clrfix">
+                <%#= label_tag :column, "客户姓名或电话" %>
+                <%= text_field_tag :column, params[:column], :class => "inp" %>
+                <%= button_tag "查询", :name => nil, :class => "search-btn" %>
+            </div>
+            <div id="customers"><%= render 'customers' %></div>
+        <% end %>
+    </div>
+    <!----}admin-content---->
+</div>
+<!----main-content---->

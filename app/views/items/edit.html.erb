@@ -1,0 +1,35 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "item" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+    <!--配件库信息{-->
+    <div class="content-set">
+      <div class="hd">
+        <h2><%=  link_to "配件厂家列表", items_path %>&gt;&gt;编辑配件厂家信息<span class="info"></span></h2>
+      </div>
+      <div class="bd">
+        <%= form_for @item, :url => item_path(@item), :method => :put do |f| %>
+            <dl>
+              <input type="hidden" value="<%= @item.id %>" id="J-item_id"/>
+              <dt><%= f.label "配件厂家名称" %></dt>
+              <dd><%= f.text_field :name, :class=>"inp inp2" %></dd>
+              <br/><dt><%= f.label "配件厂家代码" %></dt>
+              <dd><%= f.text_field :code, :class=>"inp inp2" %></dd>
+              <br/>
+            </dl>
+        <% end %>
+      </div>
+    </div>
+    <div class="tool-bar clrfix">
+      <button class="submit-btn editItem">保存</button>
+      <button class="cancel-btn">返回</button>
+    </div>
+    <!----}}}}}}content-set---->
+  </div>
+  <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

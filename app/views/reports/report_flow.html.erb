@@ -1,0 +1,55 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "workflow" %>
+<% end %>
+<!---bd{{--->
+<div id="bd" class="clrfix">
+    <!---main-block{{{--->
+    <!--<div class="main-block">-->
+        <!---main-content{{{{--->
+        <div class="main-content">
+            <!---admin-content{{{{{--->
+            <div class="workflow-content">
+                <h2>上报信息列表<span class="info"></span></h2>
+                <!--table样式{-->
+                <table class="admin-table table-style1">
+                    <thead>
+                        <tr>
+                            <th class="sa lt">&nbsp;</th>
+                            <th>流程号</th>
+                            <td colspan="3">状态</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% if @workflow_report.size > 0 %>
+                        <% @workflow_report.each do |workflow| %>
+                            <tr>
+                                <th class="sa"><input type="checkbox" name="order" value="1" class="select-all" /></th>
+                                <th><%= workflow.id %></th>
+                                <td class="workflow_status"><%= workflow.status %></td>
+                                <td>
+                                  <a href="/reports/new?wid=<%= workflow.id %>"
+                                     class="fun-link text4 product-name">
+                                  <span class="ui-icon ui-icon-pencil"></span>
+                                    <%= I18n.t('field.workflow.report') %></a>
+                                </td>
+                                <td>
+                                  <a href="#" class="fun-link text2 product-name">
+                                  <span class="ui-icon ui-icon-arrowreturn-1-w"></span>退回</a>
+                                </td>
+                            </tr>
+                        <% end %>
+                      <% else %>
+                        <tr></tr>
+                      <% end %>
+                    </tbody>
+                </table>
+                <!--}table样式-->
+            </div>
+            <!---}}}}admin-content--->
+        </div>
+        <!---}}}}main-content--->
+
+    <!--</div>-->
+    <!---}}}main-block--->
+</div>
+<!---}}bd--->

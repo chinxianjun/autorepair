@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  drawing: MyString
+  count: 1
+  fatory: MyString
+  pattern: MyString
+  depot: MyString
+  status: MyString
+  occupy: MyString
+  occupytime: 2011-09-17 23:16:29
+  warehousing-at: 2011-09-17 23:16:29
+  warehousing-on: 2011-09-17 23:16:29
+
+two:
+  name: MyString
+  drawing: MyString
+  count: 1
+  fatory: MyString
+  pattern: MyString
+  depot: MyString
+  status: MyString
+  occupy: MyString
+  occupytime: 2011-09-17 23:16:29
+  warehousing-at: 2011-09-17 23:16:29
+  warehousing-on: 2011-09-17 23:16:29

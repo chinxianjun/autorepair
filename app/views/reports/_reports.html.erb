@@ -1,0 +1,44 @@
+<div id="J-report_show">
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+  <!--table样式{-->
+  <table class="admin-table table-style1 pretty">
+    <thead>
+    <tr>
+      <th><%= sortable "id", "ID" %></th>
+      <th colspan="2"><%= sortable "status", "状态" %></th>
+      <th><%= sortable "server_regist_number", "服务登记号" %></th>
+      <th><%= sortable "server_process_number", "处理单编号" %></th>
+      <th><%= sortable "infoman", "信息员" %></th>
+      <th><%= sortable "created_at", "创建日期" %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @reports.nil? %>
+        <tr></tr>
+    <% else %>
+        <% @reports.each do |report| %>
+            <tr>
+              <th><%= report.id %></th>
+              <% if current_user.allowed_to?(current_user, :view_report, @current_company) %>
+                  <th><a href="/reports/<%= report.id %>" class="fun-link text3 product-name">
+                    <span class="ui-icon ui-icon-person"></span><%= report.status %></a>
+                  </th>
+              <% end %>
+              <% if current_user.allowed_to?(current_user, :edit_report, @current_company) %>
+                  <th><a href="/reports/<%= report.id %>/edit" class="fun-link text3 product-name">
+                    <span class="ui-icon ui-icon-pencil"></span>编辑</a>
+                  </th>
+              <% end %>
+              <th><%= customer.server_regist_number %></th>
+              <th><%= customer.server_process_number %></th>
+              <th><%= customer.infoman %></th>
+              <th><%= customer.created_at.strftime('%Y-%m-%d %H:%M:%S') %></th>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @reports %>
+  <!--}table样式-->
+</div>

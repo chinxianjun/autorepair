@@ -1,0 +1,88 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "group" %>
+    <%= javascript_include_tag "company" %>
+    <%= javascript_include_tag "user" %>
+<% end %>
+
+<div class="main-content">
+    <div class="admin-content">
+        <h2>员工列表<span class="info"></span></h2>
+        <div class="tool-bar clrfix">
+            <button class="add-btn fr newUser">添加员工</button>
+        </div>
+        <!--table样式{-->
+        <table class="admin-table table-style1">
+            <thead>
+            <tr>
+                <th class="sa lt">&nbsp;</th>
+                <th>ID</th>
+                <td colspan="3">登录名</td>
+                <td>姓名</td>
+                <td>电话</td>
+            </tr>
+            </thead>
+            <tbody>
+            <% if @users.nil? %>
+              <tr>
+                <td>I18n.t("views.nodata")</td>
+              </tr>
+            <% else %>
+                <% @users.each do |user| %>
+                    <tr>
+                        <th class="sa">
+                          <input type="checkbox" name="order" value="1" class="select-all"/>
+                        </th>
+                        <th><%= user.id %></th>
+                        <td><a href="/admin/users/<%= user.id %>"
+                               class = "fun-link text4 product-name">
+                             <span class="ui-icon ui-icon-person"></span>
+                               <%= user.username %>
+                            </a>
+                        </td>
+                        <td>
+                          <a href="/admin/users/<%= user.id %>/edit"
+                             class="fun-link text2 product-name">
+                             <span class="ui-icon ui-icon-pencil"></span>
+                             编辑
+                          </a>
+                        </td>
+                        <td><a href="/admin/users/<%= user.id %>"
+                               class="deleteItem fun-link text2 product-name">
+                               <span class="ui-icon ui-icon-trash"></span>
+                               删除
+                            </a>
+                        </td>
+                        <td><%= user.fullname %></td>
+                        <td><%= user.phone %></td>
+                    </tr>
+                <% end %>
+            <% end %>
+            </tbody>
+        </table>
+        <!--}table样式-->
+        <%= will_paginate @users %>
+    </div>
+      <div id="J-create_user" title="添加员工">
+          <div class="form-set">
+              <form method="" action="">
+                  <dl>
+                      <dt><b class="stars">*</b><label for="J-username">登录名</label></dt>
+                      <dd><input type="text" class = "inp" id = "J-username" value=""/></dd>
+
+                      <dt><b class="stars">*</b><label for="J-username">密码</label></dt>
+                      <dd><input type="password" class = "inp" id = "J-password" value=""/></dd>
+
+                      <dt><b class="stars">*</b><label for="J-username">确认密码</label></dt>
+                      <dd><input type="password" class = "inp" id= "J-confirm_password" value=""/></dd>
+
+                      <dt><b class="stars">*</b><label for="J-fullname">姓名</label></dt>
+                      <dd><input type="text" class="inp" id="J-fullname" value=""/></dd>
+
+                      <dt><b class="stars">*</b><label for="J-phone">电话</label></dt>
+                      <dd><input type="text" class="inp" id="J-phone" value=""/></dd>
+                  </dl>
+              </form>
+          </div>
+      </div>
+</div>
+

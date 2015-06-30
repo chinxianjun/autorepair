@@ -1,0 +1,67 @@
+<%= content_for :head do %>
+<meta http-equiv="refresh" content="60" />
+<% end %>
+
+<!---main-content{{{{--->
+<div class="main-content">
+    <!---admin-content{{{{{--->
+    <div class="admin-content">
+        <h2>问题列表<span class="info"></span></h2>
+
+        <div class="question_menu">
+             <ul>
+                 <li class="flowbar"><a href="/questions/repair" id="J-repair" class="flow-button"><span>维修</span></a></li>
+                 <li class="flowbar"><a href="/questions/buy_car" id="J-car_buying" class=""><span>购车</span></a></li>
+                 <li class="flowbar"><a href="/questions/buy_part" id="J-part_buying" class=""><span>购件</span></a></li>
+                 <li class="flowbar"><a href="/questions/consulting" id="J-consulting" class=""><span>咨询</span></a></li>
+                 <li class="flowbar"><a href="/questions/complaint" id="J-complaint" class=""><span>投诉</span></a></li>
+             </ul>
+        </div>
+        <!---}}}}}}tool-bar clrfix--->
+      <!--<h2>维修列表<span class="info"></span></h2>-->
+      <!--table样式{-->
+      <div class="admin-content">
+            <table class="admin-table table-style1">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>客户姓名</td>
+                        <td>联系电话</td>
+                        <td>接待员</td>
+                        <td>维修经理</td>
+                        <td>状态</td>
+                        <td>创建时间</td>
+                    </tr>
+                </thead>
+                <tbody>
+                  <% if @repair_question.size > 0 %>
+                    <% @repair_question.each do |question| %>
+                        <% if question.status == "未处理" %>
+                          <tr class="td-color">
+                        <% elsif question.status == "洽谈" %>
+                          <tr class="td-color_blue">
+                        <% else %>
+                          <tr>
+                        <% end %>
+                            <td><%= question.id  %></td>
+                            <td><%= question.customer.fullname unless question.customer.nil? %></td>
+                            <td><%= question.customer.phone unless question.customer.nil?  %></td>
+                            <td><%= question.creator  %></td>
+                            <td><%= question.processor  %></td>
+                            <td><%= question.status  %></td>
+                            <td><%= question.created_at.strftime('%Y-%m-%d %H:%M:%S')  %></td>
+                        </tr>
+                    <% end %>
+                  <% else %>
+                    <tr></tr>
+                  <% end %>
+                </tbody>
+            </table>
+            <!--}table样式-->
+            <%= will_paginate @repair_question %>
+        </div>
+        <!---}}}}admin-content--->
+    </div>
+    <!---}}}}main-content--->
+</div>
+<!---}}bd--->

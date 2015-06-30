@@ -1,0 +1,88 @@
+<%# encoding:utf-8 %>
+<%= content_for :head do %>
+    <%= javascript_include_tag "role" %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+
+<div class="main-content">
+    <div class="admin-content">
+        <h2>角色列表<span class="info"></span></h2>
+        <div class="tool-bar clrfix">
+            <button id="newRole" class="add-btn fr">新建角色</button>
+            <button class="check-btn">全选</button>
+            <button class="uncheck-btn">反选</button>
+        </div>
+        <!--table样式{-->
+        <table class="admin-table table-style1">
+            <thead>
+            <tr>
+                <th class="sa lt">&nbsp;</th>
+                <th>ID</th>
+                <td colspan="3">角色名称</td>
+                <td>权限设置</td>
+            </tr>
+            </thead>
+            <tbody>
+            <% if @roles.nil? %>
+              <tr>
+                <td></td>
+              </tr>
+            <% else %>
+                <% @roles.each do |role| %>
+                    <% unless role.name == "anonymous" %>
+                    <tr>
+                        <th class="sa">
+                          <input type="checkbox" name="order" value="1" class="select-all"/>
+                        </th>
+                        <th><%= role.id %></th>
+                        <td>
+                          <a href="/admin/roles/<%= role.id %>"
+                               class = 'fun-link text4 product-name'>
+                               <span class="ui-icon ui-icon-person"></span>
+                               <%= role.name %>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="/admin/roles/<%= role.id %>/edit"
+                               class = 'fun-link text3 product-name'>
+                               <span class="ui-icon ui-icon-pencil"></span>
+                               编辑
+                          </a>
+                        </td>
+                        <td>
+                          <a href="/admin/roles/<%= role.id %>"
+                               class = 'deleteItem fun-link text3 product-name'>
+                               <span class="ui-icon ui-icon-trash"></span>
+                               删除
+                          </a>
+                        </td>
+                        <td><a href="/admin/roles/<%= role.id %>/report"
+                               class = 'fun-link text4 product-name'>
+                               <span class="ui-icon ui-icon-key"></span>
+                               权限设置
+                          </a>
+                        </td>
+                    </tr>
+                    <% end %>
+                <% end %>
+            <% end %>
+            </tbody>
+        </table>
+        <!--}table样式-->
+        <%= will_paginate @roles %>
+    </div>
+
+    <!--新增角色弹框{-->
+    <div id="createRole" title="新增角色">
+        <div class="form-set">
+            <form method="post" action="">
+                <dl>
+                    <dt>角色名称</dt>
+                    <dd><input type="text" name="name" value=""
+                          id="rolename" class="inp inp2"/></dd>
+                </dl>
+            </form>
+        </div>
+    </div>
+    <!--}新增角色弹框-->
+</div>

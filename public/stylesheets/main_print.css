@@ -1,0 +1,27 @@
+div#hd, div.side-bar, div#ft {
+    display: none;
+}
+
+.table-print {
+    border-color: #000;
+}
+
+.table {
+    border: solid 1px black;
+}
+
+.table th {
+    border-right: solid 1px black;
+}
+
+.table td {
+    border-right: solid 1px black;
+}
+
+.table th {
+    border-bottom: solid 1px black;
+}
+
+.table td {
+    border-bottom: solid 1px black;
+}

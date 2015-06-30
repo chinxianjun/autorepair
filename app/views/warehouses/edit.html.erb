@@ -1,0 +1,74 @@
+<%= content_for :head do %>
+  <%= javascript_include_tag "company" %>
+  <%= javascript_include_tag "warehouse" %>
+<% end %>
+<!-- main-content{{{{ -->
+<div class="main-content">
+  <!-- admin-content{{{{{ -->
+  <div class="admin-content">
+    <!--配件库信息{-->
+    <div class="content-set">
+      <div class="hd">
+        <h2><%= link_to "#{@company.name}", setting_admin_company_path(@company) %>&gt;&gt;编辑配件库信息<span class="info"></span></h2>
+      </div>
+      <div class="bd">
+        <input type="hidden" value="<%= @company.id %>" id="J-company_id"/>
+        <input type="hidden" value="<%= @warehouse.id %>" id="J-warehouse_id"/>
+        <form method="" action="">
+          <dl>
+            <table>
+              <tr>
+                <td>
+                  <label for="J-warehouse_name">配件库名称<b class="ftx04">*</b></label>
+                  <input type="text" class="inp inp2b" id="J-warehouse_name" value="<%= @warehouse.name %>" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="float:left;">配件库类别<b class="ftx04">*</b></div>
+                  <div class="radio">
+                    <% if @warehouse.category == "旧件" %>
+                        <input type="radio" id="U-warehouse_category1" name="warehouse_category" value="旧件" checked="true" />
+                        <label for="U-warehouse_category1">旧件</label>
+                        <input type="radio" id="U-warehouse_category2" name="warehouse_category" value="新件" />
+                        <label for="U-warehouse_category2">新件</label>
+                    <% elsif @warehouse.category == "新件" %>
+                        <input type="radio" id="U-warehouse_category1" name="warehouse_category" value="旧件"/>
+                        <label for="U-warehouse_category1">旧件</label>
+                        <input type="radio" id="U-warehouse_category2" name="warehouse_category" value="新件" checked="true"/>
+                        <label for="U-warehouse_category2">新件</label>
+                    <% else %>
+                        <input type="radio" id="U-warehouse_category1" name="warehouse_category" value="旧件"/>
+                        <label for="U-warehouse_category1">旧件</label>
+                        <input type="radio" id="U-warehouse_category2" name="warehouse_category" value="新件"/>
+                        <label for="U-warehouse_category2">新件</label>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="J-identifier">配件库标识<b class="ftx04">*</b></label>
+                  <input type="text" id="J-identifier" class="inp inp2a inp2b" value="<%= @warehouse.identifier %>"/>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="warehouses">所属配件库</label>
+                  <%= select_tag "warehouses", options_from_collection_for_select(@warehouses, "id", "name"), :prompt => "选择所属配件库" %>
+                </td>
+              </tr>
+            </table>
+          </dl>
+        </form>
+      </div>
+    </div>
+    <div class="tool-bar clrfix">
+      <button class="submit-btn updateWarehouse">保存</button>
+      <button class="cancel-btn">返回</button>
+    </div>
+    <!-- }}}}}}content-set -->
+  </div>
+  <!-- }}}}}admin-content -->
+</div>
+<!-- }}}}main-content -->

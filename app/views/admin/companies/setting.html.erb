@@ -1,0 +1,422 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "common" %>
+    <%= javascript_include_tag "group" %>
+    <%= javascript_include_tag "company" %>
+    <%= javascript_include_tag "warehouse" %>
+<% end %>
+
+<!----main-content{---->
+<div class="main-content">
+    <!----admin-content{{---->
+    <div class="admin-content">
+        <h2><%= @company.name %><span class="info"></span></h2>
+        <input hidden="hidden" value="<%= @company.id %>" id="J_company_id" />
+        <!----J-company_tabs{{{---->
+        <div id="J-company_tabs">
+            <ul>
+                <li><a href="#J-company_info"><span>公司详情</span></a></li>
+                <li><a href="#J-company_group_info"><span>部门管理</span></a></li>
+                <li><a href="#J-company_warehouses_info"><span>配件库管理</span></a></li>
+                <li><a href="#J-company_repairer"><span>维修工管理</span></a></li>
+                <li><a href="#J-company_salesman"><span>业务员管理</span></a></li>
+            </ul>
+            <!----J-company_info{{{{---->
+            <div id="J-company_info" >
+                <div class="content-set">
+                  <div class="bd">
+                    <dl class="details-info">
+                      <dd>
+                        <table>
+                          <tbody>
+                          <tr>
+                            <th>公司名称</th>
+                            <td><%= @company.name %></td>
+                          </tr>
+                          <tr>
+                            <th>公司简称</th>
+                            <td><%= @company.simply %></td>
+                          </tr>
+                          <tr>
+                            <th>公司所在地</th>
+                            <td><%= @company.state %></td>
+                          </tr>
+                          <tr>
+                            <th>公司地址</th>
+                            <td><%= @company.address %></td>
+                          </tr>
+                          <tr>
+                            <th>公司电话</th>
+                            <td><%= @company.phone %></td>
+                          </tr>
+                          <tr>
+                            <th>公司识别码</th>
+                            <td><%= @company.company_code %></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </dd>
+                    </dl>
+                    <div class="tool-bar tr clrfix">
+                      <button class="edit-btn editCompany" id="<%= @company.id %>" >编辑</button>
+                    </div>
+                  </div>
+                  <!----}}}}}}bd---->
+                </div>
+                <!----}}}}}content-set---->
+            </div>
+            <!----}}}}J-company_info---->
+            <!----J-group_index{{{{---->
+            <div id="J-company_group_info">
+              <div class="tool-bar clrfix">
+                <button class="add-btn fr" id="J-add_group">添加部门</button>
+              </div>
+              <!--table样式{-->
+              <table class="admin-table table-style1">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <td colspan="3">部门名称</td>
+                  <td>用户</td>
+                  <td>角色</td>
+                </tr>
+                </thead>
+                <tbody>
+                <% if @groups.nil? %>
+                    <tr></tr>
+                <% else %>
+                    <% @groups.each do |group| %>
+                        <tr>
+                          <th><%= group.id %></th>
+                          <td>
+                            <a href="/admin/companies/<%= @company.id %>/groups/<%= group.id %>"
+                               class='fun-link text8 product-name' >
+                              <%= group.name %>
+                            </a>
+                          </td>
+                          <td>
+                            <a href="/admin/companies/<%= @company.id %>/groups/<%= group.id %>/edit"
+                               class='fun-link text2 product-name'>
+                              <span class="ui-icon ui-icon-pencil"></span>
+                              编辑
+                            </a>
+                          </td>
+                          <td>
+                            <a href="/admin/companies/<%= @company.id %>/groups/<%= group.id %>"
+                               class='fun-link text2 product-name deleteItem'>
+                              <span class="ui-icon ui-icon-trash"></span>
+                              删除
+                            </a>
+                          </td>
+                          <td>
+                            <a href="/admin/companies/<%= @company.id %>/groups/<%= group.id %>/new_users"
+                               class = "fun-link text2 product-name groupAddUsers">
+                              <span class="ui-icon users"></span>
+                              <%= group.users.count %>
+                            </a>
+                          </td>
+                          <td>
+                            <a href="/admin/companies/<%= @company.id %>/groups/<%= group.id %>/new_roles"
+                               class = "fun-link text2 product-name groupAddRoles">
+                              <span class="ui-icon roles"></span>
+                              <%= group.roles.count %>
+                            </a>
+                          </td>
+                        </tr>
+                    <% end %>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+            <!----}}}}J-group_index---->
+            <!----J-company_warehouses_info{{{{---->
+            <div id="J-company_warehouses_info">
+              <div class="tool-bar clrfix">
+                <button class="add-btn fr" id="newWarehouse">添加配件库</button>
+              </div>
+              <!--table样式{-->
+              <table class="admin-table table-style1">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <td colspan="3">库房名称</td>
+                  <td>类别</td>
+                  <td>成员</td>
+                  <td>关注</td>
+                </tr>
+                </thead>
+                <tbody>
+                <% if @stores.nil? %>
+                    <tr><p>没有可供显示的数据</p></tr>
+                <% else %>
+                    <% @stores.each do |store| %>
+                        <tr>
+                          <th><%= store.id %></th>
+                          <td>
+                            <a href="/warehouses/<%= store.id %>"
+                               class='fun-link text8 product-name' >
+                              <%= store.name %>
+                            </a>
+                          </td>
+                          <td>
+                            <a href="/warehouses/<%= store.id %>/edit"
+                               class='fun-link text2 product-name'>
+                              <span class="ui-icon ui-icon-pencil"></span>
+                              编辑
+                            </a>
+                          </td>
+                          <td>
+                            <a href="/warehouses/<%= store.id %>"
+                               class='fun-link text2 product-name deleteItem'>
+                              <span class="ui-icon ui-icon-trash"></span>
+                              删除
+                            </a>
+                          </td>
+                          <td>
+                              <%= store.category %>
+                          </td>
+                          <td>
+                            <a href="/warehouses/<%= store.id %>/members"
+                               class = "fun-link text2 product-name addRoles">
+                              <span class="ui-icon people"></span>
+                              <%= store.members.count %>
+                            </a>
+                          </td>
+                          <td>
+                            <a href="/warehouses/<%= store.id %>/follows"
+                               class = "fun-link text2 product-name addRoles">
+                              <span class="ui-icon ui-icon-home"></span>
+                              <%= store.follows.count %>
+                            </a>
+                          </td>
+                        </tr>
+                    <% end %>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+            <!----}}}}J-company_warehouses_info---->
+            <!----J-company_repairer{{{{---->
+            <div id="J-company_repairer">
+              <!----content-set{{{{{---->
+              <div class="content-set">
+                  <div class="tool-bar clrfix">
+                    <%= button_tag "保存", :class => "submit-btn", :id =>"J-add_repairers" %>
+                    <%= button_tag "取消", :class => "cancel-btn" %>
+                      <div class="RepairerSelector">
+                        <div class="leftBox">
+                          <div class="content borderBase" id="userLeftBox">
+                            <div class="depBoxContent" id="leftBox">
+                              <h3>已有维修工</h3>
+                              <input id="J-repairer_id" type="hidden"
+                                     value="<%= @repairer.id unless @repairer.nil? %>" />
+                              <input id="J-company_id" type="hidden"
+                                     value="<%= @company.id unless @company.nil? %>" />
+                              <% if @repairer.nil? %>
+                              <% else %>
+                                  <% if @repairer.users.any? %>
+                                      <% @repairer.users.each do |user| %>
+                                          <div class="userBox">
+                                            <input type="checkbox" class="userCheckbox" id="<%= user.id %>" name="<%= @repairer.id %>" value="<%= user.fullname %>"/>
+                                            <label for="<%= user.id %>"><%= user.fullname %></label>
+                                          </div>
+                                      <% end %>
+                                  <% end %>
+                              <% end %>
+                            </div>
+                          </div>
+                        </div>
+                        <!----}}}}}}}form---->
+                        <div class="centerBox">
+                          <div>
+                            <a href="javascript:void(0)" id="toRight">
+                              <%= image_tag("to_right.png") %>
+                            </a>
+                          </div>
+                          <div style="margin-top:20px;">
+                            <a href="javascript:void(0)" id="toLeft">
+                              <%= image_tag("to_left.png") %>
+                            </a>
+                          </div>
+                        </div>
+                        <!----}}}}}}}centerBox---->
+                        <!----rightBox{{{{{{{---->
+                        <div class="rightBox">
+                          <div class="content borderBase" id="rightBox" name="right">
+                            <h3>可分配员工</h3>
+                            <% if @repairer.nil? %>
+                                <% if User.all.any? %>
+                                    <% User.all.each do |user| %>
+                                        <div class="userBox">
+                                          <input type="checkbox" class="userCheckbox"
+                                                 id="<%= user.id %>" name=""
+                                                 value="<%= user.fullname %>" />
+                                          <label for="<%= user.id %>"><%= user.fullname %></label>
+                                        </div>
+                                    <% end %>
+                                <% end %>
+                            <% else %>
+                                <% users = User.all - @repairer.users %>
+                                <% if users.any? %>
+                                    <% users.each do |user| %>
+                                        <div class="userBox">
+                                          <input type="checkbox" class="userCheckbox"
+                                                 id="<%= user.id %>" name=""
+                                                 value="<%= user.fullname %>" />
+                                          <label for="<%= user.id %>"><%= user.fullname %></label>
+                                        </div>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                          </div>
+                        </div>
+                        <!----}}}}}}}rightBox---->
+                      </div>
+                  </div>
+              </div>
+              <!----}}}}}content-set---->
+            </div>
+            <!----}}}}J-company_repairer---->
+            <!----J-company_salesman{{{{---->
+            <div id="J-company_salesman">
+              <!----content-set{{{{{---->
+              <div class="content-set">
+                  <div class="tool-bar clrfix">
+                      <%= button_tag "保存", :class => "submit-btn", :id =>"J-add_salesmen" %>
+                      <%= button_tag "取消", :class => "cancel-btn" %>
+                      <div class="RoleSelector">
+                        <div class="leftBox">
+                          <div class="content borderBase" id="userLeftBoxSalesman">
+                            <div class="depBoxContent" id="leftBoxSalesman">
+                              <h3>已有业务员</h3>
+                              <input id="J-salesman_id" type="hidden"
+                                     value="<%= @salesman.id unless @salesman.nil? %>" />
+                              <input id="J-company_id" type="hidden"
+                                     value="<%= @company.id unless @company.nil? %>" />
+                              <% if @salesman.nil? %>
+                              <% else %>
+                                  <% if @salesman.users.any? %>
+                                      <% @salesman.users.each do |user| %>
+                                          <div class="userBox">
+                                            <input type="checkbox" class="userCheckbox" id="<%= user.id %>" name="<%= @salesman.id %>" value="<%= user.fullname %>"/>
+                                            <label for="<%= user.id %>"><%= user.fullname %></label>
+                                          </div>
+                                      <% end %>
+                                  <% end %>
+                              <% end %>
+                            </div>
+                          </div>
+                        </div>
+                        <!----}}}}}}}form---->
+                        <div class="centerBox">
+                          <div>
+                            <a href="javascript:void(0)" id="toRightSalesman">
+                              <%= image_tag("to_right.png") %>
+                            </a>
+                          </div>
+                          <div style="margin-top:20px;">
+                            <a href="javascript:void(0)" id="toLeftSalesman">
+                              <%= image_tag("to_left.png") %>
+                            </a>
+                          </div>
+                        </div>
+                        <!----}}}}}}}centerBox---->
+                        <!----rightBox{{{{{{{---->
+                        <div class="rightBox">
+                          <div class="content borderBase" id="rightBoxSalesman" name="right">
+                            <h3>可分配业务员</h3>
+                            <% if @salesman.nil? %>
+                                <% if User.all.any? %>
+                                    <% User.all.each do |user| %>
+                                        <div class="userBox">
+                                          <input type="checkbox" class="userCheckbox"
+                                                 id="<%= user.id %>" name=""
+                                                 value="<%= user.fullname %>" />
+                                          <label for="<%= user.id %>"><%= user.fullname %></label>
+                                        </div>
+                                    <% end %>
+                                <% end %>
+                            <% else %>
+                                <% users = User.all - @salesman.users %>
+                                <% if users.any? %>
+                                    <% users.each do |user| %>
+                                        <div class="userBox">
+                                          <input type="checkbox" class="userCheckbox"
+                                                 id="<%= user.id %>" name=""
+                                                 value="<%= user.fullname %>" />
+                                          <label for="<%= user.id %>"><%= user.fullname %></label>
+                                        </div>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                          </div>
+                        </div>
+                        <!----}}}}}}}rightBox---->
+                      </div>
+                  </div>
+              </div>
+              <!----}}}}}content-set---->
+            </div>
+            <!----}}}}J-company_salesman---->
+        </div>
+        <!----}}}J-company_tabs---->
+    </div>
+    <!----}}admin-content---->
+</div>
+<!----}main-content---->
+<!----新增组弹框{---->
+<div id="createGroup" title="新增部门">
+  <div class="form-set">
+    <form method="post" action="">
+      <dl>
+        <dt>部门名称</dt>
+        <dd>
+          <input type="text" name="" value="" class="inp inp2" id="groupname"/>
+        </dd>
+      </dl>
+    </form>
+  </div>
+</div>
+<!----}新增组弹框---->
+<!----新增配件库弹框{---->
+<div id="createWarehouse" title="添加配件库">
+  <div class="form-set">
+    <form method="post" action="">
+      <dl>
+        <table>
+          <tr>
+            <td>
+              <label for="J-warehouse_name">配件库名称<b class="ftx04">*</b></label>
+              <input type="text" class="inp inp2b" id="J-warehouse_name" value="" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div style="float:left;">配件库类别<b class="ftx04">*</b></div>
+              <div class="radio inp2b" id="J-warehouse_category" style="float:left;">
+                <input type="radio" id="J-warehouse_category1" name="warehouse_category" value="旧件" />
+                <label for="J-warehouse_category1">旧件</label>
+                <input type="radio" id="J-warehouse_category2" name="warehouse_category" value="新件" />
+                <label for="J-warehouse_category2">新件</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="J-identifier">配件库标识<b class="ftx04">*</b></label>
+              <input type="text" id="J-identifier" class="inp inp2b" value=""/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div>所属配件库</div>
+              <div class="radio" id="J-parent_warehouse">
+                <%= select("warehouse", "warehouse_id", @company.warehouses.collect {|w| [ w.name, w.id ] }, {:include_blank => '无'}) %>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </dl>
+    </form>
+  </div>
+</div>
+<!----}新增配件库弹框---->

@@ -1,0 +1,24 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "part" %>
+<% end %>
+
+<div class="main-content">
+    <div class="admin-content">
+        <h2>配件库列表<span class="info"></span>
+          <% if current_user.allowed_to?(current_user, :add_part, @current_company) %>
+            <%= link_to "添加配件库", new_part_path, :class=>"add-btn fr", :id=>"J-create_part" %>
+          <% end %>
+        </h2>
+
+        <%= form_tag parts_path, :method => "get", :id => "parts_search" do %>
+            <div class="tool-bar clrfix">
+                <%#= label_tag :column, "客户姓名或电话" %>
+                <%= text_field_tag :column, params[:column], :class => "inp" %>
+                <%= button_tag "查询", :name => nil, :class => "search-btn" %>
+            </div>
+            <div id="parts"><%= render 'parts' %></div>
+        <% end %>
+    </div>
+</div>

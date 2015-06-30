@@ -1,0 +1,102 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "common" %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+
+<!----main-content{{{{---->
+<div class="main-content">
+<!----admin-content{{{{{---->
+<div class="admin-content">
+<h2><%= @company.name %><span class="info"></span></h2>
+<input hidden="hidden" value="<%= @company.id %>" id="J_company_id" />
+<div class="tabs">
+  <ul>
+    <li><a href="/companies/<%= @company.id %>"><span>公司详情</span></a></li>
+    <li><a href="/companies/<%= @company.id %>/groups"><span>部门管理</span></a></li>
+    <li><a href="/companies/<%= @company.id %>/warehouses"><span>配件库管理</span></a></li>
+    <li><a href="/companies/<%= @company.id %>/new_repairers"><span>维修工管理</span></a></li>
+    <li><a href="/companies/<%= @company.id %>/new_salesmen" class="tab_active"><span>业务员管理</span></a></li>
+  </ul>
+</div>
+<!----J-company_salesman{{---->
+<div id="J-company_salesman">
+  <div class="tool-bar clrfix">
+    <%= button_tag "保存", :class => "submit-btn", :id =>"J-add_salesmen" %>
+    <%= button_tag "取消", :class => "cancel-btn" %>
+  </div>
+  <div class="RoleSelector">
+    <div class="leftBox">
+      <div class="content borderBase" id="userLeftBoxSalesman">
+        <div class="depBoxContent" id="leftBoxSalesman">
+          <h3>已有业务员</h3>
+          <input id="J-salesman_id" type="hidden"
+                 value="<%= @salesman.id unless @salesman.nil? %>" />
+          <input id="J-company_id" type="hidden"
+                 value="<%= @company.id unless @company.nil? %>" />
+          <% if @salesman.nil? %>
+          <% else %>
+              <% if @salesman.users.any? %>
+                  <% @salesman.users.each do |user| %>
+                      <div class="userBox">
+                        <input type="checkbox" class="userCheckbox" id="<%= user.id %>" name="<%= @salesman.id %>" value="<%= user.fullname %>"/>
+                        <label for="<%= user.id %>"><%= user.fullname %></label>
+                      </div>
+                  <% end %>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!----}}}}}}}form---->
+    <div class="centerBox">
+      <div>
+        <a href="javascript:void(0)" id="toRightSalesman">
+          <%= image_tag("to_right.png") %>
+        </a>
+      </div>
+      <div style="margin-top:20px;">
+        <a href="javascript:void(0)" id="toLeftSalesman">
+          <%= image_tag("to_left.png") %>
+        </a>
+      </div>
+    </div>
+    <!----}}}}}}}centerBox---->
+    <!----rightBox{{{{{{{---->
+    <div class="rightBox">
+      <div class="content borderBase" id="rightBoxSalesman" name="right">
+        <h3>可分配业务员</h3>
+        <% if @salesman.nil? %>
+            <% if User.all.any? %>
+                <% User.all.each do |user| %>
+                    <div class="userBox">
+                      <input type="checkbox" class="userCheckbox"
+                             id="<%= user.id %>" name=""
+                             value="<%= user.fullname %>" />
+                      <label for="<%= user.id %>"><%= user.fullname %></label>
+                    </div>
+                <% end %>
+            <% end %>
+        <% else %>
+            <% users = User.all - @salesman.users %>
+            <% if users.any? %>
+                <% users.each do |user| %>
+                    <div class="userBox">
+                      <input type="checkbox" class="userCheckbox"
+                             id="<%= user.id %>" name=""
+                             value="<%= user.fullname %>" />
+                      <label for="<%= user.id %>"><%= user.fullname %></label>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+    <!----}}}}}}}rightBox---->
+  </div>
+</div>
+<!----}J-company_repairer---->
+<!----}}J-company_salesman---->
+</div>
+<!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

@@ -1,0 +1,11 @@
+ <% if @part %>
+<% i=0 %>[
+  <% for part in @part %>
+     <% if i==0 %>
+    {name:"<%= part.name %>",show:"<%= part.name + " " %>"}
+    <% else %>
+      ,{name:"<%= part.name %>",show:"<%= part.name + " " %>"}
+    <% end %>
+      <% i+=1 %>
+  <% end %>]
+<% end %>

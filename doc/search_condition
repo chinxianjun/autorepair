@@ -1,0 +1,164 @@
+1. 客户管理模块：
+   表：customers
+   字段： id, username, gender, phone, address, birthday, phone_swap, created_at,
+         updated_at
+   间接关联表：fault_desc(故障描述表)
+   字段： id, car_number, description, place, created_at, updated_at
+   关系表：
+        has_many: faultdesc_customers, customer_workflows
+        belongs_to: company
+   查询条件：
+        phone, phone_swap ---- 通过电话或备用电话查询客户信息
+        username ---- 通过客户姓名查询客户信息
+        faultdesc_id ---- 通过faultdesc_id查询故障描述信息, 依赖关系表faultdesc_customers
+        customer_id ---- 通过客户id查询流程、派工、车辆、故障、旧件、费用等信息,
+                         依赖关系表customer_workflows
+2. 派工管理模块：
+   表：dispatchings
+   字段：id, repairer, dispatcher, reception, created_at, updated_at, status,
+        customer_name, customer_phone, customer_phone_swap, faultdesc_desc,
+        faultdesc_place,  faultdesc_car_number, property
+   间接关系表：repairer (维修工表)
+   字段：id, status
+   关系表：
+        has_one:  dispatching_workflow
+        字段： dispatching_id, workflow_id
+   查询条件：
+        customer_phone, customer_phone_swap ---- 通过客户电话查询派工信息
+        customer_name ---- 通过客户电话查询派工信息
+        dispatcher ---- 通过派工员查询派工信息
+        faultdesc_car_number ---- 通过故障车车牌号查询派工信息
+        dispatching_id ---- 通过派工id查询流程、车辆、故障、旧件、费用等信息,
+                            依赖关系表dispatching_workflow
+3. 车辆管理模块：
+   表：vehicles
+   字段： id, mode, chassis_number, engine, engine_number, created_at, updated_at,
+          order_number, fast_type, production_number, first_bridge, second_bridge,
+          third_bridge, driving_range, purchase_on, warranty_card, user_number,
+          car_number
+   间接关系表：owner (车主信息表)
+   字段： id, fullname phone address idcard created_at updated_at
+   关系表：
+        has_one: vehicle_ownership
+        字段： vehicle_id, owner_id
+        has_many: vehicle_workflowships
+        字段： vehicle_id, workflow_id
+   查询条件：
+        engine_number, chassis_number ---- 通过发动机编号或地盘号查询车辆信息
+        idcard ---- 通过车主身份证查询车主信息和车辆信息
+        fullname ---- 通过车主姓名查询主信息和车辆信息
+        vehicle_id ---- 通过车辆id查询流程、客户、派工、故障、旧件、费用等信息,
+                         依赖关系表vehicle_workflowships
+4. 故障管理模块：
+   表：faults
+   字段： id, measure, fault_analyse, created_at, updated_at, fault_desc
+   关系表：
+        has_one:  fault_workflowship
+        字段： fault_id, workflow_id
+        has_one:  oldpart_faultship
+        字段： fault_id, oldpart_id
+        has_one:  indirectpart_faultship
+        字段： fault_id, indirectpart_id
+        has_one:  newpart_faultship
+        字段： fault_id, newpart_id
+   查询条件：
+        fault_id ---- 通过故障id查询直接损坏旧件信息, 依赖oldpart_faultship
+                 ---- 通过故障id查询间接损坏旧件信息, 依赖indirectpart_faultship
+                 ---- 通过故障id查询更换新件信息, 依赖newpart_faultship
+                 ---- 通过故障id查询客户、派工、车辆、旧件、费用等信息,
+                      依赖关系表fault_workflowship
+5. 旧件管理模块：
+   表：oldparts(直接损坏旧件, 以下简称旧件),
+   字段：
+        id, name, drawing, count, factory, pattern, depot, status, occupy,
+        occupytime, warehousing_at, warehousing_on, created_at, updated_at,
+        running_number, category, factory_code, fault_desc
+   关系表：
+        has_many: oldpart_indirectpartships
+        字段:  oldpart_id, indirectpart_id
+        has_many: oldpart_newpartships
+        字段:  oldpart_id, newpart_id
+        has_one: oldpart_faultship
+        字段:  oldpart_id, fault_id
+        has_one: oldpart_workflowship
+        字段:  oldpart_id, workflow_id
+   查询条件：
+        name,drawing ---- 通过名称,图号查询旧件信息
+        oldpart_id ---- 通过旧件id查询间接旧件信息，依赖关系表oldpart_indirectpartships
+                   ---- 通过旧件id查询新件信息，依赖关系表oldpart_newpartships
+                   ---- 通过旧件id查询故障信息，依赖关系表oldpart_faultship
+                   ---- 通过旧件id查询客户、派工、车辆、故障、旧件、费用等信息,
+                        依赖关系表oldpart_workflowship
+   表：indirectpart(间接损坏旧件）
+   字段: id, ind_name, ind_drawing, ind_count, ind_factory, ind_pattern ind_depot,
+        ind_status, ind_occupy, ind_occupytime, ind_warehousing_at,
+        ind_warehousing_on, ind_running_number, ind_category ind_factory_code,
+        ind_fault_desc, created_at updated_at
+   关系表：
+        has_many: oldpart_indirectpartships
+        字段:  oldpart_id, indirectpart_id
+        has_one: indirectpart_faultship
+        字段:  indirectpart_id, fault_id
+        has_one: indirectpart_workflowship
+        字段:  indirectpart_id, workflow_id
+   查询条件： indirectpart_id ---- 通过间接旧件id查询旧件，依赖关系表oldpart_indirectpartships
+                             ---- 通过间接旧件id查询故障信息，依赖关系表indirectpart_faultship
+                             ---- 通过间接旧件id查询客户、派工、车辆、故障、旧件、费用等信息,
+                                  依赖关系表oldpart_workflowship
+6. 新件管理模块：
+    表：newparts
+    字段： id, name, drawing, price, factory, newpart_manage, created_at,
+          updated_at, running_number, factory_code, count category
+    关系表：
+          has_one: oldpart_newpartship
+          字段: oldpart_id, newpart_id
+          has_one: newpart_workflowship
+          字段: newpart_id, workflow_id
+    查询条件：
+          name,drawing ---- 通过新件名称,图号查询新件信息
+          newpart_id ---- 通过新件id查询旧件信息，依赖关系表oldpart_newpartship
+7. 费用管理模块：
+   表：expenses
+   字段: id, material_cost, working_hours_cost, communication_cost,
+         service_cat_cost, meal_cost, travel_expense, created_at, updated_at,
+         total, service_car_cost, info_worker
+   关系表：
+        has_one: expense_workflowship
+        字段: expense_id, workflow_id
+        has_one: expense_companyship
+        字段: expense_id, company_id
+   查询条件：
+        info_worker: 通过信息员姓名查询费用信息
+        expense_id: 通过费用id查询客户、派工、车辆、故障、旧件、费用、维修工等信息,
+                    依赖关系表expense_workflowship
+8. 流程管理模块：
+   表： workflows
+   字段：id, status, creator
+   关系表：
+        has_one: customer_workflow
+        字段: customer_id, workflow_id
+        has_one: faultdesc_workflowship
+        字段: faultdest_id, workflow_id
+        has_one: dispatching_workflow
+        字段: dispatching_id, workflow_id
+        has_one: vehicle_workflowship
+        字段: vehicle_id, workflow_id
+        has_many: fault_workflowships
+        字段: fault_id, workflow_id
+        has_many: oldpart_workflowships
+        字段: oldpart_id, workflow_id
+        has_many: indirectpart_workflowships
+        字段: indirectpart_id, workflow_id
+        has_many: newpart_workflowships
+        字段: newpart_id, workflow_id
+        has_many: repairmen
+        字段: user_id, workflow_id
+        has_one: expense_workflowship
+        字段: expense_id, workflow_id
+   查询条件：
+        creator ---- 通过创建人查询流程信息
+        workflow_id ---- 通过流程id查询客户、派工、车辆、故障、旧件、新件、费用等信息，
+                         依赖关系表： customer_workflow, dispatching_workflow,
+                         fault_workflowships, oldpart_workflowships,
+                         indirectpart_workflowships, newpart_workflowships,
+                         expense_workflowship

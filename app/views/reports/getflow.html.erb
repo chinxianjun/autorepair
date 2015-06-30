@@ -1,0 +1,120 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "report" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+  <!----info-content{{{{{---->
+  <div class="admin-content">
+    <div class="form-set">
+      <h2>流程详情</h2>
+      <!--table样式{-->
+      <table class="admin-table table-style1 pretty">
+        <thead>
+        <tr>
+          <th>流程ID</th>
+          <th>维修工</th>
+          <th>维修性质</th>
+          <th>创建日期</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if @workflow.nil? %>
+            <tr></tr>
+        <% else %>
+            <tr>
+              <td><%= @workflow.id %></td>
+              <td><%= @workflow.repairman %></td>
+              <td><%= @workflow.warranty %></td>
+              <td><%= @workflow.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="form-set">
+      <h2>客户详情</h2>
+      <!--table样式{-->
+      <table class="admin-table table-style1 pretty">
+        <thead>
+        <tr>
+          <th>客户姓名</th>
+          <th>客户电话</th>
+          <th>客户级别</th>
+          <th>地址</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if @customer.nil? %>
+            <tr></tr>
+        <% else %>
+            <tr>
+              <td><%= @customer.fullname %></td>
+              <td><%= @customer.phone %></td>
+              <td><%= @customer.address %></td>
+              <td><%= @customer.category %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="form-set">
+      <h2>车辆详情</h2>
+      <!--table样式{-->
+      <table class="admin-table table-style1 pretty">
+        <thead>
+        <tr>
+          <th>车主姓名</th>
+          <th>车主电话</th>
+          <th>车牌号</th>
+          <th>发动机型号</th>
+          <th>发动机编号</th>
+          <th>底盘号</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if @workflow.nil? %>
+            <tr></tr>
+        <% else %>
+            <tr>
+              <td><%= @workflow.id %></td>
+              <td><%= @workflow.repairman %></td>
+              <td><%= @workflow.warranty %></td>
+              <td><%= @workflow.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="form-set">
+      <h2>故障详情</h2>
+      <!--table样式{-->
+      <table class="admin-table table-style1 pretty">
+        <thead>
+        <tr>
+          <th>流程ID</th>
+          <th>维修工</th>
+          <th>维修性质</th>
+          <th>创建日期</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if @workflow.nil? %>
+            <tr></tr>
+        <% else %>
+            <tr>
+              <td><%= @workflow.id %></td>
+              <td><%= @workflow.repairman %></td>
+              <td><%= @workflow.warranty %></td>
+              <td><%= @workflow.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="tool-bar clrfix">
+      <%#= label_tag :column, "客户姓名或电话" %>
+      <button class="submit-btn" id="J-go_getFlow">下一步</button>
+      <button class="cancel-btn" >取消</button>
+    </div>
+  </div>
+</div>

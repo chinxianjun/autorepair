@@ -1,0 +1,96 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>车主详情<span class="info"></span></h2>
+        <div class="tool-bar clrfix">
+            <button class="newOwner add-btn fr">更换车主</button>
+          <% if current_user.allowed_to?(current_user, :search_vehicle, @current_company) %>
+              <div id="search">
+              </div>
+          <% end %>
+        </div>
+        <!--车主信息{-->
+      <input type="hidden" id="J-vehicle_id" value="<%= @vehicle.id %>"/>
+      <% if @owner.nil? %>
+          <div></div>
+      <% else %>
+        <div class="content-set">
+            <div class="hd">
+                <h2>基本信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>姓名</th>
+                                    <td><%= @owner.fullname %></td>
+                                </tr>
+                                <tr>
+                                  <th>电话</th>
+                                  <td><%= @owner.phone %></td>
+                                </tr>
+                                <tr>
+                                    <th>作业地点</th>
+                                    <td><%= @owner.workplace %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="tool-bar tr clrfix">
+            <button class="edit-btn editOwner">编辑</button>
+            <button class="cancel-btn">返回</button>
+        </div>
+      <% end %>
+        <!----}}}}}}content-set---->
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->
+<!--新建车主信息弹框{-->
+<div id="J-Owner_new">
+    <div class="form-set">
+        <form method="post" action="">
+            <dl>
+                <dt>姓名<b class="ftx04">*</b></dt>
+                <dd><label for="J-fullname"></label><input type="text" name="" value=""
+                           class="inp inp2" id="J-fullname"/></dd>
+                <dt>电话<b class="ftx04">*</b></dt>
+                <dd><label for="J-phone"></label><input type="text" name="" value=""
+                                                      class="inp inp2" id="J-phone"/></dd>
+                <dt>作业地点</dt>
+                <dd><label for="J-workplace"></label><input type="text" name="" value=""
+                           class="inp inp2" id="J-workplace"/></dd>
+            </dl>
+        </form>
+    </div>
+</div>
+<!--}新建车主信息弹框-->
+<!--编辑车辆弹框{-->
+<div id="J-Owner_edit">
+    <div class="form-set">
+        <form method="post" action="">
+            <dl>
+                <dt>姓名<b class="ftx04">*</b></dt>
+                <dd><label for="U-fullname"></label><input type="text" name="" value=""
+                           class="inp inp2" id="U-fullname"/></dd>
+                <dt>联系电话<b class="ftx04">*</b></dt>
+                <dd><label for="U-phone"></label><input type="text" name="" value=""
+                                                      class="inp inp2" id="U-phone"/></dd>
+                <dt>作业地点</dt>
+                <dd><label for="U-workplace"></label><input type="text" name="" value=""
+                           class="inp inp2" id="U-workplace"/></dd>
+            </dl>
+        </form>
+    </div>
+</div>
+<!--}编辑车辆弹框-->

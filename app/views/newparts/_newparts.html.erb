@@ -1,0 +1,47 @@
+<!--table样式{-->
+<table class="admin-table table-style1">
+    <thead>
+    <tr>
+        <th class="sa lt">&nbsp;</th>
+        <th>ID</th>
+        <td>品牌</td>
+        <td colspan="3">名称</td>
+        <td>图号</td>
+        <td>厂家名称</td>
+        <td>厂家代码</td>
+        <td>新件流水号</td>
+        <td>单价</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @newparts.nil? %>
+        <tr></tr>
+    <% else %>
+        <% @newparts.each do |newpart| %>
+            <tr>
+                <th class="sa">
+                  <input type="checkbox" name="order" value="1" class="select-all"/>
+                </th>
+                <th><%= newpart.id %></th>
+                <th><%= newpart.category %></th>
+              <% if current_user.allowed_to?(current_user, :view_newpart, @current_company) %>
+                <td><%= link_to "#{newpart.name}", newpart_path(newpart), :class => "fun-link product-name" %></td>
+              <% end %>
+              <% if current_user.allowed_to?(current_user, :edit_newpart, @current_company) %>
+                <td><a href="javascript:void(0)" id="<%= newpart.id %>" class="editNewpartLink fun-link text2 product-name">编辑</a></td>
+              <% end %>
+              <% if current_user.allowed_to?(current_user, :destroy_newpart, @current_company) %>
+                <td><%= link_to "删除", newpart_path(newpart), :class=>"deleteItem fun-link text2 product-name" %></td>
+              <% end %>
+                <td><%= newpart.drawing %></td>
+                <td><%= newpart.factory %></td>
+                <td><%= newpart.factory_code %></td>
+                <td><%= newpart.running_number %></td>
+                <td><%= newpart.price %></td>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+</table>
+<%= will_paginate @newparts %>
+<!--}table样式-->

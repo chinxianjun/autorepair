@@ -1,0 +1,240 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= javascript_include_tag "dispatching" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content" xmlns="http://www.w3.org/1999/html"
+     xmlns="http://www.w3.org/1999/html">
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+    <input type="hidden" value="<%= @dispatching.id %>" id="J-dispatch_id"/>
+
+    <h2>故障详情<span class="info"></span></h2>
+
+    <div class="content-set">
+      <div class="hd">
+        <h2>客户信息</h2>
+      </div>
+      <div class="bd">
+        <dl class="details-info">
+          <dd>
+            <table class="admin-table table-style1">
+              <tr>
+                <td>
+                  <label for="J-workflow_id">流程编号</label>
+                  <input type="text" value="<%= @workflow.id %>" class="inp16" id="J-workflow_id" readonly="readonly"/>
+                </td>
+                <td>
+                  <label for="J-customer_name">客户姓名</label>
+                  <input type="text" value="<%= @customer.fullname %>" class="inp16" id="J-customer_name" readonly="readonly"/>
+                </td>
+                <td>
+                  <label for="J-customer_phone">客户电话</label>
+                  <input id="J-customer_phone" value="<%= @customer.phone %>" class="inp16" readonly="readonly"/>
+                </td>
+              </tr>
+            </table>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="content-set">
+      <div class="hd">
+        <h2>车辆信息</h2>
+      </div>
+      <div class="bd">
+        <dl class="details-info">
+          <dd>
+            <table class="admin-table table-style1">
+              <tr>
+                <td>
+                  <label for="J-vehicle_model">车型</label>
+                  <input type="text" class="inp16" value="<%= @vehicle.model %>" id="J-vehicle_model" />
+                </td>
+                <td>
+                  <label for="J-vehicle_chassis_number">底盘号</label>
+                  <input type="text" class="inp16" value="<%= @vehicle.chassis_number %>" id="J-vehicle_chassis_number"/>
+                </td>
+                <td>
+                  <label for="J-vehicle_driving_range">行驶里程</label>
+                  <input type="text" class="inp16" value="<%= @vehicle.driving_range %>" id="J-vehicle_driving_range" />
+                </td>
+                <td>
+                  <label for="J-vehicle_purchase_on">购车日期</label>
+                  <input type="text" class="inp16" value="<%= @vehicle.purchase_on %>" id="J-vehicle_purchase_on"/>
+                </td>
+              </tr>
+            </table>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="content-set">
+      <div class="hd">
+        <h2>故障信息</h2>
+      </div>
+      <div class="bd">
+        <dl class="details-info">
+          <dd>
+            <table class="admin-table table-style1">
+              <tr>
+                <td>
+                  <label for="J-repair_warranty">维修性质</label>
+                  <input id="J-repair_warranty" value="<%= @workflow.faultdesc.warranty %>" class="inp16" type="text" />
+                </td>
+                <% if @workflow.faultdesc.warranty == 'rescue' %>
+                    <td>
+                      <label for="J-fault_place">故障地点</label>
+                      <input id="J-fault_place" value="<%= @workflow.faultdesc.place %>" class="inp16" type="text"/>
+                    </td>
+                <% end %>
+                <td>
+                  <label for="J-car_number">故障车牌号</label>
+                  <input id="J-car_number" value="<%= @workflow.faultdesc.car_number %>" class="inp16" type="text"/>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <label for="J-fault_description">故障描述</label>
+                  <input id="J-fault_description" value="<%= @workflow.faultdesc.description %>" class="inp16" type="text" style="width:92%;"/>
+                </td>
+              </tr>
+            </table>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <!----J-add_budget{---->
+    <div class="content-set" id="J-add_budget">
+      <div class="hd">
+        <h2>费用估算</h2>
+      </div>
+      <div class="bd">
+        <div id="J-bean" style="margin-bottom: 20px;">
+          <!--<div id="J-select_three_bags" style="float: left; margin-right: 40px;">-->
+            <!--<dl>-->
+              <!--<dt><b>选择三包方式</b></dt>-->
+              <!--<dd>-->
+                <!--<div class="radio" id="J-three_bags">-->
+                  <!--<%# if @budgets.first.nil? %>-->
+                      <!--<label for="J-three_bags_yes">三包</label>-->
+                      <!--<input type="radio" name="J-three_bags" id="J-three_bags_yes" value="三包"/>-->
+                      <!--<label for="J-three_bags_no">社会</label>-->
+                      <!--<input type="radio" name="J-three_bags" id="J-three_bags_no" value="社会" checked="checked"/>-->
+                  <!--<%# elsif @budgets.first.three_bags == "三包" %>-->
+                      <!--<label for="J-three_bags_yes">三包</label>-->
+                      <!--<input type="radio" name="J-three_bags" id="J-three_bags_yes" value="三包" checked="checked"/>-->
+                      <!--<label for="J-three_bags_no">社会</label>-->
+                      <!--<input type="radio" name="J-three_bags" id="J-three_bags_no" value="社会"/>-->
+                  <!--<%# end %>-->
+                <!--</div>-->
+              <!--</dd>-->
+            <!--</dl>-->
+          <!--</div>-->
+          <div id="J-worktime" style="float:left;" disabled="true">
+            <dl>
+              <dt><b>选择工时费</b></dt>
+              <dd>
+                <select id="J-work_hour_cost">
+                  <!--<option value="" selected="selected">选择工时费</option>-->
+                  <% if @budgets.first.nil? %>
+                    <option value="200" selected="selected">200</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                  <% elsif @budgets.first.working_hours_cost == 500 %>
+                      <option value="200">200</option>
+                      <option value="500" selected="selected">500</option>
+                      <option value="1000">1000</option>
+                  <% elsif @budgets.first.working_hours_cost == 1000 %>
+                      <option value="200">200</option>
+                      <option value="500">500</option>
+                      <option value="1000" selected="selected">1000</option>
+                  <% end %>
+                </select>
+              </dd>
+            </dl>
+          </div>
+        </div>
+        <br/>
+
+        <div id="J-show_cost">
+          <br/>
+
+          <h3><b>更换配件列表</b></h3>
+          <ul class="consulting-list" id="J-consult">
+            <li class="consulting-title clrfix">
+              <span class="consultingQuestion">配件品牌</span>
+              <span class="consultingAnswer">配件名称</span>
+              <span class="consultingDate">配件图号</span>
+              <span class="customer">配件价格</span>
+              <span class="phone">配件数量</span>
+              <span class="customer">三包</span>
+              <span class="tool">操作</span>
+            </li>
+            <% if @budgets.any? %>
+                <% @budgets.each do |budget| %>
+                    <li class="clrfix">
+                      <span class="consultingQuestion"><%= budget.category %></span>
+                      <span class="consultingAnswer"><%= budget.name %></span>
+                      <span class="consultingDate"><%= budget.drawing %></span>
+                      <span class="customer"><%= budget.price %></span>
+                      <span class="phone"><%= budget.count %></span>
+                      <span class="customer"><%= budget.three_bags %></span>
+                      <span class="tool"><a href="/dispatchings/<%= @dispatching.id %>/budget_del?budget_id=<%= budget.id %>">删除</a></span>
+                    </li>
+                <% end %>
+            <% end %>
+          </ul>
+          <dl class="details-info">
+            <dd>
+              <div id="J-part"
+                   class="order-pnum order-confirm-mod clrfix">
+              </div>
+              <p>
+                <label>选择品牌</label>
+                <%= select_tag "J-category", options_for_select([["选择分类", "0"]] + @categories, "0") %>
+                <label>旧件名称</label>
+                <input type="text" id="J-part_name"/>
+                <label>选择图号</label>
+                <%= select_tag "J-drawing", options_for_select([["选择图号", "0"]] + @drawings, "0") %>
+                <label>单价</label>
+                <input value="" id="J-part_price" type="text" />
+                <label>输入数量</label>
+                <input value="1" id="J-part_count" type="text"/>
+                <!--<div class="radio">-->
+                    <label for="J-three_bags_yes">三包</label>
+                    <input type="radio" name="J-three_bags" id="J-three_bags_yes" value="三包"/>
+                    <label for="J-three_bags_no">社会</label>
+                    <input type="radio" name="J-three_bags" id="J-three_bags_no" value="社会" checked="checked"/>
+                <!--</div>-->
+                <button class="submit_btn" id='J-add_budget_part'>添加</button>
+              </p>
+              <br/>
+
+              <div>
+                <dl>
+                  <dd>费用合计:</dd>
+                  <dt id="J-expense_count"></dt>
+                </dl>
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <br/>
+      </div>
+      <!--bd-->
+    </div>
+    <!----}content-set ---->
+    <div class="tool-bar clrfix">
+      <% if @dispatching.property == "进厂" %>
+          <button class="edit-btn" id="J-go_to_dispatch">下一步</button>
+          <button class="cancel-btn">返回</button>
+      <% elsif @dispatching.property == "救援" %>
+          <button class="submit-btn" id="J-dispatching_save">保存</button>
+          <button class="cancel-btn" id="J-return_btn">返回</button>
+      <% end %>
+    </div>
+  </div>
+  <!----admin-content---->
+</div>
+<!----}}}}main-content---->

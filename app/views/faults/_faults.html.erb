@@ -1,0 +1,39 @@
+<!--table样式{-->
+<table class="admin-table table-style1 pretty">
+    <thead>
+    <tr>
+        <th class="sa lt">&nbsp;</th>
+        <th>ID</th>
+        <td colspan="3">故障描述</td>
+        <td>故障分析</td>
+        <td>处理措施</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @faults.nil? %>
+        <tr></tr>
+    <% else %>
+        <% @faults.each do |fault| %>
+            <tr>
+                <th class="sa">
+                  <input type="checkbox" name="order" value="1" class="select-all"/>
+                </th>
+                <th><%= fault.id %></th>
+              <% if current_user.allowed_to?(current_user, :view_fault, @current_company) %>
+                <td><%= link_to "#{fault.fault_desc}", fault_path(fault), :class => "fun-link text12 product-name" %></td>
+              <% end %>
+              <% if current_user.allowed_to?(current_user, :edit_fault, @current_company) %>
+                <td><a href="javascript:void(0)" id="<%= fault.id %>" class="editFaultLink fun-link text2 product-name">编辑</a></td>
+              <% end %>
+              <% if current_user.allowed_to?(current_user, :destroy_fault, @current_company) %>
+                <td><%= link_to "删除", fault_path(fault), :class=>"deleteItem fun-link text2 product-name" %></td>
+              <% end %>
+                <td><%= fault.fault_analyse %></td>
+                <td><%= fault.measure %></td>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+</table>
+<%= will_paginate @faults %>
+<!--}table样式-->

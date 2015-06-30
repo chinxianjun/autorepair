@@ -1,0 +1,28 @@
+<h1>Listing dispatchings</h1>
+
+<table>
+  <tr>
+    <th>Repairmen</th>
+    <th>Dispatcher</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% if @dispatchings.nil? %>
+      <tr></tr>
+<% else %>
+    <% @dispatchings.each do |dispatching| %>
+      <tr>
+        <td><%= dispatching.repairmen %></td>
+        <td><%= dispatching.dispatcher_id %></td>
+        <td><%= link_to 'Show', dispatching %></td>
+        <td><%= link_to 'Edit', edit_dispatching_path(dispatching) %></td>
+        <td><%= link_to 'Destroy', dispatching, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+    <% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Dispatching', new_dispatching_path %>

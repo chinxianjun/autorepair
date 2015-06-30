@@ -1,0 +1,38 @@
+<%=  content_for :head do %>
+    <%=  javascript_include_tag "consulting" %>
+<% end %>
+<div class="main-content">
+    <div class="admin-content">
+      <!--编辑咨询表单信息-->
+     	<div id="J_edit_contact" class="contact-form">
+     		<h2><%=  link_to "咨询", question_consultings_path(@question) %>&gt;&gt;查看咨询信息<span class="info"></span></h2>
+     		<form method="put" action="" id="J-edit-contact-form">
+     			<dl class="clrfix">
+     				<dt><label for="J-customer_name">客户姓名</label></dt>
+                   <dd><input type="text" id="J-customer_name" value="<%= @customer.fullname %>" class="inp inp2 focus" readonly="readonly"/></dd>
+                   <br/><dt><label for="J-custoemr_phone">客户电话</label></dt>
+                   <dd><input type="text" id="J-customer_phone" value="<%= @customer.phone %>" class="inp inp2 focus" readonly="readonly"/></dd>
+                   <br/><dt><label for="J-question">咨询信息</label></dt>
+                   <dd><textarea id="J-question" class="textarea textarea2b" readonly="readonly"><%= @consulting.question %></textarea></dd>
+                   <br/><dt><label for="J-answer">解答</label></dt>
+                   <dd><textarea id="J-answer" class="textarea textarea2b" readonly="readonly"><%= @consulting.answer %></textarea></dd>
+                   <br/><dt><label for="J-answerer">处理人</label></dt>
+                   <dd><input type="text" id="J-answerer" value="<%= @consulting.answerer %>" class="inp inp2 focus" readonly="readonly" /></dd>
+                   <br/><dt>状态</dt>
+                     <dd>
+                       <input type="text" id="J-status" value="<%= @consulting.status %>" class="inp inp2 focus" readonly="readonly" />
+                     </dd>
+     			</dl>
+     		</form>
+     	</div>
+     	<!--编辑购车表单信息-->
+      <br/>
+      <div class="tool-bar clrfix">
+        <input type="hidden" name="qid" value="<%= @question.id %>" id="question_id" />
+        <% if @consulting == @consultings.first %>
+            <%= button_to "编辑", edit_question_consulting_path(@question, @consulting), :class=>"button", :method => :get  %>
+        <% end %>
+            <%= button_to "返回", :back, :class=>"button cancel-btn" %>
+      </div>
+    </div>
+</div>

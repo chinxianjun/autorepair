@@ -1,0 +1,56 @@
+<%=  content_for :head do %>
+    <%=  javascript_include_tag "car_buying" %>
+    <%=  javascript_include_tag "jquery.md5" %>
+<% end %>
+<div class="main-content">
+    <div class="admin-content">
+      <!--编辑购车表单信息-->
+     	<div id="J_edit_contact" class="contact-form">
+     		<h2><%=  link_to "购车", question_car_buyings_path(@question) %>&gt;&gt;编辑购车信息<span class="info"></span></h2>
+     		<form method="put" action="" id="J-edit-contact-form">
+     			<dl class="clrfix">
+     				<dt><label for="J-customer_name">客户姓名</label></dt>
+                   <dd><input type="text" id="J-customer_name" value="<%= @customer.fullname %>" class="inp inp2 focus" readonly="readonly"/></dd>
+                   <br/><dt><label for="J-custoemr_phone">客户电话</label></dt>
+                   <dd><input type="text" id="J-customer_phone" value="<%= @customer.phone %>" class="inp inp2 focus" readonly="readonly"/></dd>
+                   <br/><dt><label for="J-description">购车意向</label></dt>
+                   <dd><textarea id="J-description" class="textarea textarea2b" ><%= @car_buying.description %></textarea></dd>
+                   <br/><dt><label for="J-referral">推荐人</label></dt>
+                   <dd><input type="text" id="J-referral" value="<%= @car_buying.referral %>" class="inp inp2 focus" readonly="readonly" /></dd>
+                   <br/><dt><label for="J-manager">销售经理</label></dt>
+                   <dd><input type="text" id="J-manager" value="<%= @car_buying.manager %>" class="inp inp2 focus" readonly="readonly"/></dd>
+                   <br/><dt><label for="J-salesman">业务员</label></dt>
+                   <dd>
+                     <% if @car_buying.status == "指派业务员" %>
+                         <div class="radio" id="salesman">
+                            <% if @salesman %>
+                               <% @salesman.each do |sale| %>
+                                  <input type="radio" id="salesman_<%= sale.id %>" name="salesman" value="<%= sale.fullname %>" />
+                                   <label for="salesman_<%= sale.id %>"><%= sale.fullname %></label>
+                               <% end %>
+                            <% end %>
+                         </div>
+                     <% else %>    
+                        <input type="text" id="J-salesman" value="<%= @car_buying.salesman %>" class="inp inp2 focus" readonly="readonly"/>
+                     <% end %>
+                   </dd>
+                   <br/><dt>状态</dt>
+                     <dd>
+                       <div class="" id="status">
+                           <input type="radio" id="status1" name="status" value="洽谈" /><label for="status1">洽谈</label>
+                           <input type="radio" id="status2" name="status" value="已购" /><label for="status2">已购</label>
+                           <input type="radio" id="status3" name="status" value="未购" /><label for="status3">未购</label>
+                       </div>
+                     </dd>
+     			</dl>
+     		</form>
+     	</div>
+     	<!--编辑购车表单信息-->
+      <br/>
+      <div class="tool-bar clrfix">
+        <input type="hidden" name="qid" value="<%= @question.id %>" id="J-question_id" />
+        <button type="submit" class="submit-btn" id="J-add_edit_info">保存</button>
+        <button type="cancel" class="cancel-btn">取消</button>
+      </div>
+    </div>
+</div>

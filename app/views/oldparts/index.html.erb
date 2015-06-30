@@ -1,0 +1,194 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "oldpart" %>
+    <%= javascript_include_tag "jquery.treeTable" %>
+<% end %>
+
+<!--<div class="main-content">-->
+  <!--<div class="admin-content">-->
+    <!--<h2>旧件列表<span class="info"></span></h2>-->
+
+    <!--<div class="tool-bar clrfix">-->
+      <!--<div>库存量：库存<%#= @count %>, 总额：<%#= @amount %> 元</div>-->
+      <!--<%# if current_user.allowed_to?(current_user, :add_oldpart, @current_company) %>-->
+          <!--<button class="add-btn fr" id="create_button_to">添加旧件</button>-->
+      <!--<%# end %>-->
+    <!--</div>-->
+    <!--table样式-->
+    <!--<table class="admin-table table-style1">-->
+      <!--<thead>-->
+      <!--<tr>-->
+        <!--<th>ID</th>-->
+        <!--<td>旧件类别</td>-->
+        <!--<td colspan="3">旧件名称</td>-->
+        <!--<td>旧件图号</td>-->
+        <!--<td>数量</td>-->
+        <!--<td>单价</td>-->
+        <!--<td>旧件厂家</td>-->
+        <!--<td>破损模式</td>-->
+      <!--</tr>-->
+      <!--</thead>-->
+      <!--<tbody>-->
+      <!--<%# if @oldparts.blank? %>-->
+          <!--<tr></tr>-->
+      <!--<%# else %>-->
+          <!--<%# @oldparts.each do |oldpart| %>-->
+              <!--<tr>-->
+              <!--<th><%#= @oldparts.size %></th>-->
+              <!--<th><%#= oldpart.id %></th>-->
+              <!--<td><%#= oldpart.category %></td>-->
+              <!--<%# if current_user.allowed_to?(current_user, :view_oldpart, @current_company) %>-->
+                  <!--<td>-->
+                    <!--<a href="/warehouses/<%#= @warehouse.id %>/oldparts/<%#= oldpart.id %>"-->
+                       <!-- class="fun-link text2 product-name"> --><%#= oldpart.name %>
+                    <!--</a>-->
+                  <!--</td>-->
+              <!--<%# end %>-->
+              <%# if current_user.allowed_to?(current_user, :edit_oldpart, @current_company) %>
+                  <!--<td>-->
+                    <!--<a href="/warehouses/<%#= @warehouse.id %>/oldparts/<%#= oldpart.id %>/edit" class="fun-link text2 product-name">编辑-->
+                    <!--</a></td>-->
+              <%# end %>
+              <%# if current_user.allowed_to?(current_user, :destroy_oldpart, @current_company) %>
+                  <!--<td><%#= link_to "删除", wareshouse_oldpart_path(warehouse, oldpart), :class => "deleteItem fun-link text2 product-name" %></td>-->
+              <%# end %>
+              <!--<td><%#= oldpart.drawing %></td>-->
+              <!--<td><%#= @count %></td>-->
+              <!--<td><%#= oldpart.price %></td>-->
+              <!--<td><%#= @count %></td>-->
+              <!--<td><%#= oldpart.factory %></td>-->
+              <!--<%# if oldpart.indirectparts.any? %>-->
+                  <!--<td><a href="" class="fun-link text2 product-name"><%#= oldpart.pattern %></a></td>-->
+              <!--<%# else %>-->
+                  <!--<td><%#= oldpart.pattern %></td>-->
+              <!--<%# end %>-->
+              <!--</tr>-->
+          <!--<%# end %>-->
+      <!--<%# end %>-->
+      <!--<%# if @indirectparts.nil? %>-->
+          <!--<tr></tr>-->
+      <!--<%# else %>-->
+          <!--<%# @indirectparts.each do |indirectpart| %>-->
+              <!--<tr>-->
+                <!--<th class="sa">-->
+                  <!--<input type="checkbox" name="order" value="1" class="select-all"/>-->
+                <!--</th>-->
+                <!--<th><%#= indirectpart.id %></th>-->
+                <!--<td>-->
+                  <!--<a href="/warehouses/<%#= @warehouse.id %>/oldparts/ind_show?id=<%#= indirectpart.id %>" class="fun-link text12 product-name"><%#= indirectpart.ind_name %></a>-->
+                <!--</td>-->
+                <!--<td>-->
+                  <!--<a href="javascript:void(0)" id="<%#= indirectpart.id %>" class="editIndirectpartLink fun-link text2 product-name">编辑</a>-->
+                <!--</td>-->
+                <!--<td>-->
+                  <!--<a href="javascript:void(0)" id="<%#= indirectpart.id %>" class="fun-link text2 product-name delete_link">删除</a>-->
+                <!--</td>-->
+                <!--<td><%#= indirectpart.ind_drawing %></td>-->
+                <!--<td><%#= indirectpart.ind_factory %></td>-->
+                <!--<%# if indirectpart.oldpart.nil? %>-->
+                    <!--<td><%#= indirectpart.ind_pattern %></td>-->
+                <!--<%# else %>-->
+                    <!--<td><a href="" class="fun-link text2 product-name"><%#= indirectpart.ind_pattern %></a></td>-->
+                <!--<%# end %>-->
+                <!--<td><%#= indirectpart.ind_category %></td>-->
+                <!--<td><%#= indirectpart.ind_depot %></td>-->
+              <!--</tr>-->
+          <!--<%# end %>-->
+      <!--<%# end %>-->
+      <!--</tbody>-->
+    <!--</table>-->
+    <!--}table样式-->
+    <%#= will_paginate @oldparts %>
+  <!--</div>-->
+  <!--编辑旧件弹框{-->
+  <!--<div id="J-Oldpart_update">-->
+  <!--<div class="form-set">-->
+  <!--<form method="post" action="">-->
+  <!--<dl>-->
+  <!--<dt>旧件名称</dt>-->
+  <!--<dd>-->
+  <!--<input type="text" class="inp inp2" id="U-name"/></dd>-->
+  <!--<dt>旧件图号</dt>-->
+  <!--<dd>-->
+  <!--<input type="text" class="inp inp2" id="U-drawing"/></dd>-->
+  <!--<dt>旧件类别</dt>-->
+  <!--<dd>-->
+  <!--<div class="radio" id="U-category">-->
+  <!--<%# @category.each do |cate| %>-->
+  <!--<input type="radio" id="U-category<%#= cate.id %>" name="category" value="<%#= cate.name %>" />-->
+  <!--<label for="U-category<%#= cate.id %>"><%#= cate.name %></label>-->
+  <!--<%# end %>-->
+  <!--</div>-->
+  <!--</dd>-->
+  <!--<dt>厂家名称</dt>-->
+  <!--<dd><input type="text" class="inp inp2" id="U-factory"/></dd>-->
+  <!--<dt>厂家代码</dt>-->
+  <!--<dd><input type="text" class="inp inp2" id="U-factory_code"></dd>-->
+  <!--<dt hidden="hidden"></dt>-->
+  <!--<dd hidden="hidden"><input type="hidden" class="inp inp2" id="U-depot" value="<%#= @current_company.simply %>"/> </dd>-->
+  <!--<dt>旧件流水号</dt>-->
+  <!--<dd><input type="text" class="inp inp2" id="U-running_number"/></dd>-->
+  <!--<dt hidden="hidden">旧件状态</dt>-->
+  <!--<dd hidden="hidden"><input tyep="hidden" class="inp inp2" id="U-status" value="待入库"/></dd>-->
+  <!--<dt>数量</dt>-->
+  <!--<dd><input type="text" class="inp inp2" id="U-count"/></dd>-->
+  <!--<input type="hidden" class="inp inp2" id="U-Oldpart_id"/>-->
+  <!--</dl>-->
+  <!--</form>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--}编辑旧件弹框-->
+  <!--编辑间接损坏旧件弹框{-->
+  <!--<div id="J-Indirectpart_update">-->
+  <!--<div class="form-set">-->
+  <!--<form method="post" action="">-->
+  <!--<dl>-->
+  <!--<dt>旧件名称</dt>-->
+  <!--<dd>-->
+  <!--<input type="text" class="inp inp2" id="U-ind_name"/></dd>-->
+  <!--<dt>旧件图号</dt>-->
+  <!--<dd>-->
+  <!--<input type="text" class="inp inp2" id="U-ind_drawing"/></dd>-->
+  <!--<dt>旧件类别</dt>-->
+  <!--<dd>-->
+  <!--<div class="radio" id="U-ind_category">-->
+  <!--<%# @category.each do |cate| %>-->
+  <!--<input type="radio" id="U-ind_category<%#= cate.id %>" name="ind_category" value="<%#= cate.name %>" />-->
+  <!--<label for="U-ind_category<%#= cate.id %>"><%#= cate.name %></label>-->
+  <!--<%# end %>-->
+  <!--</div>-->
+  <!--</dd>-->
+  <!--<dt>厂家名称</dt>-->
+  <!--<dd><input type="text" class="inp inp2" id="U-ind_factory"/></dd>-->
+  <!--<dt>厂家代码</dt>-->
+  <!--<dd><input type="text" class="inp inp2" id="U-ind_factory_code"></dd>-->
+  <!--<dt hidden="hidden"></dt>-->
+  <!--<dd hidden="hidden"><input type="hidden" class="inp inp2" id="U-ind_depot" value="<%#= @current_company.simply %>"/> </dd>-->
+  <!--<dt>旧件流水号</dt>-->
+  <!--<dd><input type="text" class="inp inp2" id="U-ind_running_number"/></dd>-->
+  <!--<dt hidden="hidden">旧件状态</dt>-->
+  <!--<dd hidden="hidden"><input tyep="hidden" class="inp inp2" id="U-ind_status" value="待入库"/></dd>-->
+  <!--<dt>数量</dt>-->
+  <!--<dd><input type="text" class="inp inp2" id="U-ind_count"/></dd>-->
+  <!--<input type="hidden" class="inp inp2" id="U-Indirectpart_id"/>-->
+  <!--</dl>-->
+  <!--</form>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--}编辑间接损坏旧件弹框-->
+
+  <!----J-oldparts_index{{{{---->
+  <div id="J-oldpart_info">
+    <%= form_tag warehouse_oldparts_path(@warehouse), :method => "get", :id => "oldparts_search" do %>
+        <div class="tool-bar clrfix">
+          <%= text_field_tag :column, params[:column], :class => "inp" %>
+          <%= hidden_field_tag :wid, @warehouse.id, :class => "inp" %>
+          <%= button_tag "查询", :name => nil, :class => "search-btn" %>
+        </div>
+        <div id="oldparts"><%= render 'oldparts' %></div>
+    <% end %>
+  </div>
+  <!----}}}}J-oldparts_index---->
+  <!--</div>-->
+<!--</div>-->

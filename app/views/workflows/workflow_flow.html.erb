@@ -1,0 +1,192 @@
+<% content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "customer" %>
+    <%= javascript_include_tag "workflow" %>
+    <%= javascript_include_tag "dispatching" %>
+    <%= javascript_include_tag "vehicle" %>
+    <%= javascript_include_tag "oldpart" %>
+<% end %>
+
+<!---main-content{{{{--->
+<div class="main-content">
+  <!---admin-content{{{{{--->
+  <div class="admin-content">
+    <h2>我的流程<span class="info"></span></h2>
+
+    <p><%#= current_user.companies %></p>
+
+    <div class="question_menu">
+      <ul>
+        <% if current_user.allowed_to?(current_user, :view_dispatching, @current_company) %>
+            <li class="flowbar" id="J-flow_dispatch">
+              <a href="/dispatchings/dispatch_flow" id="dispatching" class="flow"><span>派工信息(0)</span></a></li>
+        <% end %>
+        <% if current_user.allowed_to?(current_user, :view_vehicle, @current_company) %>
+            <li class="flowbar" id="J-flow_vehicle">
+              <a href="/vehicles/vehicle_flow" id="vehicle" class="flow"><span>登记车辆(0)</span></a></li>
+        <% end %>
+        <% if current_user.allowed_to?(current_user, :view_fault, @current_company) %>
+            <li class="flowbar" id="J-flow_fault"><a href="/faults/fault_flow" id="fault" class="flow"><span>故障处理(0)</span></a>
+            </li>
+        <% end %>
+        <% if current_user.allowed_to?(current_user, :view_newpart, @current_company) %>
+            <li class="flowbar" id="J-flow_newpart">
+              <a href="/newparts/newpart_flow" id="newpart" class="flow"><span>领取新件(0)</span></a></li>
+        <% end %>
+        <%# if current_user.allowed_to?(current_user, :view_report, @current_company) %>
+        <!--<li class="flowbar"><a href="/reports/report_flow" id="report" class=""><span>上报信息(0)</span></a></li>-->
+        <%# end %>
+        <%# if current_user.allowed_to?(current_user, :view_expense, @current_company) %>
+        <!--<li class="flowbar"><a href="/expenses/expense_flow" id="expense" class=""><span>费用管理(0)</span></a></li>-->
+        <%# end %>
+      </ul>
+    </div>
+    <!---}}}}}}tool-bar clrfix--->
+  </div>
+  <!---}}}}admin-content--->
+  <!---add-oldpart{{{--->
+  <!--<div id="J-add_oldpart">-->
+    <!--<div class="form-set">-->
+      <!--<form method="" action="">-->
+        <!--<dl>-->
+          <!--<dt>旧件名称</dt>-->
+          <!--<dd>-->
+            <!--<input type="text" class="inp inp2" id="J-name" value=""/></dd>-->
+          <!--<dt>旧件图号</dt>-->
+          <!--<dd>-->
+            <!--<input type="text" class="inp inp2" id="J-drawing"/></dd>-->
+          <!--<dt>旧件类别</dt>-->
+          <!--<dd>-->
+            <!--<div class="radio" id="J-classes">-->
+              <!--<input type="radio" id="J-classes1" name="classes" value="潍柴"/><label for="J-classes1">潍柴</label>-->
+              <!--<input type="radio" id="J-classes2" name="classes" value="北奔"/><label for="J-classes2">北奔</label>-->
+              <!--<input type="radio" id="J-classes3" name="classes" value="陕汽"/><label for="J-classes3">陕汽</label>-->
+              <!--<input type="radio" id="J-classes4" name="classes" value="法士特"/><label for="J-classes4">法士特</label>-->
+            <!--</div>-->
+          <!--</dd>-->
+          <!--<dt>旧件分类</dt>-->
+          <!--<dd><input type="text" class="inp inp2" id="J-category"/></dd>-->
+          <!--<dt>厂家名称</dt>-->
+          <!--<dd><input type="text" class="inp inp2" id="J-factory"/></dd>-->
+          <!--<dt>厂家代码</dt>-->
+          <!--<dd><input type="text" class="inp inp2" id="J-factory_code"></dd>-->
+          <!--<dt>交件人</dt>-->
+          <!--<dd><input type="text" class="inp inp2" id="J-handin" value=""/></dd>-->
+          <!--<dt>旧件流水号</dt>-->
+          <!--<dd><input type="text" class="inp inp2" id="J-running_number"/></dd>-->
+          <!--<dt>数量</dt>-->
+          <!--<dd><input type="text" class="inp inp2" id="J-count"/></dd>-->
+        <!--</dl>-->
+      <!--</form>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!---}}}add_oldpart_nav--->
+  <!---add_vehicle_nav{{{--->
+  <!--<div id="J-add_vehicle_nav">-->
+    <!--<div class="form-set">-->
+      <!--<div class="content-set">-->
+        <!--<div class="hd">-->
+          <!--<h2>登记车辆信息</h2>-->
+        <!--</div>-->
+        <!--<div class="bd">-->
+          <!--<form action="" method="post">-->
+            <!--<table>-->
+              <!--<tr>-->
+                <!--<td class="vehicle_table">车主姓名</td>-->
+                <!--<td class="vehicle_table">身份证</td>-->
+                <!--<td class="vehicle_table">联系电话</td>-->
+              <!--</tr>-->
+              <!--<tr class="vehicle_tr">-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-owner_name"/></td>-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-owner_number"/></td>-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-owner_phone"/></td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="vehicle_table">车型</td>-->
+                <!--<td class="vehicle_table">车牌号</td>-->
+                <!--<td class="vehicle_table">发动机型号</td>-->
+              <!--</tr>-->
+              <!--<tr class="vehicle_tr">-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-model"/>-->
+                <!--</td>-->
+                <!--<td><input type="text" name="" value="<%#= @car_number %>"-->
+                           <!--class="inp inp1 vehicle_table" id="J-car_number"/>-->
+                <!--</td>-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-engine"/></td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="vehicle_table">发动机编号</td>-->
+                <!--<td class="vehicle_table">地盘号</td>-->
+                <!--<td class="vehicle_table">购车日期</td>-->
+              <!--</tr>-->
+              <!--<tr class="vehicle_tr">-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-engine_number"/>-->
+                <!--</td>-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-chassis_number"/>-->
+                <!--</td>-->
+                <!--<td><input type="text" readonly="readonly" id="J-datepicker" class="inp inp1 vehicle_table datepicker"/>-->
+                <!--</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="vehicle_table">行驶里程</td>-->
+                <!--<td class="vehicle_table">保修卡号</td>-->
+                <!--<td class="vehicle_table">出厂编号</td>-->
+              <!--</tr>-->
+              <!--<tr class="vehicle_tr">-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-driving_range"/>-->
+                <!--</td>-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-warranty_card"/>-->
+                <!--</td>-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-production_number"/></td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="vehicle_table">法士特型号</td>-->
+                <!--<td class="vehicle_table">购车单号</td>-->
+                <!--<td class="vehicle_table">用户编号</td>-->
+              <!--</tr>-->
+              <!--<tr class="vehicle_tr">-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-fast_type"/>-->
+                <!--</td>-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-order_number"/>-->
+                <!--</td>-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-user_number"/></td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="vehicle_table">第一桥</td>-->
+                <!--<td class="vehicle_table">第二桥</td>-->
+                <!--<td class="vehicle_table">第三桥</td>-->
+              <!--</tr>-->
+              <!--<tr class="vehicle_tr">-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-first_bridge"/>-->
+                <!--</td>-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-second_bridge"/>-->
+                <!--</td>-->
+                <!--<td><input type="text" name="" value=""-->
+                           <!--class="inp inp1 vehicle_table" id="J-third_bridge"/></td>-->
+              <!--</tr>-->
+            <!--</table>-->
+          <!--</form>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;--}}}}bd--&ndash;&gt;-->
+      <!--</div>-->
+      <!--&lt;!&ndash;--}}}content-set--&ndash;&gt;-->
+    <!--</div>-->
+  <!--</div>-->
+</div>
+<!---}}}}main-content--->

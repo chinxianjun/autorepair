@@ -1,0 +1,28 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+<% end %>
+
+<div class="main-content">
+    <div class="admin-content">
+      <h2>车辆列表<span class="info"></span></h2>
+      <%= form_tag vehicles_path, :method => "get", :id => "vehicles_search" do %>
+          <%= hidden_field_tag :direction, params[:direction] %>
+          <%= hidden_field_tag :sort, params[:sort] %>
+          <div class="tool-bar clrfix">
+            <div class="" style="width:215px;">
+              <%= label_tag :vehicle, "" %>
+              <%= text_field_tag :vehicle, params[:vehicle], :class => "inp inp26" %>
+              <div class="searchButton" style="height: 24px; width: 24px; margin-top:0px; float:right">
+                <!--<a href="javascript:void(0)" name="" class="" >-->
+                <button style="height: 30px;">
+                  <span><%= image_tag "find22x22.png", :class=>"searchIcon" %></span>
+                <!--</a>-->
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="vehicles"><%= render "vehicles" %></div>
+      <% end %>
+    </div>
+</div>

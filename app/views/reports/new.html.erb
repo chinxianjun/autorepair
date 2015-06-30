@@ -1,0 +1,46 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "report" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----info-content{{{{{---->
+    <div class="admin-content">
+        <div class="form-set">
+          <h2>选择维修单</h2>
+              <!--table样式{-->
+              <table class="admin-table table-style1 pretty">
+                <thead>
+                <tr>
+                  <th class="sa lt">&nbsp;</th>
+                  <th><%= sortable "id", "流程ID" %></th>
+                  <th><%= sortable "repairman", "维修工" %></th>
+                  <th><%= sortable "server_regist_number", "维修性质" %></th>
+                  <th><%= sortable "created_at", "创建日期" %></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% if @workflows.nil? %>
+                    <tr></tr>
+                <% else %>
+                    <% @workflows.each do |workflow| %>
+                        <tr>
+                          <th class="sa">
+                          <input type="radio" name="workflow" value="<%= workflow.id %>" class=""/>
+                          </th>
+                          <th><%= workflow.id %></th>
+                          <th><%= workflow.repairman %></th>
+                          <th><%= workflow.warranty %></th>
+                          <th><%= workflow.created_at.strftime('%Y-%m-%d %H:%M:%S') %></th>
+                        </tr>
+                    <% end %>
+                <% end %>
+                </tbody>
+              </table>
+              <div class="tool-bar clrfix">
+                <%#= label_tag :column, "客户姓名或电话" %>
+                <button class="submit-btn" id="J-go_getFlow">下一步</button>
+                <button class="cancel-btn" >取消</button>
+              </div>
+        </div>
+    </div>
+</div>

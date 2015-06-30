@@ -1,0 +1,48 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "company" %>
+    <%= javascript_include_tag "warehouse" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+    <h2>配件库详情<span class="info"></span></h2>
+    <!--基本信息{-->
+    <div class="content-set">
+      <div class="hd">
+        <h2>基本信息</h2>
+      </div>
+      <div class="bd">
+        <dl class="details-info">
+          <dd>
+            <table>
+              <tbody>
+              <tr>
+                <th>配件库名称</th>
+                <td><%= @warehouse.name %></td>
+              </tr>
+              <tr>
+                <th>所属配件库</th>
+                <td><%= @warehouse.parent %></td>
+              </tr>
+              <tr>
+                <th>配件库类别</th>
+                <td><%= @warehouse.category %></td>
+                <input type="hidden" id="J-warehouse_id" value="<%= @warehouse.id %>"/>
+                <input type="hidden" id="J-company_id" value="<%= @company.id %>"/>
+              </tr>
+              </tbody>
+            </table>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="tool-bar tr clrfix">
+      <button class="edit-btn editWarehouse">编辑</button>
+      <button class="cancel-btn">返回</button>
+    </div>
+    <!----}}}}}}content-set---->
+  </div>
+  <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

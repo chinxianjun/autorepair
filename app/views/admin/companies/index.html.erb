@@ -1,0 +1,63 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+
+<div class="main-content">
+    <div class="admin-content">
+        <h2>公司列表<span class="info"></span></h2>
+        <div class="tool-bar clrfix">
+            <button class="newCompany add-btn fr">新建公司</button>
+        </div>
+        <!--table样式{-->
+        <table class="admin-table table-style1">
+            <thead>
+            <tr>
+                <th class="sa lt">&nbsp;</th>
+                <th>ID</th>
+                <td colspan="3">公司全称</td>
+                <td>公司简称</td>
+                <td>公司所在地</td>
+                <td>公司地址</td>
+                <td>公司电话</td>
+                <td>公司识别码</td>
+            </tr>
+            </thead>
+            <tbody>
+            <% if @companies.any? %>
+                <% @companies.each do |company| %>
+                    <tr>
+                        <th class="sa">
+                          <input type="checkbox" name="order" value="1" class="select-all"/>
+                        </th>
+                        <th><%= company.id %></th>
+                        <td><a href="/admin/companies/<%= company.id %>/setting"
+                               class="fun-link text12 product-name">
+                               <%= company.name %>
+                            </a>
+                        </td>
+                        <td>
+                          <a href="/admin/companies/<%= company.id %>/edit" class="fun-link text2" >
+                               <span class="ui-icon ui-icon-pencil"></span>编辑
+                          </a>
+                        </td>
+                        <td><a href="/admin/companies/<%= company.id %>"
+                               class="deleteItem fun-link text2" >
+                            <span class="ui-icon ui-icon-trash"></span>
+                            删除
+                            </a>
+                        </td>
+                        <td><%= company.simply %></td>
+                        <td><%= company.state %></td>
+                        <td><%= company.address %></td>
+                        <td><%= company.phone %></td>
+                        <td><%= company.company_code %></td>
+                    </tr>
+                <% end %>
+            <% else %>
+                <tr></tr>
+            <% end %>
+            </tbody>
+        </table>
+        <!--}table样式-->
+    </div>
+</div>

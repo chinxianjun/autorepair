@@ -1,0 +1,55 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+<div class="main-content">
+    <div class="admin-content" style="height:480px;">
+        <h2>
+          <%= @role.name %> &#187;
+          <%= I18n.t('field.label_permissions_report') %></h2>
+        <div class="tool-bar clrfix">
+            <button class="check-btn">全选</button>
+            <button class="uncheck-btn">反选</button>
+            <!--<%= button_tag "保存", :class => "submit-btn" %>-->
+            <!--<%= button_tag "取消", :class => "cancel-btn" %>-->
+        </div>
+        <div id="permissions_table" style="height:400px;  overflow-y: scroll;">
+        <%= form_tag({:action=> 'report'}, :id=> 'permissions_form', :method=> "post") do %>
+            <!--table样式{-->
+            <table class="acl-table admin-table table-style1">
+              <thead>
+                <tr>
+                  <td>模块名称</td>
+                  <td colspan="6"><%= I18n.t('field.label_permissions') %></td>
+                </tr>
+              </thead>
+              <tbody>
+                <% perms_by_module = @permissions.group_by { |p| p.feature_module.to_s } %>
+                <% perms_by_module.keys.sort.each do |mod| %>
+                    <% unless mod.blank? %>
+                        <tr class="group open">
+                          <td>
+                            <%= l_or_humanize(mod, :prefix=> 'feature_module_') %>
+                          </td>
+                    <% end %>
+                    <% perms_by_module[mod].each do |permission| %>
+                          <td>
+                            <% if @role.setable_permissions.include? permission %>
+                                <%= check_box_tag "permissions[#{@role.id}][]", permission.name,
+                                    (@role.permissions.include? permission.name) %>
+                            <% end %>
+                            <%= l_or_humanize(permission.name, :prefix => 'permission_') %>
+                          </td>
+                    <% end %>
+                        </tr>
+                <% end %>
+            </table>
+            <!--}table样式-->
+            <div class="tool-bar tr clrfix">
+                <%= button_tag "保存", :class =>"submit-btn" %>
+                <%= button_tag "取消", :class => "cancel-btn" %>
+            </div>
+        <% end %>
+        <!----form---->
+       </div>
+    </div>
+</div>

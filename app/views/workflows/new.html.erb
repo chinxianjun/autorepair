@@ -1,0 +1,60 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "workflow" %>
+<% end %>
+
+<!---main-content{{{{--->
+<div class="main-content">
+    <!---admin-content{{{{{--->
+    <div class="admin-content">
+        <h2>新增流程</h2>
+        <div id="container">
+            <form action="#" method="">
+                <!-- #first_step -->
+                <div id="first_step">
+                    <h1>新建一条<span>客户</span>信息</h1>
+
+                    <div class="form">
+                        <input type="text" name="username" id="J-username" value="" />
+                        <label for="J-username">输入客户姓名</label>
+                        <input type="text" name="phone" id="J-phone" value="" />
+                        <label for="J-phone">输入常用手机号</label>
+                        <input type="text" name="phone_swap" id="J-phone_swap" value="" />
+                        <label for="J-phone_swap">输入备用手机号</label>
+                    </div>
+                    <!-- clearfix -->
+                    <div class="clear"></div>
+                    <!-- /clearfix -->
+                    <input class="submit" type="submit" name="submit_first" id="submit_first" value="" />
+                </div>
+                <!-- clearfix -->
+                <div class="clear"></div>
+                <!-- /clearfix -->
+                <!-- #second_step -->
+                <div id="second_step">
+                    <h1>录入<span>故障</span>描述</h1>
+                    <div class="form">
+                      <input type="text" name="car_number" id="J-car_number" value="" />
+                      <label for="J-car_number">车牌号</label>
+                      <input type="text" name="place" id="J-place" value="" />
+                      <label for="J-place">故障地点</label>
+                      <textarea name="description" id="J-description" ></textarea>
+                      <label for="J-description">故障描述</label>
+                    </div>
+                    <!-- clearfix -->
+                    <div class="clear"></div>
+                    <!-- /clearfix -->
+                    <input class="send_create" type="submit" name="submit_second" id="submit_second" value="" />
+                </div>
+                <!-- clearfix -->
+                <div class="clear"></div>
+                <!-- /clearfix -->
+            </form>
+        </div>
+        <div id="progress_bar">
+            <div id="progress"></div>
+            <div id="progress_text">0% 完成</div>
+        </div>
+    </div>
+    <!---}}}}admin-content--->
+</div>
+<!---}}}}main-content--->

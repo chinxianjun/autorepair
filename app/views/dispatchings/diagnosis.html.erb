@@ -1,0 +1,129 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= javascript_include_tag "dispatching" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content" xmlns="http://www.w3.org/1999/html"
+     xmlns="http://www.w3.org/1999/html">
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+    <input type="hidden" value="<%= @dispatching.id %>" id="J-dispatch_id"/>
+
+    <h2>故障详情<span class="info"></span></h2>
+
+    <div class="content-set">
+      <div class="hd">
+        <h2>基本信息</h2>
+      </div>
+      <div class="bd">
+        <dl class="details-info">
+          <dd>
+            <table class="admin-table table-style1">
+              <tr>
+                <td>流程编号</td>
+                <td id="J-workflow_id"><%= @workflow.id %></td>
+                <td>客户姓名</td>
+                <td id="J-customer_name"><%= @customer.fullname %></td>
+                <td>客户电话</td>
+                <td id="J-customer_phone"><%= @customer.phone %></td>
+              </tr>
+              <tr>
+                <td>维修性质</td>
+                <td id="J-repair_warranty">
+                  <%= @workflow.faultdesc.warranty %>
+                </td>
+                <% if @workflow.faultdesc.warranty == 'rescue' %>
+                    <td>故障地点</td>
+                    <td id="J-fault_place"><%= @workflow.faultdesc.place %></td>
+                <% end %>
+                <td>故障车牌号</td>
+                <td id="J-car_number"><%= @workflow.faultdesc.car_number %></td>
+              </tr>
+              <tr>
+                <td>故障描述</td>
+                <td colspan="5" id="J-fault_description"><%= @workflow.faultdesc.description %></td>
+              </tr>
+            </table>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <!----J-add_budget{---->
+    <div class="content-set" id="J-add_budget">
+      <div class="hd">
+        <h2>费用估算</h2>
+      </div>
+      <div class="bd">
+        <div id="J-show_cost">
+          <br/>
+
+          <h3><b>更换配件列表</b></h3>
+          <ul class="consulting-list" id="J-consult">
+            <li class="consulting-title clrfix">
+              <span class="consultingQuestion">配件品牌</span>
+              <span class="consultingAnswer">配件名称</span>
+              <span class="consultingDate">配件图号</span>
+              <span class="customer">配件价格</span>
+              <span class="phone">配件数量</span>
+              <span class="tool">操作</span>
+            </li>
+            <% if @budgets.any? %>
+                <% @budgets.each do |budget| %>
+                    <li class="clrfix">
+                      <span class="consultingQuestion"><%= budget.category %></span>
+                      <span class="consultingAnswer"><%= budget.name %></span>
+                      <span class="consultingDate"><%= budget.drawing %></span>
+                      <span class="customer"><%= budget.price %></span>
+                      <span class="phone"><%= budget.count %></span>
+                      <span class="tool"><a href="/dispatchings/<%= @dispatching.id %>/budget_del?budget_id=<%= budget.id %>">删除</a></span>
+                    </li>
+                <% end %>
+            <% end %>
+          </ul>
+          <dl class="details-info">
+            <dd>
+              <div id="J-part"
+                   class="order-pnum order-confirm-mod clrfix">
+              </div>
+              <p>
+                <label>选择品牌</label>
+                <%= select_tag "J-category", options_for_select([["选择分类", "0"]] + @categories, "0") %>
+                <label>选择名称</label>
+                <%= select_tag "J-name", options_for_select([["选择名称", "0"]] + @names, "0") %>
+                <label>选择图号</label>
+                <%= select_tag "J-drawing", options_for_select([["选择图号", "0"]] + @drawings, "0") %>
+                <label>单价</label>
+                <input value="" id="J-part_price" type="text" readonly="readonly"/>
+                <label>输入数量</label>
+                <input value="1" id="J-part_count" type="text"/>
+                <button class="submit_btn" id='J-add_budget_part'>添加</button>
+              </p>
+              <br/>
+
+              <div>
+                <dl>
+                  <dd>费用合计:</dd>
+                  <dt id="J-expense_count"></dt>
+                </dl>
+              </div>
+            </dd>
+          </dl>
+        </div>
+        <br/>
+      </div>
+      <!--bd-->
+    </div>
+    <!----}content-set ---->
+    <div class="tool-bar clrfix">
+      <% if @dispatching.property == "进厂" %>
+          <button class="edit-btn" id="J-go_to_dispatch">下一步</button>
+          <button class="cancel-btn">返回</button>
+      <% elsif @dispatching.property == "救援" %>
+          <button class="submit-btn" id="J-dispatching_save">保存</button>
+          <button class="cancel-btn" id="J-return_btn">返回</button>
+      <% end %>
+    </div>
+  </div>
+  <!----admin-content---->
+</div>
+<!----}}}}main-content---->

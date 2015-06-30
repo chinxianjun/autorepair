@@ -1,0 +1,27 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+<!-- main-content{{{{ -->
+<div class="main-content">
+    <!-- admin-content{{{{{ -->
+    <div class="info-content">
+        <h2>编辑组信息<span class="info"></span></h2>
+        <!--修改公司信息{-->
+        <div class="form-set">
+            <%= form_for ([:admin,@company,@group]) do |f| %>
+                <dl>
+                    <dt><%= f.label :name %></dt>
+                    <dd>
+                      <%= f.text_field :name, :class=>"inp inp2" %>
+                    </dd>
+                </dl>
+                <div class="tool-bar tr clrfix">
+                    <%= button_tag "保存", :class =>"submit-btn" %>
+                    <%= button_tag "取消", :class => "cancel-btn" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <!-- }}}}}admin-content -->
+</div>
+<!-- }}}}main-content -->

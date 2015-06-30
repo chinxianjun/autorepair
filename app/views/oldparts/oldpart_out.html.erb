@@ -1,0 +1,86 @@
+<%= content_for :head do %> 
+    <%#= javascript_include_tag "user" %>
+    <%#= javascript_include_tag "oldpart" %>
+    <%= stylesheet_link_tag "main_print", :media => "print" %>
+    <%= javascript_include_tag "print" %>
+<% end %>
+ 
+
+<!--startprint1-->
+<div class="main-content">
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+    <h2>旧件出库单<span class="info"></span></h2>
+    <!--基本信息{-->
+    <div class="content-set">
+      <div class="hd">
+        <h2>基本信息</h2>
+      </div>
+      <div class="bd">
+        <dl class="details-info">
+          <dd>
+            <table class="table-print">
+              <tbody class="table-print">
+              <tr class="table-print">
+                <th class="table-print">旧件品牌</th>
+                <td class="table-print"><%= @oldpart.category %></td>
+              </tr>
+              <tr class="table-print">
+                <th class="table-print">旧件名称</th>
+                <td class="table-print"><%= @oldpart.name %></td>
+              </tr>
+              <tr class="table-print">
+                <th class="table-print">旧件图号</th>
+                <td class="table-print"><%= @oldpart.drawing %></td>
+              </tr>
+              <tr class="table-print">
+                <th class="table-print">旧件流水号</th>
+                <td class="table-print"><%= @oldpart.running_number %></td>
+              </tr>
+              <tr class="table-print">
+                <th class="table-print">厂家名称</th>
+                <td class="table-print"><%= @oldpart.factory %></td>
+              </tr>
+              <tr class="table-print">
+                <th class="table-print">厂家代码</th>
+                <td class="table-print"><%= @oldpart.factory_code %></td>
+              </tr>
+              <tr>
+              <tr class="table-print">
+                <th class="table-print">单价</th>
+                <td class="table-print"><%= @oldpart.price %></td>
+              </tr>
+              <tr class="table-print">
+                <th class="table-print">数量</th>
+                <td class="table-print"><input class="inp0" id="J-oldpart_count" /></td>
+              </tr>
+              <tr class="table-print">
+                <th class="table-print">备注</th>
+                <td class="table-print"><input class="inp0" id="J-oldpart_note" /></td>
+              </tr>
+              <tr class="table-print">
+                <th class="table-print">出库员</th>
+                <td class="table-print"><%= current_user.fullname %></td>
+              </tr>
+              <tr class="table-print">
+                <th class="table-print">领件人</th>
+                <td class="table-print"><input class="inp0" id="J-oldpart_receiptor" /></td>
+              </tr>
+              </tbody>
+            </table>
+          </dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="tool-bar tr clrfix">
+      <input id="J-button_print" type="button" value="打印" />
+      <input id="J-button_print_view" type="button" value="打印预览" />
+      <!--<button class="edit-btn editOldpart">打印预览</button>-->
+      <!--<button class="cancel-btn">返回</button>-->
+    </div>
+    <!----}}}}}}content-set---->
+  </div>
+  <!----}}}}}admin-content---->
+</div>
+<!--endprint1-->

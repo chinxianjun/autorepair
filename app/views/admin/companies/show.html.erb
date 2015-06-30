@@ -1,0 +1,70 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "common" %>
+    <%= javascript_include_tag "group" %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+
+<!----main-content{{{{---->
+<div class="main-content">
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+    <h2><%= @company.name %><span class="info"></span></h2>
+    <input hidden="hidden" value="<%= @company.id %>" id="J_company_id" />
+    <div class="tabs">
+      <ul>
+        <li><a href="/admin/companies/<%= @company.id %>" class="tab_active"><span>公司详情</span></a></li>
+        <li><a href="/admin/companies/<%= @company.id %>/groups"><span>部门管理</span></a></li>
+        <li><a href="/admin/companies/<%= @company.id %>/warehouses"><span>配件库管理</span></a></li>
+        <li><a href="/admin/companies/<%= @company.id %>/new_repairers"><span>维修工管理</span></a></li>
+        <li><a href="/admin/companies/<%= @company.id %>/new_salesmen"><span>业务员管理</span></a></li>
+      </ul>
+    </div>
+    <!----J-company_show{---->
+    <div id="J-company_show" >
+      <div class="content-set">
+        <div class="bd">
+          <dl class="details-info">
+            <dd>
+              <table>
+                <tbody>
+                <tr>
+                  <th>公司名称</th>
+                  <td><%= @company.name %></td>
+                </tr>
+                <tr>
+                  <th>公司简称</th>
+                  <td><%= @company.simply %></td>
+                </tr>
+                <tr>
+                  <th>公司所在地</th>
+                  <td><%= @company.state %></td>
+                </tr>
+                <tr>
+                  <th>公司地址</th>
+                  <td><%= @company.address %></td>
+                </tr>
+                <tr>
+                  <th>公司电话</th>
+                  <td><%= @company.phone %></td>
+                </tr>
+                <tr>
+                  <th>公司识别码</th>
+                  <td><%= @company.company_code %></td>
+                </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          <div class="tool-bar tr clrfix">
+            <button class="edit-btn editCompany" id="<%= @company.id %>" >编辑</button>
+          </div>
+        </div>
+        <!----}}}}}}}}}bd---->
+      </div>
+      <!----}}}}}}content-set---->
+    </div>
+    <!----}J-company_show---->
+  </div>
+  <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

@@ -1,0 +1,75 @@
+    <div id="bd" class="clrfix">
+        <!----main-block{{{---->
+        <div class="main-block">
+            <!----main-content{{{{---->
+            <div class="main-content">
+                <!----admin-content{{{{{---->
+                <div class="admin-content">
+                    <h2>管理员列表<span class="info"></span></h2>
+                    <!----tool-bar{{{{{---->
+                    <div class="tool-bar clrfix">
+                        <button class ="add-btn fr" id="newAdmin">新建管理员</button>
+                        <button class="check-btn">全选</button>
+                        <button class="uncheck-btn">反选</button>
+                        <button class="delete-btn">删除选中</button>
+                    </div>
+                    <!----}}}}}tool-bar---->
+                    <!----table样式{{{{{{---->
+                    <table class="admin-table table-style1">
+                        <thead>
+                        <tr>
+                            <th class="sa lt">&nbsp;</th>
+                            <th>ID</th>
+                            <td colspan="2">登录名</td>
+                            <td>姓名</td>
+                            <td>电话</td>
+                            <td>email</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% if @managers.nil? %>
+                          <tr>
+                            <td>I18n.t("views.nodata")</td>
+                          </tr>
+                        <% else %>
+                            <% @managers.each do |manager| %>
+                                <tr>
+                                    <th class="sa">
+                                      <input type="checkbox" name="order" value="1" class="select-all"/>
+                                    </th>
+                                    <th><%= manager.id %></th>
+                                    <td><%= link_to manager.username, :class => 'fun-link text2' %></td>
+                                    <td><%= link_to "编辑", edit_manager_registration_path(manager), :class => 'fun-link text2' %></td>
+                                    <td><%= manager.fullname %></td>
+                                    <td><%= manager.phone %></td>
+                                    <td><%= manager.email %></td>
+                                </tr>
+                            <% end %>
+                        <% end %>
+                        </tbody>
+                    </table>
+                    <!----}}}}}}table样式---->
+                    <%= will_paginate @managers %>
+                </div>
+                <!----}}}}}admin-content---->
+                <div class="info-content"></div>
+            </div>
+            <!----}}}}main-content---->
+        </div>
+        <!----}}}bd---->
+        <!----sidebar{{{---->
+        <div class="side-bar">
+            <div class="menu-box">
+                <h3><a href="/home/superadmin">管理员列表</a></h3>
+                <div>
+                    <ul class="sub-menu">
+                        <li><span class="ui-icon ui-icon-suitcase"></span>
+                          <a href="/home/searchadmin" target="main">查找管理员</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!----}}}side-bar---->
+    </div>
+    <!----}}bd---->

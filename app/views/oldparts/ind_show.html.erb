@@ -1,0 +1,131 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "oldpart" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>旧件详情<span class="info"></span></h2>
+        <!--基本信息{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>基本信息</h2>
+                <input type="hidden" id="J-ind_id" value="<%= @indirectpart.id %>"/>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>旧件名称</th>
+                                    <td><%= @indirectpart.ind_name %></td>
+                                </tr>
+                                <tr>
+                                    <th>旧件图号</th>
+                                    <td><%= @indirectpart.ind_drawing %></td>
+                                </tr>
+                                <tr>
+                                    <th>旧件流水号</th>
+                                    <td><%= @indirectpart.ind_running_number %></td>
+                                </tr>
+                                <tr>
+                                    <th>旧件类别</th>
+                                    <td><%= @indirectpart.ind_category %></td>
+                                </tr>
+                                <tr>
+                                    <th>厂家名称</th>
+                                    <td><%= @indirectpart.ind_factory %></td>
+                                </tr>
+                                <tr>
+                                    <th>厂家代码</th>
+                                    <td><%= @indirectpart.ind_factory_code %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <!--故障信息{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>故障信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>故障描述</th>
+                                    <td><%= @indirectpart.ind_fault_desc %></td>
+                                </tr>
+                                <tr>
+                                    <th>破损模式</th>
+                                    <td><%= @indirectpart.ind_pattern %></td>
+                                </tr>
+                                <tr>
+                                    <th>仓库</th>
+                                    <td><%= @indirectpart.ind_depot %></td>
+                                </tr>
+                                <tr>
+                                    <th>状态</th>
+                                    <td><%= @indirectpart.ind_status %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="tool-bar tr clrfix">
+            <button class="edit-btn editIndirectpart">编辑</button>
+            <button class="cancel-btn">返回</button>
+        </div>
+        <!----}}}}}}content-set---->
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->
+<!--编辑旧件弹框{-->
+<div id="J-Indirectpart_edit">
+    <div class="form-set">
+        <form method="post" action="">
+            <dl>
+                <dt>旧件名称</dt>
+                <dd>
+                  <input type="text" class="inp inp2" id="J-ind_name"/></dd>
+                <dt>旧件图号</dt>
+                <dd>
+                  <input type="text" class="inp inp2" id="J-ind_drawing"/></dd>
+                <dt>旧件类别</dt>
+                <dd>
+                    <div class="radio" id="J-ind_category">
+                        <input type="radio" id="J-ind_category1" name="ind_category" value="潍柴" /><label for="J-ind_category1">潍柴</label>
+                        <input type="radio" id="J-ind_category2" name="ind_category" value="北奔" /><label for="J-ind_category2">北奔</label>
+                        <input type="radio" id="J-ind_category3" name="ind_category" value="陕汽" /><label for="J-ind_category3">陕汽</label>
+                        <input type="radio" id="J-ind_category4" name="ind_category" value="法士特" /><label for="J-ind_category4">法士特</label>
+                    </div>
+                </dd>
+                <dt>厂家名称</dt>
+                <dd><input type="text" class="inp inp2" id="J-ind_factory"/></dd>
+                <dt>厂家代码</dt>
+                <dd><input type="text" class="inp inp2" id="J-ind_factory_code"></dd>
+                <dt hidden="hidden">仓库</dt>
+                <dd hidden="hidden"><input type="hidden" class="inp inp2" id="J-ind_depot" value="<%=@current_company.simply %>"/></dd>
+                <dt hidden="hidden">破损模式</dt>
+                <dd hidden="hidden"><input type="hidden" class="inp inp2" id="J-ind_pattern" value="直接"/></dd>
+                <dt>旧件流水号</dt>
+                <dd><input type="text" class="inp inp2" id="J-ind_running_number"/></dd>
+                <dt hidden="hidden">旧件状态</dt>
+                <dd hidden="hidden"><input tyep="hidden" class="inp inp2" id="J-ind_status" value="待入库"/></dd>
+                <dt>数量</dt>
+                <dd><input type="text" class="inp inp2" id="J-ind_count"/></dd>
+            </dl>
+        </form>
+    </div>
+</div>
+<!--}编辑旧件弹框-->

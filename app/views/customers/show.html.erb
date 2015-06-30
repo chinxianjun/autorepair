@@ -1,0 +1,97 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "customer" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>客户详情<span class="info"></span></h2>
+        <!--客户信息{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>客户信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>姓名</th>
+                                    <td><%= @customer.fullname %></td>
+                                </tr>
+                                <tr>
+                                    <th>性别</th>
+                                    <td><%= @customer.gender %></td>
+                                </tr>
+                                <tr>
+                                    <th>联系电话</th>
+                                    <td><%= @customer.phone %></td>
+                                </tr>
+                                <tr>
+                                    <th>级别</th>
+                                    <td><%= @customer.category %></td>
+                                </tr>
+                                <tr>
+                                    <th>地址</th>
+                                    <td><%= @customer.address %></td>
+                                </tr>
+                                <tr>
+                                    <th>生日</th>
+                                    <td><%= @customer.birthday %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="tool-bar clrfix">
+            <button class="edit-btn showCustomerEdit">编辑</button>
+            <button class="cancel-btn">返回</button>
+        </div>
+        <!----}}}}}}content-set---->
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->
+<!--编辑客户弹框{-->
+<div id="S-Customer_update_show">
+    <dl>
+        <dt>姓名</dt>
+        <dd><input type="text" name="" value=""
+                   class="inp inp2" id="S-username"/></dd>
+        <dt>性别</dt>
+        <dd>
+            <div class="">
+                <input type="radio" id="S-gender1" name="gender_show" value="男" /><label for="S-gender1">男</label>
+                <input type="radio" id="S-gender2" name="gender_show" value="女" /><label for="S-gender2">女</label>
+            </div>
+        </dd>
+        <dt>
+          客户级别
+        </dt>
+        <dd>
+          <select name="" id="S-select_category">
+              <option value="无">无</option>
+              <% if @categories.any? %>
+                    <% @categories.each do |category| %>
+                      <option value="<%= category.category %>"><%= category.category %></option>
+                    <% end %>
+              <% end %>
+          </select>
+        </dd>
+        <dt>联系电话</dt>
+        <dd><input type="text" name="" value=""
+                   class="inp inp2" id="S-phone"/></dd>
+        <dt>地址</dt>
+        <dd><input type="text" name="" value=""
+                   class="inp inp2" id="S-address"/></dd>
+        <dt>生日</dt>
+        <dd><input type="text" id="S-datepicker" class="inp inp2 datepicker"/></dd>
+        <dt hidden="hidden">ID</dt>
+        <dd hidden="hidden"><input type="hidden" class="inp inp2" id="S-Customer_id" value=""/></dd>
+    </dl>
+</div>
+<!--}编辑客户弹框-->

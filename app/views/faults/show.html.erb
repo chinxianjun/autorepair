@@ -1,0 +1,87 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "fault" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>故障详情<span class="info"></span></h2>
+        <!--客户描述{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>客户描述</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>故障描述</th>
+                                    <td><%= @fault.fault_desc %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <!--故障分析{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>故障分析与处理措施</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>故障分析</th>
+                                    <td><%= @fault.fault_analyse %></td>
+                                </tr>
+                                <tr>
+                                    <th>处理措施</th>
+                                    <td><%= @fault.measure %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="tool-bar tr clrfix">
+            <button class="edit-btn editFault">编辑</button>
+            <button class="cancel-btn">返回</button>
+        </div>
+        <!----}}}}}}content-set---->
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->
+<!--编辑故障弹框{-->
+<div id="J-Fault_edit">
+    <div class="form-set">
+        <form method="post" action="">
+            <dl>
+                <dt>故障描述</dt>
+                <dd>
+                  <textarea class="textarea textarea2" id="J-fault_desc"></textarea></dd>
+                <dt>故障分析</dt>
+                <dd>
+                  <textarea class="textarea textarea2" id="J-fault_analyse"></textarea></dd>
+                <dt>处理措施</dt>
+                <dd>
+                    <div class="radio">
+                        <input type="radio" id="J-measure1" name="measure" value="检修" /><label for="J-measure1">检修</label>
+                        <input type="radio" id="J-measure2" name="measure" value="更换" /><label for="J-measure2">更换</label>
+                        <input type="radio" id="J-measure3" name="measure" value="调整" /><label for="J-measure3">调整</label>
+                    </div>
+                </dd>
+            </dl>
+        </form>
+    </div>
+</div>
+<!--}编辑客户弹框-->

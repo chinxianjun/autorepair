@@ -1,0 +1,165 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= javascript_include_tag "jquery.md5" %>
+    <%= javascript_include_tag "message" %>
+    <%= javascript_include_tag "question" %>
+    <%= javascript_include_tag "sendMSG" %>
+<% end %>
+
+<!---main-content{{{{--->
+<div class="main-content">
+    <!---admin-content{{{{{--->
+    <div class="admin-content">
+        <h2>选择客户问题类别</h2>
+        <div class="question_tabs">
+            <ul>
+                <div class="radio" id="J-question_type">
+                    <input type="radio" id="J-flowCreate" name="question_type" value="repair" CHECKED="checked"/>
+                    <label for="J-flowCreate">维修</label>
+                    <input type="radio" id="J-carBuying" name="question_type" value="buy_car"/>
+                    <label for="J-carBuying">购车</label>
+                    <input type="radio" id="J-partBuying" name="question_type" value="buy_part"/>
+                    <label for="J-partBuying">购件</label>
+                    <input type="radio" id="J-consulting" name="question_type" value="consulting"/>
+                    <label for="J-consulting">咨询</label>
+                    <input type="radio" id="J-complaint" name="question_type" value="complaint"/>
+                    <label for="J-complaint">投诉</label>
+                </div>
+            </ul>
+        </div>
+        <input type="hidden" id="J-customer_id" value="<%= @customer.id %>"/>
+        <input type="hidden" id="J-current_user" value="<%= current_user.fullname %>"/>
+        <!----J-flow_create{---->
+        <div id="J-flow_create">
+            <div class="content-set">
+                <div class="hd">
+                  <h2>客户信息</h2>
+                </div>
+                <!----bd{{---->
+                <div class="bd">
+                    <dl class="details-info">
+                        <dd>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label for="J-customer_name">客户姓名</label>
+                                        <input id="J-customer_name" value="<%= @customer.fullname %>" class="inp16" type="text"/>
+                                    </td>
+                                    <td>
+                                        <label for="">客户电话</label>
+                                        <input id="J-customer_phone" value="<%= @customer.phone %>" class="inp16" type="text"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </dd>
+                    </dl>
+                </div>
+                <!----}}bd---->
+            </div>
+            <!----}content-set---->
+            <div class="content-set">
+                <div class="hd">
+                  <h2>维修信息</h2>
+                </div>
+                <div class="bd" style="height: 26px;">
+                    <dl class="details-info">
+                        <dd style="width:20%" class="repair_type">
+                            <div class="repair_type" style="margin-top: 4px; margin-right: 4px;">
+                              维修模式
+                            </div>
+                            <div class="radio" id="J-repair_type">
+                                <input type="radio" id="J-repair_type1" name="repair_type" value="进厂" checked="checked"/>
+                                <label for="J-repair_type1">进厂</label>
+                                <input type="radio" id="J-repair_type2" name="repair_type" value="救援"/>
+                                <label for="J-repair_type2">救援</label>
+                            </div>
+                        </dd>
+                        <div class="repair_type">
+                            <dd>
+                                <label for="J-select_number">车牌号</label>
+                                <select name="number" id="J-select_number">
+                                    <option value="蒙" id="J-meng" selected="selected">蒙</option>
+                                    <option value="冀" id="J-ji">冀</option>
+                                    <option value="豫" id="J-yu">豫</option>
+                                    <option value="鲁" id="J-lu">鲁</option>
+                                    <option value="黑" id="J-hei">黑</option>
+                                    <option value="吉" id="J-jilin">吉</option>
+                                    <option value="辽" id="J-liao">辽</option>
+                                </select>
+                                <input type="text" id="J-fault_car_number" class="inp16" value=""/>
+                            </dd>
+                        </div>
+                        <div id="J-repair_rescue" style="display: none; margin-left: 48%;">
+                            <label for="J-fault_place">故障地点</label>
+                            <input type="text" id="J-fault_place" class="inp16" value=""/>
+                        </div>
+                    </dl>
+                </div>
+                <!----}}}}bd---->
+            </div>
+            <!----}}}content-set---->
+            <!----content-set{{{---->
+            <div class="content-set">
+                <div class="hd">
+                  <h2>车辆信息</h2>
+                </div>
+                <div class="bd">
+                    <dl class="details-info">
+                        <table id="J-vehicle_info">
+                            <tr>
+                                <td class="ui-widget">
+                                    <label for="J-chassis_number">底盘号</label>
+                                    <input type="text" class="inp16" value="" id="J-chassis_number"/>
+                                </td>
+                                <td>
+                                    <label for="J-model">车型</label>
+                                    <input type="text" class="inp16" value="" id="J-model"/>
+                                </td>
+                                <td>
+                                    <label for="J-driving_range">行驶里程</label>
+                                    <input type="text" class="inp16" value="" id="J-driving_range"/>
+                                </td>
+                                <td>
+                                    <label for="J-purchase_on">购车日期</label>
+                                    <input type="text" class="inp16 datepicker" value="" id="J-purchase_on"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="width:40%;">
+                            <label for="J-fault_description">故障现象</label>
+                            <textarea type="text" id="J-fault_description" class="textarea1 textarea-business"></textarea>
+                        </div>
+                        <div>
+                            <dt style="padding-top: 4px;">维修经理</dt>
+                            <dd id="J-manager">
+                            <% if @managers %>
+                              <% @managers.each do |manager| %>
+                                  <input type='radio' name='manager' value='<%= manager.phone %>'/>
+                                  <label><%= manager.fullname %></label>
+                              <% end %>
+                            <% end %>
+                            </dd>
+                        </div>
+                        <div>
+                        	<dt>发送业务信息</dt>
+                        	<dd id="J-is_or_not_send">
+                        		<input type="radio" id="not_send" name="not_send" value="0" checked="checked"/>
+                        		<label for="not_send">否</label>
+                        		<input type="radio" id="is_send" name="is_send" value="1"/>
+                        		<label for="is_send">是</label>
+                        	</dd>
+                    </dl>
+                    <div class="save-question-btn">
+                        <button type="submit" id="J-add_question_save" class="submit-btn">保存</button>
+                        <button type="cancel" id="J-add_question_cancel cancel-btn" class="cancel-btn">取消</button>
+                    </div>
+                </div>
+                <!----}}}}bd---->
+            </div>
+            <!----}}}content-set---->
+        </div>
+        <!----}J-flow_create---->
+    </div>
+    <!---}}}}admin-content--->
+</div>
+<!----}main-content---->

@@ -1,0 +1,31 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----info-content{{{{{---->
+    <div class="info-content">
+        <!----form-set{{{{{{---->
+        <div class="form-set">
+            <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+              <%= devise_error_messages! %>
+              <dl>
+                  <p>修改密码</p>
+                  <dt><%= f.label :password %></dt>
+                  <dd><%= f.password_field :password, :class => "inp" %></dd>
+
+                  <dt><%= f.label :password_confirmation %></dt>
+                  <dd><%= f.password_field :password_confirmation, :class => "inp" %></dd>
+
+              </dl>
+              <div class="tool-bar tr clrfix">
+                  <%= button_tag "保存", :class =>"submit-btn" %>
+                  <%= button_tag "取消", :class => "cancel-btn" %>
+              </div>
+            <% end %>
+        </div>
+        <!----}}}}}}}form-set---->
+    </div>
+    <!----}}}}}info-content---->
+</div>
+<!----}}}}main-content---->

@@ -1,0 +1,118 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "expense" %>
+<% end %>
+
+<div class="main-content">
+    <div class="admin-content">
+        <h2>费用列表<span class="info"></span></h2>
+        <div class="tool-bar clrfix">
+          <% if current_user.allowed_to?(current_user, :add_expense, @current_company) %>
+            <button class="newExpense add-btn fr">添加费用</button>
+          <% end %>
+            <button class="check-btn" >全选</button>
+            <button class="uncheck-btn" >反选</button>
+            <button class="delete-btn">删除选中</button>
+          <% if current_user.allowed_to?(current_user, :search_expense, @current_company) %>
+              <div id="search">
+              </div>
+          <% end %>
+        </div>
+        <!--table样式{-->
+        <table class="admin-table table-style1">
+            <thead>
+            <tr>
+                <th class="sa lt">&nbsp;</th>
+                <th>ID</th>
+                <td>材料费</td>
+                <td>通讯费</td>
+                <td>工时费</td>
+                <td>服务车费</td>
+                <td>在途餐补</td>
+                <td>差旅费</td>
+                <td colspan="3">合计</td>
+            </tr>
+            </thead>
+            <tbody>
+            <% if @expenses.nil? %>
+                <tr></tr>
+            <% else %>
+                <% @expenses.each do |expense| %>
+                    <tr>
+                        <th class="sa">
+                          <input type="checkbox" name="order" value="1" class="select-all"/>
+                        </th>
+                        <th><%= expense.id %></th>
+                        <td><%= expense.material_cost %></td>
+                        <td><%= expense.working_hours_cost %></td>
+                        <td><%= expense.communication_cost %></td>
+                        <td><%= expense.service_car_cost %></td>
+                        <td><%= expense.meal_cost %></td>
+                        <td><%= expense.travel_expense %></td>
+                      <% if current_user.allowed_to?(current_user, :view_expense, @current_company) %>
+                        <td><%= link_to "#{expense.total}", expense_path(expense), :class => "fun-link text12 product-name" %></td>
+                      <% end %>
+                      <% if current_user.allowed_to?(current_user, :edit_expense, @current_company) %>
+                        <td><a href="javascript:void(0)" id="<%= expense.id %>" class="editExpenseLink fun-link text2 product-name">编辑</a></td>
+                      <% end %>
+                      <% if current_user.allowed_to?(current_user, :destroy_expense, @current_company) %>
+                        <td><%= link_to "删除", expense_path(expense), :class=>"deleteItem fun-link text2 product-name" %></td>
+                      <% end %>
+                    </tr>
+                <% end %>
+            <% end %>
+            </tbody>
+        </table>
+        <%= will_paginate @expenses %>
+        <!--}table样式-->
+    </div>
+    <!--新增新件弹框{-->
+    <div id="J-Expense_create">
+        <div class="form-set">
+            <form method="post" action="">
+                <dl>
+                    <dt>材料费</dt>
+                    <dd><input type="text" class="inp inp2" id="J-material_cost"/></dd>
+                    <dt>工时费</dt>
+                    <dd><input type="text" class="inp inp2" id="J-working_hours_cost"/></dd>
+                    <dt>通讯费</dt>
+                    <dd><input type="text" class="inp inp2" id="J-communication_cost"/></dd>
+                    <dt>服务车费</dt>
+                    <dd><input type="text" class="inp inp2" id="J-service_car_cost"/></dd>
+                    <dt>在途餐补</dt>
+                    <dd><input type="text" class="inp inp2" id="J-meal_cost"/></dd>
+                    <dt>差旅费</dt>
+                    <dd><input type="text" class="inp inp2" id="J-travel_expense"/></dd>
+                </dl>
+            </form>
+        </div>
+    </div>
+    <!--}新增新件弹框-->
+    <!--编辑新件弹框{-->
+    <div id="J-Expense_update">
+        <div class="form-set">
+            <form method="post" action="">
+                <dl>
+                    <dt>材料费</dt>
+                    <dd><input type="text" class="inp inp2" id="U-material_cost"/></dd>
+                    <dt>工时费</dt>
+                    <dd><input type="text" class="inp inp2" id="U-working_hours_cost"/></dd>
+                    <dt>通讯费</dt>
+                    <dd><input type="text" class="inp inp2" id="U-communication_cost"/></dd>
+                    <dt>服务车费</dt>
+                    <dd><input type="text" class="inp inp2" id="U-service_car_cost"/></dd>
+                    <dt>在途餐补</dt>
+                    <dd><input type="text" class="inp inp2" id="U-meal_cost"/></dd>
+                    <dt>差旅费</dt>
+                    <dd><input type="text" class="inp inp2" id="U-travel_expense"/></dd>
+                    <dt>合计</dt>
+                    <dd><input type="text" readonly="readonly" class="inp inp2" id="U-total"/></dd>
+                    <dt hidden="hidden">ID</dt>
+                    <dd hidden="hidden"><input type="hidden" class="inp inp2" id="U-Expense_id" value=""/></dd>
+                </dl>
+            </form>
+        </div>
+    </div>
+    <!--}编辑新件弹框-->
+</div>

@@ -1,0 +1,133 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "jquery.treeTable" %>
+    <%= javascript_include_tag "company" %>
+    <%= javascript_include_tag "warehouse" %>
+    <%= javascript_include_tag "oldpart" %>
+    <%= javascript_include_tag "jquery.treeTable" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+
+    <h2><%= @current_company.simply %>&bull;<%= @warehouse.name %><span class="info-header"></span></h2>
+    <input type="hidden" value="<%= @warehouse.id %>" id="J-warehouse_id"/>
+    <input type="hidden" value="<%= @current_company.id %>" id="J-company_id"/>
+    <!----J-company_tabs{{{---->
+    <div id="J-jartai-tabs">
+    <ul>
+        <li><a href="#J-warehouse_info"><span>旧件库详情</span></a></li>
+        <li><a href="/warehouses/<%= @warehouse.id %>/oldparts?warehouse_id=<%= @warehouse.id %>"><span>旧件列表</span></a></li>
+        <li><a href="#J-oldpart_in"><span>旧件入库</span></a></li>
+        <!--<li><a href="#J-oldpart_out"><span>旧件出库</span></a></li>-->
+        <li><a href="#J-oldpart_allot"><span>旧件调配</span></a></li>
+    </ul>
+    <!----J-company_info{{{{---->
+    <div id="J-warehouse_info" >
+        <div class="content-set">
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                              <tr>
+                                <th>旧件库名称</th>
+                                <td><%= @warehouse.name %></td>
+                              </tr>
+                              <tr>
+                                <th>库存金额</th>
+                                <td>
+                                  <%# sum = 0 %>
+                                  <%= @sum %>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th>库存溢出</th>
+                                <td><%= @overflow %></td>
+                              </tr>
+                              <tr>
+                                <th>库存不足</th>
+                                <td><%= @stockout %></td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+            <!----}}}}}}bd---->
+        </div>
+        <!----}}}}}content-set---->
+        <!----content-set{{{{{---->
+        <!--<div class="content-set">-->
+            <!----bd{{{{---->
+            <!--<div class="bd">-->
+                <%#=  %>
+            <!--</div>-->
+            <!----}}}}bd---->
+        <!--</div>-->
+        <!----}}}}}content-set---->
+    </div>
+    <!----}}}}J-warehouse_info---->
+    <!----J-oldpart_in{{{{---->
+    <div id="J-oldpart_in">
+        <div class="form-set">
+            <form method="" action="">
+                <dl>
+                    <dt><b class="ftx04">*</b>旧件名称</dt>
+                    <dd><input type="text" name="" value=""
+                            class="inp inp2" id="J-oldpart_name"/></dd>
+                    <dt><b class="ftx04">*</b>旧件图号</dt>
+                    <dd><input type="text" name="" value=""
+                            class="inp inp2" id="J-oldpart_drawing"/></dd>
+                    <dt>厂家代码</dt>
+                    <dd><input type="text" name="" value=""
+                            class="inp inp2" id="J-oldpart_factory_code"/></dd>
+                    <dt>厂家名称</dt>
+                    <dd><input type="text" name="" value=""
+                            class="inp inp2" id="J-oldpart_factory_name"/></dd>
+                    <dt>故障简述</dt>
+                    <dd><textarea class="textarea2a" id="J-oldpart_fault_desc"></textarea></dd>
+                    <dt>单价</dt>
+                    <dd><input type="text" name="" value="" class="inp inp2" id="J-oldpart_price"/></dd>
+                    <dt>数量</dt>
+                    <dd><input type="text" name="" value="" class="inp inp2" id="J-oldpart_count"/></dd>
+                    <dt>交件人</dt>
+                    <dd><input type="text" name="" value="" class="inp inp2" id="J-oldpart_handiner"/></dd>
+                    <dt>收件人</dt>
+                    <dd><input type="text" name="" value="<%= current_user.fullname %>" class="inp inp2" id="J-oldpart_manager" readonly="readonly"/></dd>
+                    <dt>选择旧件状态</dt>
+                    <dd>
+                        <div class="radio" id="J-oldpart_status">
+                          <label for="J-oldpart_status_1">空闲</label>
+                          <input type="radio" name="J-oldpart_status" id="J-oldpart_status_1" value="空闲" checked="checked"/>
+                          <label for="J-oldpart_status_2">入库</label>
+                          <input type="radio" name="J-oldpart_status" id="J-oldpart_status_2" value="入库"/>
+                        </div>
+                    </dd>
+                </dl>
+            </form>
+            <div class="tool-bar clrfix">
+                <button class="submit-btn" id="J-oldpart_new">保存</button>
+                <button class="cancel-btn" >取消</button>
+            </div>
+        </div>
+    </div>
+    <!----}}}}J-oldpart_in---->
+    <!----J-oldpart_allot{{{{---->
+    <div id="J-oldpart_allot">
+        <%= form_tag warehouse_oldparts_path(@warehouse), :method => "get", :id => "oldparts_out_search" do %>
+            <div class="tool-bar clrfix">
+                <%= text_field_tag :column, params[:column], :class => "inp" %>
+                <%= button_tag "查询", :name => nil, :class => "search-btn" %>
+            </div>
+            <div id="oldparts_allot"><%= render 'oldparts_allot' %></div>
+        <% end %>
+    </div>
+    <!----}}}}J-oldpart_allot---->
+  </div>
+  <!----}}}J-company_tabs---->
+  </div>
+  <!----}}admin-content---->
+</div>
+<!----}main-content---->

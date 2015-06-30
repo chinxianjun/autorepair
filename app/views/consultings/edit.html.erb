@@ -1,0 +1,32 @@
+<%=  content_for :head do %>
+    <%=  javascript_include_tag "consulting" %>
+<% end %>
+<div class="main-content">
+    <div class="admin-content">
+      <!--编辑咨询表单信息-->
+     	<div id="J_edit_contact" class="contact-form">
+     		<h2><%=  link_to "咨询", question_consultings_path(@question) %>&gt;&gt;编辑咨询信息<span class="info"></span></h2>
+     		<form method="put" action="" id="J-edit-contact-form">
+     			<dl class="clrfix">
+     				<dt><label for="J-customer_name">客户姓名</label></dt>
+                   <dd><input type="text" id="J-customer_name" value="<%= @customer.fullname %>" class="inp inp2 focus" readonly="readonly"/></dd>
+                   <br/><dt><label for="J-custoemr_phone">客户电话</label></dt>
+                   <dd><input type="text" id="J-customer_phone" value="<%= @customer.phone %>" class="inp inp2 focus" readonly="readonly"/></dd>
+                   <br/><dt><label for="J-description">咨询问题</label></dt>
+                   <dd><textarea id="J-description" class="textarea textarea2b" ><%= @consulting.question %></textarea></dd>
+                   <br/><dt><label for="J-answer">解答</label></dt>
+                   <dd><textarea id="J-answer" class="textarea textarea2b" ><%= @consulting.answer %></textarea></dd>
+                   <br/><dt><label for="J-answerer">处理人</label></dt>
+                   <dd><input type="text" id="J-answerer" value="<%= current_user.fullname %>" class="inp inp2 focus" readonly="readonly"/></dd>
+                   </dl>
+     		</form>
+     	</div>
+     	<!--编辑咨询表单信息-->
+      <br/>
+      <div class="tool-bar clrfix">
+        <input type="hidden" name="qid" value="<%= @question.id %>" id="J-question_id" />
+        <button type="submit" class="submit-btn" id="J-add_edit_info">保存</button>
+        <button type="cancel" class="cancel-btn">取消</button>
+      </div>
+    </div>
+</div>

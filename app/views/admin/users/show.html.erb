@@ -1,0 +1,88 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "group" %>
+    <%= javascript_include_tag "company" %>
+    <%= javascript_include_tag "user" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>员工详情<span class="info"></span></h2>
+        <!--员工信息{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>员工信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>登录名</th>
+                                    <td><%= @user.username %></td>
+                                </tr>
+                                <tr>
+                                    <th>姓名</th>
+                                    <td><%= @user.fullname %></td>
+                                </tr>
+                                <tr>
+                                    <th>电话</th>
+                                    <td><%= @user.phone %></td>
+                                </tr>
+                                <tr>
+                                    <th>email</th>
+                                    <td><%= @user.email %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+            <!----}}}}}}}}}bd---->
+        </div>
+        <!----}}}}}}content-set---->
+        <!--员工所在组信息{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>员工所属组</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <% if @user.groups.any? %>
+                    <dd>
+                        <table>
+                            <tbody>
+                            <% @user.groups.each do |group| %>
+                                <tr>
+                                    <th>组名称</th>
+                                    <td><%= group.name %></td>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                        </table>
+                    </dd>
+                    <% else %>
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <td>此员工不属于任何组</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <% end %>
+                </dl>
+            </div>
+            <!----}}}}}}}}}bd---->
+            <div class="tool-bar tr clrfix">
+                <button class="edit-btn editUser" id="<%= @user.id %>">编辑</button>
+                <button class="cancel-btn">返回</button>
+            </div>
+        </div>
+        <!----}}}}}}content-set---->
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

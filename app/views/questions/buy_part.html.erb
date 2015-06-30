@@ -1,0 +1,84 @@
+<%= content_for :head do %>
+<meta http-equiv="refresh" content="60" />
+<% end %>
+
+<!---main-content{{{{--->
+<div class="main-content">
+    <!---admin-content{{{{{--->
+    <div class="admin-content">
+        <h2>问题列表<span class="info"></span></h2>
+
+        <div class="question_menu">
+             <ul>
+               <% if  current_user.allowed_to?(current_user, :view_workflow, @current_company) %>
+                 <li class="flowbar"><a href="/questions/repair" id="J-repair" class=""><span>维修</span></a></li>
+               <% end %>
+               <% if current_user.allowed_to?(current_user, :add_car_buying, @current_company) %>
+                 <li class="flowbar"><a href="/questions/buy_car" id="J-car_buying" class=""><span>购车</span></a></li>
+               <% end %>
+               <% if current_user.allowed_to?(current_user, :add_part_buying, @current_company) %>
+                 <li class="flowbar"><a href="/questions/buy_part" id="J-part_buying" class="flow-button"><span>购件</span></a></li>
+               <% end %>
+               <% if current_user.allowed_to?(current_user, :add_consulting, @current_company) %>
+                 <li class="flowbar"><a href="/questions/consulting" id="J-consulting" class=""><span>咨询</span></a></li>
+               <% end %>
+               <% if current_user.allowed_to?(current_user, :add_complaint, @current_company) %>
+                 <li class="flowbar"><a href="/questions/complaint" id="J-complaint" class=""><span>投诉</span></a></li>
+               <% end %>
+             </ul>
+        </div>
+        <!---}}}}}}tool-bar clrfix--->
+      <!--<h2>维修列表<span class="info"></span></h2>-->
+      <div class="admin-content">
+      <!--table样式{-->
+      <table class="admin-table table-style1">
+          <thead>
+              <tr>
+                  <td>ID</td>
+                  <td>客户姓名</td>
+                  <td>联系电话</td>
+                  <td>业务员</td>
+                  <td>新件经理</td>
+                  <td>状态</td>
+                  <td>创建时间</td>
+                  <td>操作</td>
+              </tr>
+          </thead>
+          <tbody>
+            <% unless @buy_part_question.nil? %>
+              <% @buy_part_question.each do |question| %>
+                  <% if question.status == "未处理" %>
+                    <tr class="td-color">
+                  <% elsif question.status == "洽谈" %>
+                    <tr class="td-color_blue">
+                  <% else %>
+                    <tr>
+                  <% end %>
+                      <td><%= question.id %></td>
+                      <td><%= question.customer.fullname unless question.customer.nil? %></td>
+                      <td><%= question.customer.phone unless question.customer.nil? %></td>
+                      <td>
+                        <% if question.part_buyings.any? %>
+                           <%= question.part_buyings.last.salesman %>
+                        <% end %>
+                      </td>
+                      <td><%= question.processor %></td>
+                      <td><%= question.status %></td>
+                      <td><%= question.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+                      <td><a href="/questions/<%= question.id %>/part_buyings" class="fun-link text3 product-name">查看</a></td>
+                  </tr>
+              <% end %>
+            <% else %>
+              <tr></tr>
+            <% end %>
+          </tbody>
+      </table>
+      <!--}table样式-->
+      <% unless @buy_part_question.nil?  %>
+        <%= will_paginate @buy_part_question %>
+      <% end %>
+      </div>
+    </div>
+    <!---}}}}admin-content--->
+</div>
+<!---}}}}main-content--->

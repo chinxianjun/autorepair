@@ -1,0 +1,41 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+<!--table样式{-->
+<table class="admin-table table-style1 pretty">
+  <thead>
+  <tr>
+    <th><%= sortable "id", "ID" %></th>
+    <th colspan="3" style="width:50%;"><%= sortable "name", "配件库名称" %></th>
+    <th><%= sortable "manager", "配件库管理员" %></th>
+    <th><%= sortable "category", "配件库类别" %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @parts.nil? %>
+      <tr></tr>
+  <% else %>
+      <% @parts.each do |part| %>
+          <tr>
+            <td><%= part.id %></td>
+            <% if current_user.allowed_to?(current_user, :view_part, @current_company) %>
+                <td><a href="/parts/<%= part.id %>" class="fun-link product-name">
+                  <span class="ui-icon ui-icon-home"></span><%= part.name %></a></td>
+            <% end %>
+            <% if current_user.allowed_to?(current_user, :edit_part, @current_company) %>
+                <td><a href="/parts/<%= part.id %>/edit" class="fun-link text2 product-name">
+                  <span class="ui-icon ui-icon-pencil"></span>编辑</a></td>
+            <% end %>
+            <% if current_user.allowed_to?(current_user, :destroy_part, @current_company) %>
+                <td><a href="/parts/<%= part.id %>" class="deleteItem fun-link text2 product-name">
+                  <span class="ui-icon ui-icon-trash"></span>删除</a></td>
+            <% end %>
+            <td><%= part.manager %></td>
+            <td><%= part.category %></td>
+          </tr>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
+<%= will_paginate @parts %>
+<!--}table样式-->

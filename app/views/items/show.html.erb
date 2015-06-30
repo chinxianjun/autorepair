@@ -1,0 +1,42 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "item" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+    <h2>配件库详情<span class="info"></span></h2>
+    <!--基本信息{-->
+    <div class="content-set">
+      <div class="hd">
+        <h2>基本信息</h2>
+      </div>
+      <div class="bd">
+        <dl class="details-info">
+          <dd>
+            <table>
+              <tbody>
+              <tr>
+                <th>配件厂家名称</th>
+                <td><%= @item.name %></td>
+              </tr>
+              <tr>
+                <th>配件厂家代码</th>
+                <td><%= @item.manager %></td>
+              </tr>
+              </tbody>
+            </table>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="tool-bar tr clrfix">
+      <button class="edit-btn editItem">编辑</button>
+      <button class="cancel-btn">返回</button>
+    </div>
+    <!----}}}}}}content-set---->
+  </div>
+  <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

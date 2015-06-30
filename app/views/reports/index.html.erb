@@ -1,0 +1,27 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= javascript_include_tag "rails" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "report" %>
+<% end %>
+
+<!----main-content{{{{---->
+<div class="main-content">
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+    <h2>上报单列表<span class="info"></span>
+      <% if current_user.allowed_to?(current_user, :add_report, @current_company) %>
+          <button class="newReport add-btn fr">新建上报单</button><% url = request.url %>
+      <% end %>
+    </h2>
+    <%= form_tag reports_path, :method => "get", :id => "reports_search" do %>
+        <div class="tool-bar clrfix">
+          <%= text_field_tag :column, params[:column], :class => "inp" %>
+          <%= button_tag "查询", :name => nil, :class => "search-btn" %>
+        </div>
+        <div id="reports"><%= render 'reports' %></div>
+    <% end %>
+  </div>
+  <!----}admin-content---->
+</div>
+<!----main-content---->

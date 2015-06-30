@@ -1,0 +1,25 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "customer" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>客户详情<span class="info"></span></h2>
+        <!--客户信息{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>客户信息</h2>
+            </div>
+            <div class="bd">
+              <%= form_tag level_customers_path, :method => "post", :id => "J-customers" do %>
+                <%= button_tag "level", :name => nil, :class => "search-btn" %>
+              <% end %>
+            </div>
+        </div>
+        <!----}}}}}}content-set---->
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

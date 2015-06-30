@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Description:</b>
+  <%= @workflow.description %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @workflow.status %>
+</p>
+
+
+<%= link_to I18n.t('views.links.edit'), edit_workflow_path(@workflow) %> |
+<%= link_to I18n.t('views.links.back'), workflow_flow_workflows_path %>

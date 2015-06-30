@@ -1,0 +1,21 @@
+<%= content_for :topmenu do %>
+    <ul>
+      <li><%= link_to I18n.t('views.menu.customers'), customers_path %></li>
+      <li><%= link_to I18n.t('views.menu.vehicles'), vehicles_path %></li>
+      <li><%= link_to I18n.t('views.menu.faults'), faults_path %></li>
+      <li><%= link_to I18n.t('views.menu.old_parts'), oldparts_path %></li>
+      <li><%= link_to I18n.t('views.menu.new_parts'), newparts_path %></li>
+      <li class="current"><%= link_to I18n.t('views.menu.repairs'), repairs_path %></li>
+      <li><%= link_to I18n.t('views.menu.expenses'), expenses_path %></li>
+      <li><%= link_to I18n.t('views.menu.work_flow'), workflow_flow_workflows_path %></li>
+      <li><%= link_to I18n.t("views.menu.user_manage"), users_path %></li>
+      <li><%= link_to I18n.t("views.menu.profile"), profiles_path %></li>
+    </ul>
+<% end %>
+
+<h3>Editing repair</h3>
+
+<%= render 'form' %>
+
+<%= link_to I18n.t('views.links.show'), @repair %> |
+<%= link_to I18n.t('views.links.back'), repairs_path %>

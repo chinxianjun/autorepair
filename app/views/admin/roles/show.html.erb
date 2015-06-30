@@ -1,0 +1,77 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "group" %>
+    <%= javascript_include_tag "company" %>
+    <%= javascript_include_tag "role" %>
+<% end %>
+
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>角色详情<span class="info"></span></h2>
+        <!--角色信息{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>角色信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>角色名称</th>
+                                    <td><%= @role.name %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <!----}}}}}}}content-set---->
+        <!----content-set{{{{{{{---->
+        <div class="content-set">
+            <div class="hd">
+                <h2>权限信息</h2>
+            </div>
+            <!----bd{{{{{{{{---->
+            <div class="bd">
+                <dl class="details-info">
+                    <% if @role.permissions.any? %>
+                    <dd>
+                        <table>
+                            <tbody>
+                            <% @role.permissions.each do |perm| %>
+                                <tr>
+                                    <th></th>
+                                    <td><%= perm %></td>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                        </table>
+                    </dd>
+                    <% else %>
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <td>此角色没有任何权限</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <% end %>
+                </dl>
+            </div>
+            <!----}}}}}}}}}bd---->
+            <div class="tool-bar tr clrfix">
+                <button class="edit-btn editRole" id="<%= @role.id %>">编辑</button>
+                <button class="cancel-btn">返回</button>
+            </div>
+        </div>
+        <!----}}}}}}content-set---->
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

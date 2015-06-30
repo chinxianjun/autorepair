@@ -1,0 +1,70 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "warehouse" %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+
+<div class="main-content">
+  <div class="admin-content">
+    <h2><%= @warehouse.name %><span class="info"></span></h2>
+    <div class="tool-bar clrfix">
+      <button class="submit-btn" id="addroles">保存</button>
+      <button class="cancel-btn">取消</button>
+    </div>
+    <div class="RoleSelector">
+      <div class="leftBox">
+        <div class="content borderBase" id="userLeftBox">
+          <div class="depBoxContent" id="leftBox">
+            <h3>已有角色</h3>
+            <input id="J-warehouse_id" type="hidden" value="<%= @warehouse.id %>" />
+            <input id="J-company_id" type="hidden" value="<%= @company.id %>" />
+            <% if @warehouse.roles.any? %>
+                <% @warehouse.roles.each do |role| %>
+                    <% unless role.name == "anonymous" %>
+                        <div class="userBox">
+                          <input type="checkbox" class="userCheckbox" id="<%= role.id %>" name="<%= @warehouse.id %>" value="<%= role.name %>"/>
+                          <label for="<%= role.id %>"><%= role.name %></label>
+                        </div>
+                    <% end %>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <!----}}}}}}}form---->
+      <div class="centerBox">
+        <div>
+          <a href="#" id="toRight">
+            <%= image_tag("to_right.png") %>
+          </a>
+        </div>
+        <div style="margin-top:20px;">
+          <a href="#" id="toLeft">
+            <%= image_tag("to_left.png") %>
+          </a>
+        </div>
+      </div>
+      <!----}}}}}}}centerBox---->
+      <!----rightBox{{{{{{{---->
+      <div class="rightBox">
+        <div class="content borderBase" id="rightBox" name="right">
+          <h3>可分配角色</h3>
+          <% roles = Role.all - @warehouse.roles %>
+          <% if roles.any? %>
+              <% roles.each do |role| %>
+                  <% unless role.name == "anonymous" %>
+                      <div class="userBox">
+                        <input type="checkbox" class="userCheckbox" id="<%= role.id %>" name="" value="<%= role.name %>" />
+                        <label for="<%= role.id %>"><%= role.name %></label>
+                      </div>
+                  <% end %>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
+      <!----}}}}}}}rightBox---->
+    </div>
+    <!----}}}}}}increaseUser---->
+  </div>
+  <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

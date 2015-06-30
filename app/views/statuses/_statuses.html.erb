@@ -1,0 +1,37 @@
+<div id="J-status_show">
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+  <!--table样式{-->
+  <table class="admin-table table-style1 pretty">
+    <thead>
+    <tr>
+      <th><%= sortable "id", "ID" %></th>
+      <th><%= sortable "name", "名称" %></th>
+      <th><%= sortable "created_at", "创建日期" %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @statuses.nil? %>
+        <tr></tr>
+    <% else %>
+        <% @statuses.each do |status| %>
+            <tr>
+              <td><%= status.id %></td>
+              <% if current_user.allowed_to?(current_user, :view_status, @current_company) %>
+                  <td style="min-width:140px;"><a href="/statuses/<%= status.id %>" class="fun-link product-name">
+                    <span class="ui-icon ui-icon-person"></span><%= status.name %></a>
+              <% end %>
+              <% if current_user.allowed_to?(current_user, :edit_status, @current_company) %>
+                  <a href="/statuses/<%= status.id %>/edit" class="fun-link product-name">
+                    <span class="ui-icon ui-icon-mail-closed tooltip"></span>
+                  </a>
+              <% end %>
+              <td><%= customer.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @statues %>
+  <!--}table样式-->
+</div>

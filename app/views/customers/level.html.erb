@@ -1,0 +1,41 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "customer" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>客户级别<span class="info"></span></h2>
+        <!--客户信息{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>级别信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>名称</th>
+                                    <% if @categories.any? %>
+                                    <% @categories.each do |c| %>
+                                    <td><%= c.category %></td>
+                                    <% end %>
+                                    <% end %>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="tool-bar clrfix">
+            <button class="cancel-btn">返回</button>
+        </div>
+        <!----}}}}}}content-set---->
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

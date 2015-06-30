@@ -1,0 +1,95 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= javascript_include_tag "dispatching" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content" xmlns="http://www.w3.org/1999/html"
+     xmlns="http://www.w3.org/1999/html">
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+    <input type="hidden" value="<%= @dispatching.id %>" id="J-dispatch_id"/>
+
+    <h2>故障详情<span class="info"></span></h2>
+
+    <div class="content-set">
+      <div class="hd">
+        <h2>基本信息</h2>
+      </div>
+      <div class="bd">
+        <dl class="details-info">
+          <dd>
+            <table class="admin-table table-style1">
+              <tr>
+                <td>流程编号</td>
+                <td id="J-workflow_id"><%= @workflow.id %></td>
+                <td>客户姓名</td>
+                <td id="J-customer_name"><%= @customer.fullname %></td>
+                <td>客户电话</td>
+                <td id="J-customer_phone"><%= @customer.phone %></td>
+              </tr>
+              <tr>
+                <td>维修性质</td>
+                <td id="J-repair_warranty">
+                  <%= @workflow.faultdesc.warranty %>
+                </td>
+                <% if @workflow.faultdesc.warranty == 'rescue' %>
+                    <td>故障地点</td>
+                    <td id="J-fault_place"><%= @workflow.faultdesc.place %></td>
+                <% end %>
+                <td>故障车牌号</td>
+                <td id="J-car_number"><%= @workflow.faultdesc.car_number %></td>
+              </tr>
+              <tr>
+                <td>故障描述</td>
+                <td colspan="5" id="J-fault_description"><%= @workflow.faultdesc.description %></td>
+              </tr>
+            </table>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <!----J-add_budget{---->
+    <div class="content-set" id="J-add_budget">
+      <div class="hd">
+        <h2>派维修工</h2>
+      </div>
+      <div class="bd">
+        <dl>
+            <dt>维修工程师</dt>
+            <dd>
+                <div class="checkbox">
+                  <% if @repairer.users.any? %>
+                    <% @repairer.users.each do |user| %>
+                      <% unless user.status == "busy" %>
+                          <input type="checkbox" id="<%= user.id %>"
+                                 name="" value="<%= user.fullname %>" />
+                          <label for="<%= user.id %>">
+                                 <%= user.fullname %></label>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </div>
+            </dd><br/>
+            <dt>派工管理员</dt>
+            <dd><input type="text" readonly="readonly" class="inp inp2"
+                id = "J-dispatcher"
+                value="<%= current_user.fullname %>" />
+            </dd>
+        </dl>
+      </div>
+      <!--bd-->
+    </div>
+    <!----}content-set ---->
+    <div class="tool-bar clrfix">
+      <%# if @dispatching.property == "进厂" %>
+          <!--<button class="edit-btn" id="J-go_to_dispatch">下一步</button>-->
+          <!--<button class="cancel-btn">返回</button>-->
+      <%# elsif @dispatching.property == "救援" %>
+          <button class="submit-btn" id="J-dispatching_save">保存</button>
+          <button class="cancel-btn" id="J-return_btn">返回</button>
+      <%# end %>
+    </div>
+  </div>
+  <!----admin-content---->
+</div>
+<!----}}}}main-content---->

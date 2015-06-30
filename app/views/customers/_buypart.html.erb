@@ -1,0 +1,46 @@
+<!----J-buy_part_show{---->
+<div id="J-buy_part_show" style="display: none;">
+    <!--table样式{-->
+    <table class="admin-table table-style1">
+        <thead>
+        <tr>
+            <th class="sa lt">&nbsp;</th>
+            <th>ID</th>
+            <td colspan="3">姓名</td>
+            <td>性别</td>
+            <td>联系电话</td>
+            <td>地址</td>
+            <td>级别</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% if @customers.nil? %>
+            <tr></tr>
+        <% else %>
+            <% @customers.each do |customer| %>
+                <tr>
+                    <th class="sa">
+                      <input type="checkbox" name="order" value="1" class="select-all"/>
+                    </th>
+                    <th><%= customer.id %></th>
+                  <% if current_user.allowed_to?(current_user, :view_customer, @current_company) %>
+                    <td><%= link_to "#{customer.fullname}", customer_path(customer), :class => "fun-link text12 product-name" %></td>
+                  <% end %>
+                  <% if current_user.allowed_to?(current_user, :edit_customer, @current_company) %>
+                    <td><a href="javascript:void(0)" id="<%= customer.id %>" class="editCustomerLink fun-link text2 product-name">编辑</a></td>
+                  <% end %>
+                  <% if current_user.allowed_to?(current_user, :destroy_customer, @current_company) %>
+                    <td><%= link_to "删除", customer_path(customer), :class=>"deleteItem fun-link text2 product-name" %></td>
+                  <% end %>
+                    <td><%= customer.gender %></td>
+                    <td><%= customer.phone %></td>
+                    <td><%= customer.address %></td>
+                    <td><%= customer.category %></td>
+                </tr>
+            <% end %>
+        <% end %>
+        </tbody>
+    </table>
+    <%= will_paginate @customers %>
+    <!--}table样式-->
+</div>

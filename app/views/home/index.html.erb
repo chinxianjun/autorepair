@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AutoRepair</title>
+  <%#= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "common" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+        <div id="doc-main">
+            <div id="hd">
+                <h1>
+                    <a href="/">
+                        <%= image_tag("logo-write-200x40.png") %>
+                    </a>
+                    <ul id="login">
+                        <li><%#= link_to  "管理员登录", new_manager_session_path, :class => "add-btn fr" %></li>
+                        <li><%= link_to  "用户登录", new_user_session_path, :class => "add-btn fr" %></li>
+                    </ul>
+                </h1>
+            </div>
+            <div id="bd" class="clrfix">
+                <div class="main-block">
+                    <div class="main-content">
+                    <h1>欢迎使用汽修综合管理平台</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

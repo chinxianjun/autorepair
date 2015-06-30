@@ -1,0 +1,223 @@
+<% content_for :head do %>
+    <%= javascript_include_tag "vehicle" %>
+<% end %>
+<!---side-bar{{{{--->
+<div class="side-bar">
+  <% if (user_signed_in? && !current_user.nil?) %>
+    <!--<p>I AM SIMPLE USER</p>-->
+    <% if current_user.allowed_to?(current_user, :view_workflow, @current_company) %>
+        <div class="menu-box">
+            <h3><a href="javascript:void(0)">流程管理</a></h3>
+            <div>
+                <ul class="sub-menu">
+                  <% if current_user.allowed_to?(current_user, :view_workflow, @current_company) %>
+                    <li>
+                        <span class="ui-icon ui-icon-suitcase"></span>
+                        <a href="/workflows/">所有流程</a>
+                    </li>
+                  <% end %>
+                    <li>
+                        <span class="ui-icon ui-icon-suitcase"></span>
+                        <a href="/workflows/workflow_flow">我的流程</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+    <% if current_user.allowed_to?(current_user, :view_report, @current_company) %>
+        <div class="menu-box">
+            <h3><a href="javascript:void(0)">上报单管理</a></h3>
+            <div>
+                <ul class="sub-menu">
+                  <% if current_user.allowed_to?(current_user, :view_report, @current_company) %>
+                    <li>
+                        <span class="ui-icon ui-icon-suitcase"></span>
+                        <a href="/reports/">所有上报单</a>
+                    </li>
+                  <% end %>
+                  <% if current_user.allowed_to?(current_user, :add_report, @current_company) %>
+                    <li>
+                        <span class="ui-icon ui-icon-suitcase"></span>
+                        <a href="/reports/new">新建上报单</a>
+                    </li>
+                  <% end %>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+    <% if current_user.allowed_to?(current_user, :view_customer, @current_company) ||
+          current_user.allowed_to?(current_user, :view_question, @current_company) %>
+        <div class="menu-box">
+            <h3><a href="javascript:void(0)">客户管理</a></h3>
+            <div>
+                <ul class="sub-menu">
+                  <% if current_user.allowed_to?(current_user, :add_customer, @current_company) %>
+                    <li>
+                        <span class="ui-icon ui-icon-person"></span>
+                        <a href="javascript:void(0)" class="product-name newCustomer">新建客户</a>
+                    </li>
+                  <% end %>
+                  <% if current_user.allowed_to?(current_user, :view_question, @current_company) %>
+                    <li>
+                        <span class="ui-icon ui-icon-alert"></span>
+                        <a href="/questions/">客户问题</a>
+                    </li>
+                  <% end %>
+                  <% if current_user.allowed_to?(current_user, :view_customer, @current_company) %>
+                    <li>
+                        <span class="ui-icon ui-icon-search"></span>
+                        <a href="/customers/">所有客户</a>
+                    </li>
+                  <% end %>
+                  <% if current_user.allowed_to?(current_user, :add_customer, @current_company) %>
+                    <li>
+                        <span class="ui-icon ui-icon-wrench"></span>
+                        <a href="/customers/category">客户设置</a>
+                    </li>
+                  <% end %>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+    <% if current_user.allowed_to?(current_user, :view_message, @current_company) %>
+        <div class="menu-box">
+            <h3><a href="javascript:void(0)">短信管理</a></h3>
+            <div>
+                <ul class="sub-menu">
+                  <% if current_user.allowed_to?(current_user, :add_message, @current_company) %>
+                    <li>
+                      <span class="ui-icon ui-icon-alert"></span>
+                      <a href="/messages/multi_send_msg">新建信息</a>
+                    </li>
+                  <% end %>
+                  <% if current_user.allowed_to?(current_user, :view_message, @current_company) %>
+                    <li>
+                      <span class="ui-icon ui-icon-alert"></span>
+                      <a href="/messages/history">已发短信</a>
+                    </li>
+                  <% end %>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+    <% if current_user.allowed_to?(current_user, :view_vehicle, @current_company) %>
+        <div class="menu-box">
+            <h3><a href="javascript:void(0)">车辆管理</a></h3>
+            <div>
+              <% if current_user.allowed_to?(current_user, :add_vehicle, @current_company) %>
+                <ul class="sub-menu">
+                    <li><span class="ui-icon ui-icon-wrench newVehicle"></span><a
+                            href="/vehicles/new">添加车辆信息</a></li>
+                </ul>
+              <% end %>
+              <% if current_user.allowed_to?(current_user, :view_vehicle, @current_company) %>
+                <ul class="sub-menu">
+                    <li><span class="ui-icon ui-icon-search"></span><a
+                            href="/vehicles/">所有车辆</a></li>
+                </ul>
+              <% end %>
+            </div>
+        </div>
+    <% end %>
+    <% if current_user.allowed_to?(current_user, :view_fault, @current_company) %>
+        <div class="menu-box">
+            <h3><a href="javascript:void(0)">故障管理</a></h3>
+            <div>
+              <% if current_user.allowed_to?(current_user, :view_fault, @current_company) %>
+                <ul class="sub-menu">
+                    <li><span class="ui-icon ui-icon-search"></span><a
+                            href="/faults/">所有故障</a></li>
+                </ul>
+              <% end %>
+            </div>
+        </div>
+    <% end %>
+    <% if current_user.allowed_to?(current_user, :view_oldpart, @current_company) %>
+        <div class="menu-box">
+            <h3><a href="javascript:void(0)">旧件管理</a></h3>
+            <div>
+                <ul class="sub-menu">
+                  <% if @current_company.warehouses.nil? %>
+                  <% else %>
+                    <% @current_company.warehouses.each do |warehouse| %>
+                      <% if warehouse.users.include?(current_user) %>
+                          <% if current_user.allowed_to?(current_user, :view_warehouse, @current_company) %>
+                            <li>
+                              <span class="ui-icon ui-icon-wrench"></span>
+                              <%#=  link_to_warehouse(warehouse) %>
+                              <a href="/warehouses/<%= warehouse.id %>">
+                                <%= warehouse.name %>
+                              </a>
+                            </li>
+                          <% else %>
+                            <!--<p>is not allows_to</p>-->
+                          <% end %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+    <% if current_user.allowed_to?(current_user, :view_newpart, @current_company) %>
+        <div class="menu-box">
+            <h3><a href="javascript:void(0)">新件管理</a></h3>
+            <div>
+                <ul class="sub-menu">
+                  <% if current_user.allowed_to?(current_user, :add_newpart, @current_company) %>
+                    <li><span class="ui-icon ui-icon-wrench"></span><a
+                            href="/newparts/new">添加新件</a></li>
+                  <% end %>
+                  <% if current_user.allowed_to?(current_user, :view_newpart, @current_company) %>
+                    <li><span class="ui-icon ui-icon-search"></span><a
+                            href="/newparts/">所有新件</a></li>
+                  <% end %>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+    <% if current_user.allowed_to?(current_user, :view_expense, @current_company) %>
+        <div class="menu-box">
+            <h3><a href="javascript:void(0)">费用管理</a></h3>
+            <div>
+                <ul class="sub-menu">
+                  <% if current_user.allowed_to?(current_user, :stats_expense, @current_company) %>
+                    <li><span class="ui-icon ui-icon-wrench"></span><a
+                            href="/expenses/stats">费用统计</a></li>
+                  <% end %>
+                  <% if current_user.allowed_to?(current_user, :view_expense, @current_company) %>
+                    <li><span class="ui-icon ui-icon-wrench"></span><a
+                            href="/expenses/">所有费用</a></li>
+                  <% end %>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+    <!--<%# if current_user.allowed_to?(current_user, :view_workflow, @current_company) %>-->
+        <!--<div class="menu-box">-->
+            <!--<h3><a href="javascript:void(0)">基本设置</a></h3>-->
+            <!--<div>-->
+                <!--<ul class="sub-menu">-->
+                  <!--<%# if current_user.allowed_to?(current_user, :view_item, @current_company) %>-->
+                    <!--<li><span class="ui-icon ui-icon-wrench"></span><a-->
+                            <!--href="/items/">配件厂家设置</a></li>-->
+                  <!--<%# end %>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--<%# end %>-->
+        <div class="menu-box">
+            <h3><a href="javascript:void(0)">帐号设置</a></h3>
+
+            <div>
+                <ul class="sub-menu">
+                    <li><span class="ui-icon ui-icon-wrench"></span><a
+                            href="/admin/users/<%= current_user.id %>/password_edit">修改密码</a></li>
+                    <li><span class="ui-icon ui-icon-wrench"></span><a
+                            href="/admin/users/<%= current_user.id %>">个人信息</a></li>
+                </ul>
+            </div>
+        </div>
+  <% end %>
+</div>
+<!---}}}}side-bar--->

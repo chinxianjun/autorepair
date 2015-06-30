@@ -1,0 +1,64 @@
+<!----J-group_index{---->
+<div class="content-set">
+  <div class="tool-bar clrfix">
+    <button class="add-btn fr" id="J-add_group">添加部门</button>
+  </div>
+  <!--table样式{-->
+  <table class="admin-table table-style1">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <td colspan="3">部门名称</td>
+      <td>用户</td>
+      <td>角色</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @groups.nil? %>
+        <tr></tr>
+    <% else %>
+        <% @groups.each do |group| %>
+            <tr>
+              <th><%= group.id %></th>
+              <td>
+                <a href="/companies/<%= @company.id %>/groups/<%= group.id %>"
+                   class='fun-link text8 product-name' >
+                  <%= group.name %>
+                </a>
+              </td>
+              <td>
+                <a href="/companies/<%= @company.id %>/groups/<%= group.id %>/edit"
+                   class='fun-link text2 product-name'>
+                  <span class="ui-icon ui-icon-pencil"></span>
+                  编辑
+                </a>
+              </td>
+              <td>
+                <a href="/companies/<%= @company.id %>/groups/<%= group.id %>"
+                   class='fun-link text2 product-name deleteItem'>
+                  <span class="ui-icon ui-icon-trash"></span>
+                  删除
+                </a>
+              </td>
+              <td>
+                <a href="/companies/<%= @company.id %>/groups/<%= group.id %>/new_users"
+                   class = "fun-link text2 product-name">
+                  <span class="ui-icon users"></span>
+                  <%= group.users.count %>
+                </a>
+              </td>
+              <td>
+                <a href="/companies/<%= @company.id %>/groups/<%= group.id %>/new_roles"
+                   class = "fun-link text2 product-name">
+                  <span class="ui-icon roles"></span>
+                  <%= group.roles.count %>
+                </a>
+              </td>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<!----}J-group_index---->
+

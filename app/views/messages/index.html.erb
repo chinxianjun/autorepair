@@ -1,0 +1,65 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.md5" %>
+    <%= javascript_include_tag "message" %>
+<% end %>
+
+
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>短信列表<span class="info"></span>
+          <% if current_user.allowed_to?(current_user, :add_message, @current_company) %>
+              <button class="newMessage add-btn fr">新建短信</button>
+          <% end %></h2>
+        <%= form_tag messages_path, :method => "get", :id => "J-customers" do %>
+            <%= hidden_field_tag :direction, params[:direction] %>
+            <%= hidden_field_tag :sort, params[:sort] %>
+            <div class="tool-bar clrfix">
+                <%#= label_tag :messages, "客户姓名或电话" %>
+                <%= text_field_tag :messages, params[:messages], :class => "inp" %>
+                <%= button_tag "查询", :name => nil, :class => "search-btn" %>
+            </div>
+            <div id="messages"><%= render 'messages' %></div>
+        <% end %>
+    </div>
+    <!----}admin-content---->
+    <!--新增短信弹框{-->
+    <div id="J-message_create">
+        <div class="form-set">
+            <form method="post" action="">
+                <dl>
+                    <dt>分类</dt>
+                    <dd><input type="text" name="" value=""
+                               class="inp inp2" id="J-category"/></dd>
+                    <dt>内容</dt>
+                    <dd><textarea class="textarea textarea2" id="J-content"></textarea></dd>
+                    <dt>创建人</dt>
+                    <dd><input type="text" name="" value="<%= current_user.fullname %>"
+                               class="inp inp2" id="J-creator" readonly="readonly"/></dd>
+                </dl>
+            </form>
+        </div>
+    </div>
+    <!--}新增短信弹框-->
+    <!--编辑短信弹框{-->
+    <div id="J-message_update">
+        <div class="form-set">
+            <form method="post" action="">
+                <dl>
+                  <dt>分类</dt>
+                  <dd><input type="text" name="" value=""
+                             class="inp inp2" id="U-category"/></dd>
+                  <dt>内容</dt>
+                  <dd><textarea class="textarea textarea2" id="U-content"></textarea></dd>
+                  <dt>创建人</dt>
+                  <dd><input type="text" name="" value="<%= current_user.fullname %>"
+                             class="inp inp2" id="U-creator" readonly="readonly"/></dd>
+                  <input type="hidden" value="" id="U-message_id"/>
+                </dl>
+            </form>
+        </div>
+    </div>
+    <!--}编辑短信弹框-->
+</div>
+<!----main-content---->

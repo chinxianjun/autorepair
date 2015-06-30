@@ -1,0 +1,134 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= stylesheet_link_tag "jquery.tooltip" %>
+    <%= javascript_include_tag "jquery.tooltip" %>
+    <%= stylesheet_link_tag "common" %>
+    <%= javascript_include_tag "member" %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+
+<!----main-content{---->
+<div class="main-content">
+  <!----admin-content{{---->
+  <div class="admin-content">
+    <h2>
+        <input type="hidden" id="J-company_id" value="<%= @company.id %>"/>
+        <input type="hidden" id="J-warehouse_id" value="<%= @warehouse.id %>"/>
+        <%= link_to "#{@company.name}", setting_admin_company_path(@company) %>&gt;&gt;<%= link_to "#{@warehouse.name}", warehouse_path(@warehouse) %>&gt;&gt;成员列表<span class="info"></span>
+    </h2>
+    <!----content-set{{{---->
+    <div class="content">
+        <!--table样式{{{{-->
+        <table class="member-table table-style1">
+          <thead>
+              <tr>
+                <td>员工/部门</td>
+                <td>角色</td>
+                <td colspan="2">操作</td>
+              </tr>
+          </thead>
+          <tbody>
+            <% if @members.blank? %>
+              <tr>
+                <td>没有可供显示的数据</td>
+                <td>没有可供显示的数据</td>
+                <td></td>
+              </tr>
+            <% else %>
+              <% @members.each do |member| %>
+                <% if !member.user_id.nil? %>
+                  <tr>
+                    <td>
+                        <% u = User.find(member.user_id) %>
+                        <%= u.fullname %>
+                    </td>
+                    <td>
+                      <% if !member.roles.blank? %>
+                        <% member.roles.each do |r| %>
+                          <%= r.name %>
+                        <% end %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <a href="/warehouses/<%= @warehouse.id %>/members/<%= member.id %>/edit?user_id=<%= u.id %>"
+                        class='fun-link text2 product-name'>
+                        <span class="ui-icon ui-icon-pencil"></span>
+                        编辑
+                      </a>
+                    </td>
+                    <td>
+                      <a href="/warehouses/<%= @warehouse.id %>/members/<%= member.id %>"
+                         class='fun-link text2 product-name deleteItem'>
+                        <span class="ui-icon ui-icon-trash"></span>
+                        删除
+                      </a>
+                    </td>
+                  </tr>
+                <% elsif !member.group_id.nil? %>
+                  <tr>
+                    <td>
+                      <% g = Group.find(member.group_id) %>
+                      <%= g.name %>
+                    </td>
+                    <td>
+                      <% if !member.roles.blank? %>
+                          <% member.roles.each do |r| %>
+                              <%= r.name %>
+                          <% end %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <a href="/warehouses/<%= @warehouse.id %>/members/<%= member.id %>/edit?group_id=<%= g.id %>"
+                         class='fun-link text2 product-name'>
+                        <span class="ui-icon ui-icon-pencil"></span>
+                        编辑
+                      </a>
+                    </td>
+                    <td>
+                      <a href="/warehouses/<%= @warehouse.id %>/members/<%= member.id %>"
+                         class='fun-link text2 product-name deleteItem'>
+                        <span class="ui-icon ui-icon-trash"></span>
+                        删除
+                      </a>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+        <!----}}}}table---->
+        <!----member{{{{---->
+        <div class="member">
+          <fieldset>
+            <legend>添加成员</legend>
+            <div class="users_add">
+                <p>员工</p>
+                <% (@users - @member_users).each do |u| %>
+                  <label><input type="checkbox" name="user" value="<%= u.id %>"/><%= u.fullname %></label>
+                <% end %>
+            </div>
+            <div class="roles_add">
+                <p>部门</p>
+                <% (@groups - @member_groups).each do |g| %>
+                  <label><input type="checkbox" name="group" value="<%= g.id %>" /><%= g.name %></label>
+                <% end %>
+            </div>
+            <div class="roles_add">
+                <p>角色</p>
+                <% @roles.each do |role| %>
+                  <label><input type="checkbox" name="role" value="<%= role.id %>"/><%= role.name %></label>
+                <% end %>
+            </div>
+            <div class="tool-bar">
+                <button class="submit-btn addMember">添加</button>
+            </div>
+          </fieldset>
+        </div>
+        <!----}}}}---->
+    </div>
+    <!----}}}content-set---->
+  </div>
+  <!----}}admin-content---->
+</div>
+<!----}main-content---->

@@ -1,0 +1,48 @@
+<div id="J-repair_show">
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>
+    <!--table样式{-->
+    <table class="admin-table table-style1 pretty">
+        <thead>
+        <tr>
+            <th><%= sortable "id", "ID" %></th>
+            <th><%= sortable "fullname", "姓名" %></th>
+            <th><%= sortable "phone", "联系电话" %></th>
+            <th><%= sortable "address", "地址" %></th>
+            <th><%= sortable "category", "级别" %></th>
+            <th><%= sortable "created_at", "创建日期" %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if @customers.nil? %>
+            <tr></tr>
+        <% else %>
+            <% @customers.each do |customer| %>
+                <tr>
+                    <td><%= customer.id %></td>
+                  <% if current_user.allowed_to?(current_user, :view_customer, @current_company) %>
+                    <td style="min-width:140px;"><a href="/customers/<%= customer.id %>" class="fun-link product-name">
+                      <span class="ui-icon ui-icon-person"></span><%= customer.fullname %></a>
+                  <% end %>
+                  <% if current_user.allowed_to?(current_user, :view_message, @current_company) %>
+                      <a href="/messages/send_msg?phone=<%= customer.phone  unless customer.nil? %>&name=<%= customer.fullname  unless customer.nil? %>" class="fun-link product-name">
+                        <span class="ui-icon ui-icon-mail-closed tooltip"></span></a>
+
+                  <% end %>
+                  <% if current_user.allowed_to?(current_user, :add_question, @current_company) %>
+                      <a href="/questions/repair_new?customer_id=<%= customer.id  unless customer.nil? %>" class="fun-link product-name">
+                        <span class="ui-icon ui-icon-info tooltip"></span></a>
+                      </td>
+                  <% end %>
+                    <td><%= customer.phone %></td>
+                    <td><%= customer.address %></td>
+                    <td><%= customer.category %></td>
+                    <td><%= customer.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+                </tr>
+            <% end %>
+        <% end %>
+        </tbody>
+    </table>
+    <%= will_paginate @customers %>
+    <!--}table样式-->
+</div>

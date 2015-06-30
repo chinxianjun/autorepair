@@ -1,0 +1,73 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "company" %>
+    <%= javascript_include_tag "warehouse" %>
+<% end %>
+<div class="main-content">
+  <div class="admin-content warehouse">
+      <h2>创建配件库<span class="info"></span></h2>
+      <!----J-ind_new{{---->
+      <div class="form-warehouse ui-widget" id="J-part_new" style="height: auto;">
+        <form method="" action="">
+          <dl>
+            <table>
+                <tr>
+                  <td>
+                    <label for="J-warehouse_name">配件库名称<b class="ftx04">*</b></label>
+                    <input type="text" class="inp inp2b autocomplete" id="J-warehouse_name" value="" />
+                  </td>
+                </tr>
+                <tr>
+                    <td>
+                    <label for="J-warehouse_manager">配件管理员<b class="ftx04">*</b></label>
+                    <input type="text" class="inp inp2b" id="J-warehouse_manager"/>
+                    </td>
+                </tr>
+                <tr>
+                <td>
+                  <div>配件库类别<b class="ftx04">*</b></div>
+                  <div class="radio" id="J-warehouse_category">
+                    <input type="radio" id="J-warehouse_category1" name="warehouse_category" value="旧件" />
+                    <label for="J-warehouse_category1">旧件</label>
+                    <input type="radio" id="J-warehouse_category2" name="warehouse_category" value="新件" />
+                    <label for="J-warehouse_category2">新件</label>
+                  </div>
+                </td>
+                </tr>
+                <tr>
+                <td>
+                  <div>所属公司<b class="ftx04">*</b></div>
+                  <div class="radio" id="J-warehouse_company">
+                    <% if @companies %>
+                      <% @companies.each do |company| %>
+                        <input type="radio" id="J-warehouse_company1" name="warehouse_company" value="<%= company.simply %>" />
+                     <label for="J-warehouse_company1"><%= company.simply %></label>
+                   <% end %>
+                  <% end %>
+                  </div>
+                </td>
+                </tr>
+                <tr>
+                    <td>
+                      <div>所属配件库</div>
+                      <div class="radio" id="J-parent_warehouse">
+                        <% if @warehouses %>
+                          <% select("warehouse", "warehouse_id", @warehouses.collect {|w| [ w.name, w.id ] }, {:include_blank => 'None'}) %>
+                        <% else %>
+                          <select name="warehouse[warehouse_id]">
+                              <option value="">选择配件库</option>
+                          </select>
+                        <% end %>
+                      </div>
+                    </td>
+                </tr>
+            </table>
+          </dl>
+        </form>
+        <div class="tool-bar clrfix">
+          <button class="submit-btn" id="J-add_warehouse_save">保存</button>
+          <button class="cancel-btn" >取消</button>
+        </div>
+      </div>
+  </div>
+</div>

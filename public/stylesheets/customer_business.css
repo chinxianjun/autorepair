@@ -1,0 +1,631 @@
+@charset "utf-8";
+.textarea-business{
+    height: 140px;
+    width: 500px;
+    rows: 5;
+}
+.workflow-list,
+.complaint-list,
+.consulting-list,
+.contact-list,
+.part-list{
+	margin-bottom: 50px;
+}
+.workflow-list.li{}
+.complaint-list.li{}
+.consulting-list.li{}
+.contact-list li{}
+.part-list li{}
+.workflow-list .workflow-item{
+	border-bottom: 1px solid #ccc;
+	height: 31px;
+}
+.complaint-list .complaint-item{
+	border-bottom: 1px solid #ccc;
+	height: 31px;
+}
+.consulting-list .consulting-item{
+	border-bottom: 1px solid #ccc;
+	height: 31px;
+}
+.contact-list .contact-item{
+	border-bottom: 1px solid #ccc;
+	height: 31px;
+}
+.part-list li .part-item{
+	border-bottom: 1px solid #ccc;
+	height: 31px;
+}
+.workflow-list li span{
+	float: left;
+	display: block;
+	/*height: 31px;*/
+	line-height: 31px;
+}
+.complaint-list li span{
+	float: left;
+	display: block;
+	/*height: 31px;*/
+	line-height: 31px;
+}
+.consulting-list li span{
+	float: left;
+	display: block;
+	/*height: 31px;*/
+	line-height: 31px;
+}
+.contact-list li span{
+	float: left;
+	display: block;
+	/*height: 31px;*/
+	line-height: 31px;
+}
+.part-list li span{
+	float: left;
+	display: block;
+	/*height: 31px;*/
+	line-height: 31px;
+}
+.workflow-list li span.customer{
+	width: 60px;
+	padding-left: 35px;
+	background: url(/images/ucenter/contact_icon.png) no-repeat 10px 50%;
+}
+.complaint-list li span.customer{
+	width: 60px;
+	padding-left: 35px;
+	background: url(/images/ucenter/contact_icon.png) no-repeat 10px 50%;
+}
+.consulting-list li span.customer{
+	width: 60px;
+	padding-left: 35px;
+	background: url(/images/ucenter/contact_icon.png) no-repeat 10px 50%;
+}
+.contact-list li span.customer{
+	width: 60px;
+	padding-left: 35px;
+	background: url(/images/ucenter/contact_icon.png) no-repeat 10px 50%;
+}
+.part-list li span.customer{
+	width: 60px;
+	padding-left: 35px;
+	background: url(/images/ucenter/contact_icon.png) no-repeat 10px 50%;
+}
+.workflow-list li span.phone{
+    width: 100px;
+}
+.complaint-list li span.phone{
+    width: 100px;
+}
+.consulting-list li span.phone{
+    width: 100px;
+}
+.contact-list li span.phone{
+    width: 100px;
+}
+.part-list li span.phone{
+    width: 100px;
+}
+.workflow-list li span.workflowDate{
+	width: 220px;
+}
+.workflow-list li span.workflowCreator{
+	width: 100px;
+}
+.workflow-list li span.workflowNumber{
+	width: 106px;
+}
+.workflow-list li span.workflowRepair{
+	width: 106px;
+}
+.workflow-list li span.workflowStatus{
+	width: 106px;
+}
+.complaint-list li span.complaintDate{
+    width: 220px;
+}
+.complaint-list li span.complaintCategory{
+    width: 80px;
+}
+.complaint-list li span.complaintDescription{
+    width: 220px;
+}
+.complaint-list li span.complaintStatus{
+    width: 80px;
+}
+.consulting-list li span.consultingDate{
+    width: 220px;
+}
+.consulting-list li span.consultingQuestion{
+    width: 220px;
+}
+.consulting-list li span.consultingAnswer{
+    width: 220px;
+}
+.consulting-list li span.consultingStatus{
+    width: 80px;
+}
+.contact-list li span.factory{
+	width: 120px;
+}
+.contact-list li span.kind{
+	width: 100px;
+}
+.contact-list li span.price_range{
+	width: 106px;
+}
+.contact-list li span.referral{
+	width: 106px;
+}
+.contact-list li span.manager{
+	width: 106px;
+}
+.contact-list li span.salesman{
+	width: 106px;
+}
+.contact-list li span.status{
+	width: 60px;
+}
+.part-list li span.partName{
+	width: 100px;
+}
+.part-list li span.partDrawing{
+	width: 120px;
+}
+.part-list li span.partType{
+	width: 70px;
+}
+.part-list li span.partFactoryName{
+	width: 106px;
+}
+.part-list li span.partFactoryCode{
+	width: 106px;
+}
+.part-list li span.partCount{
+	width: 60px;
+}
+.part-list li span.partUnitPrice{
+	width: 80px;
+}
+.part-list li span.partSubtotal{
+	width: 106px;
+}
+.complaint-list li span.tool{
+	width: 110px;
+}
+.consulting-list li span.tool{
+	width: 110px;
+}
+.workflow-list li span.tool{
+	width: 110px;
+}
+.contact-list li span.tool{
+	width: 110px;
+}
+.part-list li span.tool{
+	width: 110px;
+}
+.workflow-list li.workflow-title{
+	height: 26px;
+	background: #00c2d1;
+	color: #fff;
+	border-bottom: 1px solid #ccc;
+}
+.complaint-list li.complaint-title{
+	height: 26px;
+	background: #00c2d1;
+	color: #fff;
+	border-bottom: 1px solid #ccc;
+}
+.consulting-list li.consulting-title{
+	height: 26px;
+	background: #00c2d1;
+	color: #fff;
+	border-bottom: 1px solid #ccc;
+}
+.contact-list li.contact-title{
+	height: 26px;
+	background: #00c2d1;
+	color: #fff;
+	border-bottom: 1px solid #ccc;
+}
+.part-list li.part-title{
+	height: 26px;
+	background: #00c2d1;
+	color: #fff;
+	border-bottom: 1px solid #ccc;
+}
+.workflow-list li.workflow-title span{
+	height: 26px;
+	line-height: 26px;
+	background: none;
+}
+.complaint-list li.complaint-title span{
+	height: 26px;
+	line-height: 26px;
+	background: none;
+}
+.consulting-list li.consulting-title span{
+	height: 26px;
+	line-height: 26px;
+	background: none;
+}
+.contact-list li.contact-title span{
+	height: 26px;
+	line-height: 26px;
+	background: none;
+}
+.part-list .part-title span{
+	height: 26px;
+	line-height: 26px;
+	background: none;
+}
+.ind-fault-workflow,
+.edit-workflow,
+.edit-complaint,
+.edit-consulting,
+.edit-contact,
+.edit-part{
+	margin-right: 10px;
+}
+.add-workflow,
+.add-complaint,
+.add-consulting,
+.add-contact,
+.add-part{
+
+}
+.add-workflow .btn-box{
+	height: 33px;
+	text-align: center;
+}
+.add-complaint .btn-box{
+	height: 33px;
+	text-align: center;
+}
+.add-consulting .btn-box{
+	height: 33px;
+	text-align: center;
+}
+.add-contact .btn-box{
+	height: 33px;
+	text-align: center;
+}
+.add-part .btn-box{
+	height: 33px;
+	text-align: center;
+}
+.add-workflow-btn,
+.add-complaint-btn,
+.add-consulting-btn,
+.add-contact-btn,
+.add-part-btn{
+	background-color: #ffe049;
+	background: -moz-linear-gradient(top,#ffe971,#ffe049);
+	background: -webkit-linear-gradient(top,#ffe971,#ffe049);
+	border: 1px solid #ccc;
+	color: #333;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 800;
+	height: 31px;
+	line-height: 29px;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	width: 140px;
+}
+.add-workflow-btn:hover{
+	background-color: #ffe971;
+	background: -moz-linear-gradient(top,#ffe049,#ffe971);
+	background: -webkit-linear-gradient(top,#ffe049,#ffe971);
+}
+.add-complaint-btn:hover{
+	background-color: #ffe971;
+	background: -moz-linear-gradient(top,#ffe049,#ffe971);
+	background: -webkit-linear-gradient(top,#ffe049,#ffe971);
+}
+.add-consulting-btn:hover{
+	background-color: #ffe971;
+	background: -moz-linear-gradient(top,#ffe049,#ffe971);
+	background: -webkit-linear-gradient(top,#ffe049,#ffe971);
+}
+.add-contact-btn:hover{
+	background-color: #ffe971;
+	background: -moz-linear-gradient(top,#ffe049,#ffe971);
+	background: -webkit-linear-gradient(top,#ffe049,#ffe971);
+}
+.add-part-btn:hover{
+	background-color: #ffe971;
+	background: -moz-linear-gradient(top,#ffe049,#ffe971);
+	background: -webkit-linear-gradient(top,#ffe049,#ffe971);
+}
+.workflow-form,
+.complaint-form,
+.consulting-form,
+.contact-form,
+.part-form
+{
+	background: #fafafa;
+	border: 1px solid #ccc;
+	border-top: 0;
+	padding-bottom: 40px;
+	position: relative;
+	width: 998px;
+	text-align: left;
+	display: none;
+	top: 0;
+	left: 0;
+}
+.workflow-form h3{
+	height: 40px;
+	background: #fff;
+	font-size: 14px;
+	font-weight: 800;
+	padding-left: 113px;
+	line-height: 40px;
+}
+.complaint-form h3{
+	height: 40px;
+	background: #fff;
+	font-size: 14px;
+	font-weight: 800;
+	padding-left: 113px;
+	line-height: 40px;
+}
+.consulting-form h3{
+	height: 40px;
+	background: #fff;
+	font-size: 14px;
+	font-weight: 800;
+	padding-left: 113px;
+	line-height: 40px;
+}
+.contact-form h3{
+	height: 40px;
+	background: #fff;
+	font-size: 14px;
+	font-weight: 800;
+	padding-left: 113px;
+	line-height: 40px;
+}
+.part-form h3{
+	height: 40px;
+	background: #fff;
+	font-size: 14px;
+	font-weight: 800;
+	padding-left: 113px;
+	line-height: 40px;
+}
+.workflow-form dl{
+	padding: 40px 0 0 100px;
+	background: url(/images/ucenter/edit_form_bg.png) no-repeat 0 0 #fafafa;
+	font-size: 14px;
+	margin-bottom: 15px;
+}
+.complaint-form dl{
+	padding: 40px 0 0 100px;
+	background: url(/images/ucenter/edit_form_bg.png) no-repeat 0 0 #fafafa;
+	font-size: 14px;
+	margin-bottom: 15px;
+}
+.consulting-form dl{
+	padding: 40px 0 0 100px;
+	background: url(/images/ucenter/edit_form_bg.png) no-repeat 0 0 #fafafa;
+	font-size: 14px;
+	margin-bottom: 15px;
+}
+.contact-form dl{
+	padding: 40px 0 0 100px;
+	background: url(/images/ucenter/edit_form_bg.png) no-repeat 0 0 #fafafa;
+	font-size: 14px;
+	margin-bottom: 15px;
+}
+.part-form dl{
+	padding: 40px 0 0 100px;
+	background: url(/images/ucenter/edit_form_bg.png) no-repeat 0 0 #fafafa;
+	font-size: 14px;
+	margin-bottom: 15px;
+}
+.text-dd{
+    height: 72px;
+}
+.workflow-form dt{
+	float: left;
+	width: 66px;
+	height: 36px;
+	line-height: 36px;
+	padding: 5px 0;
+}
+.complaint-form dt{
+	float: left;
+	width: 66px;
+	height: 36px;
+	line-height: 36px;
+	padding: 5px 0;
+}
+.consulting-form dt{
+	float: left;
+	width: 66px;
+	height: 36px;
+	line-height: 36px;
+	padding: 5px 0;
+}
+.contact-form dt{
+	float: left;
+	width: 66px;
+	height: 36px;
+	line-height: 36px;
+	padding: 5px 0;
+}
+.part-form dt{
+	float: left;
+	width: 66px;
+	height: 36px;
+	line-height: 36px;
+	padding: 5px 0;
+}
+.workflow-form dd{
+	height: 36px;
+	margin-left: 66px;
+	padding: 5px 0;
+	line-height: 36px;
+}
+.complaint-form dd{
+	height: 36px;
+	margin-left: 66px;
+	padding: 5px 0;
+	line-height: 36px;
+}
+.consulting-form dd{
+	height: 36px;
+	margin-left: 66px;
+	padding: 5px 0;
+	line-height: 36px;
+}
+.contact-form dd{
+	height: 36px;
+	margin-left: 66px;
+	padding: 5px 0;
+	line-height: 36px;
+}
+.part-form dd{
+	height: 36px;
+	margin-left: 66px;
+	padding: 5px 0;
+	line-height: 36px;
+}
+/*.contact-form dd span{*/
+	/*display: block;*/
+	/*height: 36px;*/
+	/*width: 262px;*/
+/*}*/
+.workflow-form dd label{
+	margin-right: 10px;
+}
+.complaint-form dd label{
+	margin-right: 10px;
+}
+.consulting-form dd label{
+	margin-right: 10px;
+}
+.contact-form dd label{
+	margin-right: 10px;
+}
+.part-form dd label{
+	margin-right: 10px;
+}
+.workflow-form .save-workflow-btn{
+	padding: 0 0 0 166px;
+    margin-top: 32px;
+}
+.complaint-form .save-complaint-btn{
+	padding: 0 0 0 166px;
+    margin-top: 32px;
+}
+.consulting-form .save-consulting-btn{
+	padding: 0 0 0 166px;
+    margin-top: 32px;
+}
+.contact-form .save-btn{
+	padding: 0 0 0 166px;
+}
+.part-form .save-part-btn{
+	padding: 0 0 0 166px;
+}
+.workflow-form .save-workflow-btn button{
+	margin-right: 10px;
+}
+.complaint-form .save-complaint-btn button{
+	margin-right: 10px;
+}
+.consulting-form .save-consulting-btn button{
+	margin-right: 10px;
+}
+.contact-form .save-btn button{
+	margin-right: 10px;
+}
+.part-form .save-part-btn button{
+	margin-right: 10px;
+}
+.add-workflow .workflow-form{
+	border-top: 1px solid #ccc;
+}
+.add-complaint .complaint-form{
+	border-top: 1px solid #ccc;
+}
+.add-consulting .consulting-form{
+	border-top: 1px solid #ccc;
+}
+.add-contact .contact-form{
+	border-top: 1px solid #ccc;
+}
+.add-part .part-form{
+	border-top: 1px solid #ccc;
+}
+.workflow-list li .workflowEditor,
+.add-workflow .workflowEditor{
+	position: relative;
+	height: 0;
+	overflow: hidden;
+}
+.complaint-list li .complaintEditor,
+.add-complaint .complaintEditor{
+	position: relative;
+	height: 0;
+	overflow: hidden;
+}
+.consulting-list li .consultingEditor,
+.add-consulting .consultingEditor{
+	position: relative;
+	height: 0;
+	overflow: hidden;
+}
+.contact-list li .editor,
+.add-contact .editor{
+	position: relative;
+	height: 0;
+	overflow: hidden;
+}
+.part-list li .partEditor,
+.add-part .partEditor{
+	position: relative;
+	height: 0;
+	overflow: hidden;
+}
+.no-content{
+	color: #999;
+	text-align: center;
+	font-size: 14px;
+	padding: 30px 0;
+	margin-bottom: 50px;
+}
+table.pretty {
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.pretty td, .pretty th {
+    padding: 4px 10px;
+    border: solid 1px #AAA;
+}
+
+.pretty .price {
+    text-align: right;
+}
+
+.pretty th .current {
+    padding-right: 12px;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+.pretty th .asc {
+    background-image: url('../images/up_arrow.gif');
+}
+
+.pretty th .desc {
+    background-image: url('../images/down_arrow.gif');
+}
+
+

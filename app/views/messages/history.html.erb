@@ -1,0 +1,50 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.md5" %>
+    <%= javascript_include_tag "message" %>
+<% end %>
+
+
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>短信列表<span class="info"></span>
+          <button id="J-getReport">获取已发送记录</button><button id="J-getBalance">获取余额</button></h2>
+        <%= form_tag history_messages_path, :method => "get", :id => "J-histories" do %>
+            <div class="tool-bar clrfix">
+                <%#= label_tag :messages, "客户姓名或电话" %>
+                <%= text_field_tag :search, params[:search], :class => "inp" %>
+                <%= button_tag "查询", :name => nil, :class => "search-btn" %>
+            </div>
+        <% end %><!--table样式{-->
+        <table class="admin-table table-style1">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <td>发送人</td>
+                <td>接收人</td>
+                <td>内容</td>
+                <td>发送日期</td>
+            </tr>
+            </thead>
+            <tbody>
+            <% if @histories.nil? %>
+                <tr></tr>
+            <% else %>
+                <% @histories.each do |history| %>
+                    <tr>
+                        <th><%= history.id %></th>
+                        <td><%= history.send_man %></td>
+                        <td><%= history.receive_man %></td>
+                        <td><%= history.content %></td>
+                        <td><%= history.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+                    </tr>
+                <% end %>
+            <% end %>
+            </tbody>
+        </table>
+        <%= will_paginate @histories %>
+    </div>
+    <!----}admin-content---->
+</div>
+<!----main-content---->

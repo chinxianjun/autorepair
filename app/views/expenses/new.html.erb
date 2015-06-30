@@ -1,0 +1,53 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "expense" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----info-content{{{{{---->
+    <input type="hidden" id="J-wid" value="<%= @workflow.id %>"/>
+    <div class="info-content">
+        <div class="form-set">
+            <form method="" action="">
+                <h2>厂家服务号<span class="info"></span></h2>
+                <dl>
+                  <dt>服务登记号</dt>
+                  <dd><input type="text" class="inp inp2" id="J-server_regist_number"/></dd>
+                  <dt>处理单号</dt>
+                  <dd><input type="text" class="inp inp2" id="J-server_process_number"/></dd>
+                </dl>
+                <h2>维修人员</h2>
+                <dl>
+                  <% if @workflow.users.any? %>
+                      <dt>姓名</dt>
+                      <dd>
+                        <% repairmen = "" %>
+                        <% @workflow.users.each do |user| %>
+                           <% repairmen << user.fullname + '; ' %>
+                        <% end %>
+                        <input class="inp inp2" readonly="readonly" value="<%= repairmen %>"/>
+                      </dd>
+                  <% end %>
+                </dl>
+                <h2>费用信息<span class="info"></span></h2>
+                <dl>
+                    <dt>材料费</dt>
+                    <dd><input type="text" class="inp inp2" id="J-material_cost"/></dd>
+                    <dt>工时费</dt>
+                    <dd><input type="text" class="inp inp2" id="J-working_hours_cost"/></dd>
+                    <dt>通讯费</dt>
+                    <dd><input type="text" class="inp inp2" id="J-communication_cost"/></dd>
+                    <dt>服务车费</dt>
+                    <dd><input type="text" class="inp inp2" id="J-service_car_cost"/></dd>
+                    <dt>在途餐补</dt>
+                    <dd><input type="text" class="inp inp2" id="J-meal_cost"/></dd>
+                    <dt>差旅费</dt>
+                    <dd><input type="text" class="inp inp2" id="J-travel_expense"/></dd>
+                </dl>
+                <div class="tool-bar tr clrfix">
+                    <button class="submit-btn" id="J-expense_submit" >保存</button>
+                    <button class = "cancel-btn">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

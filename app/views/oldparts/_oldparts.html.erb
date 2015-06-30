@@ -1,0 +1,149 @@
+<div class="content-set">
+  <div class="hd">
+    <h2><%= @warehouse.name %></h2>
+  </div>
+  <div class="bd">
+    <dl class="oldparts-info">
+      <dd>
+        <!--table样式{-->
+        <table class="admin-table table-style1 J-oldpart_table">
+          <thead>
+          <tr>
+            <th>名称</th>
+            <td>图号</td>
+            <td>厂家代码</td>
+            <td>厂家名称</td>
+            <td>数量</td>
+            <td>单价</td>
+            <td>状态</td>
+            <td colspan="2">操作</td>
+          </tr>
+          </thead>
+          <% if @oldparts.nil? %>
+              <tbody><tr><td>没有可供显示的数据!</td></tr></tbody>
+          <% end %>
+          <tbody>
+          <% @oldparts.each do |du| %>
+              <tr id="node-<%= du.id %>">
+                <td><%= du.name %></td>
+                <td><%= du.drawing %></td>
+                <td><%= du.factory_code %></td>
+                <td><%= du.factory %></td>
+                <td><%= Oldpart.where(:drawing => du.drawing).size %></td>
+                <td><%= du.price %></td>
+                <td></td>
+                <td>
+                  <a href="/warehouses/<%= @warehouse.id %>/oldparts/<%= du.id %>/oldpart_out" class="fun-link product-name" id="J-warehouse_oldpart_out">
+                    <span class="ui-icon ui-icon-gear"></span>
+                    出库
+                  </a>
+                </td>
+              </tr>
+              <% Oldpart.where(:drawing => du.drawing).each do |oldpart| %>
+                  <% if oldpart.id != du.id %>
+                      <tr id="node-<%= oldpart.id %>" class="child-of-node-<%= du.id %>">
+                        <td><%= oldpart.name %></td>
+                        <td><%= oldpart.drawing %></td>
+                        <td><%= oldpart.factory_code %></td>
+                        <td><%= oldpart.factory %></td>
+                        <td>1</td>
+                        <td><%= oldpart.price %></td>
+                        <td><%= oldpart.status %></td>
+                        <td></td>
+                      </tr>
+                  <% else %>
+                      <tr id="node-" class="child-of-node-<%= du.id %>">
+                        <td><%= oldpart.name %></td>
+                        <td><%= oldpart.drawing %></td>
+                        <td><%= oldpart.factory_code %></td>
+                        <td><%= oldpart.factory %></td>
+                        <td>1</td>
+                        <td><%= oldpart.price %></td>
+                        <td><%= oldpart.status %></td>
+                        <td></td>
+                      </tr>
+                  <% end %>
+              <% end %>
+          <% end %>
+          </tbody>
+        </table>
+        <% unless @oldparts.nil? %>
+            <%= will_paginate @oldparts %>
+        <% end %>
+      </dd>
+    </dl>
+  </div>
+</div>
+<% if !@warehouse.follows.empty? %>
+    <% Warehouse.find(@warehouse.follows).each do |w| %>
+        <div class="hd">
+          <h2><%= w.name %></h2>
+        </div>
+        <div class="bd">
+          <dl class="oldparts-info">
+            <dd>
+              <!--table样式{-->
+              <table border="1" class="admin-table table-style1 J-oldpart_table">
+                <thead>
+                <tr>
+                  <th>名称</th>
+                  <td>图号</td>
+                  <td>厂家代码</td>
+                  <td>厂家名称</td>
+                  <td>数量</td>
+                  <td>单价</td>
+                  <td>状态</td>
+                  <td colspan="2">操作</td>
+                </tr>
+                </thead>
+                <% if w.oldparts.nil? %>
+                    <tbody><tr><td>没有可供显示的数据!</td></tr></tbody>
+                <% end %>
+                <tbody>
+                <% w.oldparts.each do |du| %>
+                    <tr id="node-<%= du.id %>">
+                      <td><%= du.name %></td>
+                      <td><%= du.drawing %></td>
+                      <td><%= du.factory_code %></td>
+                      <td><%= du.factory %></td>
+                      <td><%= Oldpart.where(:drawing => du.drawing).size %></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <% Oldpart.where(:drawing => du.drawing).each do |oldpart| %>
+                        <% if oldpart.id != du.id %>
+                            <tr id="node-<%= oldpart.id %>" class="child-of-node-<%= du.id %>">
+                              <td><%= oldpart.name %></td>
+                              <td><%= oldpart.drawing %></td>
+                              <td><%= oldpart.factory_code %></td>
+                              <td><%= oldpart.factory %></td>
+                              <td>1</td>
+                              <td><%= oldpart.price %></td>
+                              <td><%= oldpart.status %></td>
+                              <td></td>
+                            </tr>
+                        <% else %>
+                            <tr id="node-" class="child-of-node-<%= du.id %>">
+                              <td><%= oldpart.name %></td>
+                              <td><%= oldpart.drawing %></td>
+                              <td><%= oldpart.factory_code %></td>
+                              <td><%= oldpart.factory %></td>
+                              <td>1</td>
+                              <td><%= oldpart.price %></td>
+                              <td><%= oldpart.status %></td>
+                              <td></td>
+                            </tr>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                </tbody>
+              </table>
+              <% unless @drawing_uniq.nil? %>
+                  <%= will_paginate @drawing_uniq %>
+              <% end %>
+            </dd>
+          </dl>
+        </div>
+    <% end %>
+<% end %>

@@ -1,0 +1,650 @@
+# US English translations for Ruby on Rails
+#
+# Use this as the base for the locale file of your language.
+
+"en-US":
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+
+    day_names:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+    abbr_day_names:
+      - Sun
+      - Mon
+      - Tue
+      - Wed
+      - Thu
+      - Fri
+      - Sat
+
+    month_names:
+      - ~
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+    abbr_month_names:
+      - ~
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
+    order:
+      - :year
+      - :month
+      - :day
+
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+    am: "am"
+    pm: "pm"
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " and "
+      last_word_connector: ", and "
+
+    select:
+      prompt: "Please select"
+
+  number:
+    format:
+      separator: "."
+      delimiter: ","
+      precision: 3
+      significant: false
+      strip_insignificant_zeros: false
+
+    currency:
+      format:
+        format: "%u%n"
+        unit: "$"
+        separator: "."
+        delimiter: ","
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+
+    percentage:
+      format:
+        delimiter: ""
+
+    precision:
+      format:
+        delimiter: ""
+
+    human:
+      format:
+        delimiter: ""
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+      decimal_units:
+        format: "%n %u"
+        units:
+          unit: ""
+          thousand: Thousand
+          million: Million
+          billion: Billion
+          trillion: Trillion
+          quadrillion: Quadrillion
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "half a minute"
+      less_than_x_seconds:
+        one: "less than 1 second"
+        other: "less than %{count} seconds"
+      x_seconds:
+        one: "1 second"
+        other: "%{count} seconds"
+      less_than_x_minutes:
+        one: "less than a minute"
+        other: "less than %{count} minutes"
+      x_minutes:
+        one: "1 minute"
+        other: "%{count} minutes"
+      about_x_hours:
+        one: "about 1 hour"
+        other: "about %{count} hours"
+      x_days:
+        one: "1 day"
+        other: "%{count} days"
+      about_x_months:
+        one: "about 1 month"
+        other: "about %{count} months"
+      x_months:
+        one: "1 month"
+        other: "%{count} months"
+      about_x_years:
+        one: "about 1 year"
+        other: "about %{count} years"
+      over_x_years:
+        one: "over 1 year"
+        other: "over %{count} years"
+      almost_x_years:
+        one: "almost 1 year"
+        other: "almost %{count} years"
+    prompts:
+      year: "Year"
+      month: "Month"
+      day: "Day"
+      hour: "Hour"
+      minute: "Minute"
+      second: "Seconds"
+
+  helpers:
+    select:
+      prompt: "Please select"
+
+#    submit:
+#      create: 'Create %{model}'
+#      update: 'Update %{model}'
+#      submit: 'Save %{model}'
+
+  errors:
+    format: "%{attribute} %{message}"
+
+    messages: &errors_messages
+      inclusion: "is not included in the list"
+      exclusion: "is reserved"
+      invalid: "is invalid"
+      confirmation: "doesn't match confirmation"
+      accepted: "must be accepted"
+      empty: "can't be empty"
+      blank: "can't be blank"
+      too_long: "is too long (maximum is %{count} characters)"
+      too_short: "is too short (minimum is %{count} characters)"
+      wrong_length: "is the wrong length (should be %{count} characters)"
+      not_a_number: "is not a number"
+      not_an_integer: "must be an integer"
+      greater_than: "must be greater than %{count}"
+      greater_than_or_equal_to: "must be greater than or equal to %{count}"
+      equal_to: "must be equal to %{count}"
+      less_than: "must be less than %{count}"
+      less_than_or_equal_to: "must be less than or equal to %{count}"
+      odd: "must be odd"
+      even: "must be even"
+      # To use devise
+      expired: "has expired, please request a new one"
+      not_found: "not found"
+      already_confirmed: "was already confirmed, please try signing in"
+      not_locked: "was not locked"
+      not_saved:
+        one: "1 error prohibited this %{resource} from being saved:"
+        other: "%{count} errors prohibited this %{resource} from being saved:"
+
+  activerecord:
+    attributes:
+      user:
+        username: "Username"
+        user_number: "Serial Number"
+        fullname: "full name"
+        email: "Email"
+        phone: "Phone"
+        address: "Address"
+        birthday: "Birthday"
+        gender: "Gender"
+        login: "Username or Email"
+        password: "Password"
+        password_confirmation: "Password Confirmation"
+        remember_me: "Remember me"
+      role:
+        name: "Role Name"
+      group:
+        name: "Group Name"
+      customer:
+        username: "Username"
+        phone: "Phone"
+        address: "Address"
+        birthday: "Birthday"
+        gender: "Gender"
+      vehicle:
+        list: "vehicle"
+        model: "Model"
+        chassis_number: "Chassis Number"
+        engine: "Engine"
+        engine_number: "Engine Number"
+        order_number: "Order Number"
+        purchase_on: "Purchase On"
+        warranty_card: "Warranty Card"
+        driving_range: "Driving Range"
+        fast_type: "Fast Type"
+        production_number: "Production Number"
+        user_number: "User Number"
+        first_bridge: "First Bridge"
+        second_bridge: "Second Bridge"
+        third_bridge: "third Bridge"
+      fault:
+        fault_type: "Type"
+        fault_analyse: "Analyse"
+      oldpart:
+        list: "Old_part List"
+        name: "Old_part Name"
+        drawing: "Old_part Drawing"
+        count: "Count"
+        factory: "Factory Number"
+        pattern: "Parts Pattern"
+        depot: "depot"
+        status: "status"
+        occupy: "Occupy"
+        occupytime: "Occupy Time"
+        warehousing_at: "Warehousing_at"
+        warehousing_on: "Warehousing_on"
+      newpart:
+        list: "NewPart List"
+        name: "NewPart Name"
+        drawing: "NewPart Drawing"
+        price: "Price"
+        factory: "Factory"
+        newpart_manage: "NewPart Manager"
+      repair:
+        service_numver: "Service Number"
+        fault: "Fault"
+        vehicle: "Vehicle"
+
+    errors:
+      template:
+        header:
+          one: "1 error prohibited this %{model} from being saved"
+          other: "%{count} errors prohibited this %{model} from being saved"
+        body: "There were problems with the following fields:"
+
+      messages:
+        taken: "has already been taken"
+        record_invalid: "Validation failed: %{errors}"
+        <<: *errors_messages
+
+      full_messages:
+        format: "%{attribute} %{message}"
+
+  will_paginate:
+    previous_label: "&#8592; Previous"
+    next_label: "Next &#8594;"
+    page_gap: "&hellip;"
+
+  views:
+    captcha:
+      captcha: "captcha"
+      valid: "valid"
+      invalid: "invalid"
+    checkall_uncheckall: "checkall/uncheckall"
+    nodata: "nodata!"
+    header:
+      site: "jartai Autorepair System"
+      current_user: "current_user:"
+      rolename: "rolename:"
+    menu:
+      user_manage: "UserManage"
+      profile: "Profile"
+      customers: "CustomerManage"
+      vehicles:  "VehicleManage"
+      faults: "FaultManage"
+      old_parts: "OldPartManage"
+      new_parts: "NewPartManage"
+      repairs:  "RepairOrderManage"
+      expenses:  "ExpensesManage"
+      work_flow: "WorkflowManage"
+    sidebar:
+      workflow: "create workflow"
+      flow_view: "flow view"
+      flow_new: "flow new"
+      dispatching: "dispatching"
+      dispatch_new: "dispatch new"
+      dispatch_order: "dispatch order"
+      vehicle_information: "vehicle information"
+      vehicle_add: "vehicle add"
+      vehicle_view: "vehicle view"
+      fault_infomation: "fault information"
+      fault_add: "fault add"
+      fault_view: "fault view"
+      part_warehousing: "old_part warehousing"
+      warehousing_view: "warehousing view"
+      warehousing_add: "warehousing add"
+      newpart: "new part"
+      newpart_receive: "new part receive"
+      newpart_view: "new part view"
+      report_information: "report information"
+      report_new: "report new information"
+      report_view: "report information view"
+      expenses: "expenses manage"
+      expenses_add: "expenses add"
+      expenses_view: "expenses view"
+      workflow_finished: "workflow finished"
+      workflow_acceptance: "workflow acceptance"
+      workflow_view: "workflow view"
+    links:
+      add: "Add"
+      back: "Back"
+      show: "View"
+      edit: "Update"
+      delete: "Destroy"
+      users:
+        add: "create user"
+        list: "user list"
+        change_password: "change password"
+    home:
+      index: "home style"
+      workflow: "workflow style"
+    user:
+      username: "username"
+      fullname: "fullname"
+      user_number: "serialnumber"
+      email: "email"
+      phone: "phone"
+      address: "address"
+      birthday: "birthday"
+      gender: "gender"
+      man: "man"
+      lady: "lady"
+      profile: "Profile"
+    profile:
+      index: "my account"
+      edit: "edit"
+    groups:
+      list: "Group List"
+      edit: "edit group"
+      users: "user"
+      roles: "role"
+      show: "manage group"
+    roles:
+      list: "Role List"
+      name: "name"
+      add: "add"
+      edit: "edit"
+    customers:
+      username: "username"
+      customer: "Customer"
+      phone: "phone"
+      address: "address"
+      birthday: "birthday"
+      gender: "gender"
+      man: "man"
+      lady: "lady"
+      add: "new customer"
+      show: "view customer"
+      edit: "update customer"
+      delete: "destroy customer"
+    vehicle:
+      list: "vehicle"
+      model: "Model"
+      chassis_number: "Chassis Number"
+      engine: "Engine"
+      engine_number: "Engine Number"
+      order_number: "Order Number"
+      purchase_on: "Purchase On"
+      warranty_card: "Warranty Card"
+      driving_range: "Driving Range"
+      fast_type: "Fast Type"
+      production_number: "Production Number"
+      user_number: "User Number"
+      first_bridge: "First Bridge"
+      second_bridge: "Second Bridge"
+      third_bridge: "third Bridge"
+    expense:
+      expenses: "Expenses List"
+      material: "Material Cost"
+      working_hour: "Working hour Cost"
+      communication: "Communication Cost"
+      service_car: "service car Cost"
+      meal: "Meal Cost"
+      travel: "Travel Expense"
+    faults:
+      faults: "Faults info list"
+      type: "Faults Type"
+      analyse: "Faults Analyse"
+      oldpart: "Oldpart info"
+      vehicle: "Vehicle info"
+      change: "Change"
+      overhauling: "Overhauling"
+      adjusting: "Adjusting"
+    oldparts:
+      list: "Old_part List"
+      name: "Old_part Name"
+      drawing: "Old_part Drawing"
+      count: "Count"
+      factory: "Factory Number"
+      pattern: "Parts Pattern"
+      depot: "depot"
+      status: "status"
+      occupy: "Occupy"
+      occupytime: "Occupy Time"
+      warehousing_at: "Warehousing_at"
+      warehousing_on: "Warehousing_on"
+    newparts:
+      list: "NewPart List"
+      name: "NewPart Name"
+      drawing: "NewPart Drawing"
+      price: "Price"
+      factory: "Factory"
+      newpart_manage: "NewPart Manager"
+    repairs:
+      list: "Repair List"
+      service_number: "Service Number"
+      fault: "Fault"
+      vehicle: "Vehicle"
+
+  field:
+    id: "ID"
+    label_no_data: "no data to display"
+    label_group: "group"
+    label_group_new: "new group"
+    label_general: "general"
+    label_user: "user"
+    label_user_add: "add user"
+    label_user_new: "new user"
+    label_user_plural: "user"
+    label_user_search: "search"
+    label_user_anonymous: "anonymous"
+    label_project: "project"
+    label_project_plural: "project"
+    label_group_plural: "group"
+    label_role: "role"
+    label_role_new: "new role"
+    label_role_add: "add role"
+    label_role_plural: "role"
+    label_permissions: "permissions"
+    label_permissions_report: "permissions report"
+    label_administration: "administration"
+    label_sort_highest: "Move to top"
+    label_sort_higher: "Move up"
+    label_sort_lower: "Move down"
+    label_sort_lowest: "Move to bottom"
+    button_create: "create"
+    button_submit: "submit"
+    button_delete: "delete"
+    button_add: "add"
+    button_change: "change"
+    button_cancel: "cancel"
+    button_edit: "edit"
+    button_sort: "sort"
+    button_search: "Search"
+    button_check_all: "check all"
+    button_uncheck_all: "uncheck all"
+    new: "create"
+    update: "edit"
+    destroy: "delete"
+    show: "view"
+    save: "save"
+    cancel: "cancel"
+    operate: "operate"
+    back: "Back"
+    user:
+      current_user: "current user"
+      administrator: "administrator"
+      ordinary_user: "ordinary user"
+      groupname: "groupname"
+      groupmanage: "group manage"
+      rolename: "role name"
+      users: "users"
+      regist: "regist"
+      forgot_pwd: "forgot your password?"
+      logout_confirm: "logout confirm"
+      operate_select: "operate select"
+      add_despatching: "add despatching"
+      index_despatching: "index despatching"
+      can_be_assigned_users: "can be assigned"
+      can_be_assigned_roles: "can be assigned roles"
+      can_be_assigned_group: "can be assigned group"
+      assigned_users: "assigned users"
+      assigned_roles: "assigned roles"
+      assigned_groups: "assigned groups"
+      add_user: "add user"
+      destroy_user: "destroy user"
+      user_manage: "users manage"
+      reg_time: "regist time: "
+      cancle: "cancle"
+      loginname: "login name: "
+      username: "user name: "
+      nickname: "nick name: "
+      phone: "mobile phone: "
+      email: "E-mail: "
+      manage_roles: "manage roles"
+      login: "login"
+      password: "password"
+      password_confirm: "password confirmation"
+      logout: "logout"
+      BatchNumer: "ButchNumber"
+      OddNumber: "OddNumeber"
+      Mechanic: "Mechanic"
+      CreateTime: "CreateTime"
+      UpdateTime: "UpdateTime"
+      CustomID: "CustomID"
+      back_to_index: "back to index"
+      home:
+        welcome: "welcome"
+        new_despatching: "new despatching"
+        user_list: "user index"
+        group_list: "user index"
+        role_list: "role index"
+
+  txt:
+    resend_mail: "Resend confirmation instructions"
+    resend: "Resend"
+    notice_not_authorized: "You are not authorized to access this page."
+    notice_file_not_found: "The page you were trying to access doesn't exist or has been removed."
+    register: "register"
+    account_welcome: "welcome"
+    account_logout: "logout"
+    no_login: "account not loggin"
+    no_login_or_perm: "no login or have not perm"
+    password_not_match: "password not match"
+    length_not_match: "field length not match"
+    loginname_exist: "login name exist"
+    edit_and_retry: "Please try to save modified."
+    error_info: "The contents of your submission the following errors: "
+    destroy_confirm: "confirm, delete!"
+    create_success: "create success"
+    update_success: "update success"
+    destroy_success: "destroy success"
+    logo: "AutoRepaire"
+    sub_logo: "AutoRepaire"
+    main_title: "AutoRepaire"
+    no_perm: "no permission"
+    app_name: "Demo Application"
+    sub_title: "how to localize your app with Rails' new i18n features"
+    contents: "Contents"
+    are_you_sure: "Are you sure?"
+
+  devise:
+    button:
+      sign_in: "Sign In"
+      sign_out: "Sign Out"
+      sign_up: "Sign Up"
+      update: "Update"
+      save: "Save"
+    links:
+      sign_in: "Sign In"
+      sign_up: "Sign Up"
+      sign_out: "Sign Out"
+      forget_password: "Forget Password"
+      sign_in_with: "Sign in with"
+      didnot_receive_confirmation_instructions: "Didn't receive confirmation instructions"
+      didnot_receive_unlock_instructions: "Didn't receive unlock instructions"
+    failure:
+      already_authenticated: 'You are already signed in.'
+      unauthenticated: 'You need to sign in or sign up before continuing.'
+      unconfirmed: 'You have to confirm your account before continuing.'
+      locked: 'Your account is locked.'
+      invalid: 'Invalid email or password.'
+      invalid_token: 'Invalid authentication token.'
+      timeout: 'Your session expired, please sign in again to continue.'
+      inactive: 'Your account was not activated yet.'
+    sessions:
+      signin: "Sign in"
+      signup: "Sign Up"
+      signed_in: 'Signed in successfully.'
+      signed_out: 'Signed out successfully.'
+    passwords:
+      send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
+      updated: 'Your password was changed successfully. You are now signed in.'
+      updated_not_active: 'Your password was changed successfully.'
+      send_paranoid_instructions: "If your e-mail exists on our database, you will receive a password recovery link on your e-mail"
+    confirmations:
+      send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'
+      send_paranoid_instructions: 'If your e-mail exists on our database, you will receive an email with instructions about how to confirm your account in a few minutes.'
+      confirmed: 'Your account was successfully confirmed. You are now signed in.'
+    registrations:
+      destroy: "destroy"
+      sign_up: "sign up"
+      signed_up: 'Welcome! You have signed up successfully.'
+      inactive_signed_up: 'You have signed up successfully. However, we could not sign you in because your account is %{reason}.'
+      updated: 'You updated your account successfully.'
+      destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon.'
+      reasons:
+        inactive: 'inactive'
+        unconfirmed: 'unconfirmed'
+        locked: 'locked'
+    unlocks:
+      send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
+      unlocked: 'Your account was successfully unlocked. You are now signed in.'
+      send_paranoid_instructions: 'If your account exists, you will receive an email with instructions about how to unlock it in a few minutes.'
+    omniauth_callbacks:
+      success: 'Successfully authorized from %{kind} account.'
+      failure: 'Could not authorize you from %{kind} because "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Confirmation instructions'
+      reset_password_instructions:
+        subject: 'Reset password instructions'
+      unlock_instructions:
+        subject: 'Unlock Instructions'

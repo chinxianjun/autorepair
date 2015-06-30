@@ -1,0 +1,75 @@
+<!----doc-main{---->
+<div id="doc-main">
+    <!----hd{{---->
+    <div id="hd">
+        <h1>
+			<%= image_tag("logo-write-200x40.png") %>
+            <ul id="login">
+                <li><p>当前用户:superadmin</p></li>
+                <li><p><%= link_to "退出", root_path %></p></li>
+            </ul>
+        </h1>
+    </div>
+    <!----}}hd---->
+    <!----bd{{---->
+    <div id="bd" class="clrfix">
+        <!----main-block{{{---->
+        <div class="main-block">
+            <!----main-content{{{{---->
+            <div class="main-content">
+                <!----info-content{{{{{---->
+                <div class="info-content">
+                    <!----form-set{{{{{{---->
+                    <div class="form-set">
+                        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+                          <%= devise_error_messages! %>
+                          <dl>
+                              <dt><b class="stars">*</b><%= f.label :username %></dt>
+                              <dd><%= f.text_field :username, :class => "inp", :id => "J-username" %></dd>
+
+                              <dt><b class="stars">*</b><%= f.label :password %></dt>
+                              <dd><%= f.password_field :password, :class => "inp" %></dd>
+
+                              <dt><b class="stars">*</b><%= f.label :password_confirmation %></dt>
+                              <dd><%= f.password_field :password_confirmation, :class => "inp" %></dd>
+
+                              <dt><b class="stars">*</b><%= f.label :fullname %></dt>
+                              <dd><%= f.text_field :fullname, :class => "inp" %></dd>
+
+                              <dt><b class="stars">*</b><%= f.label :phone %></dt>
+                              <dd><%= f.text_field :phone, :class => "inp" %></dd>
+
+                              <dt><b class="stars">*</b><%= f.label :email %></dt>
+                              <dd><%= f.text_field :email, :class => "inp", :type => "text", :id=>"J-mail" %></dd>
+                          </dl>
+                          <div class="tool-bar tr clrfix">
+                              <%= button_tag "注册", :class =>"submit-btn" %>
+                              <%= button_tag "取消", :class => "cancel-btn" %>
+                          </div>
+                        <% end %>
+                    </div>
+                    <!----}}}}}}}form-set---->
+                </div>
+                <!----}}}}}info-content---->
+            </div>
+            <!----}}}}main-content---->
+        </div>
+        <!----}}}main-block---->
+        <!----sidebar{{{---->
+        <div class="side-bar">
+            <div class="menu-box">
+                <h3><a href="/home/superadmin">管理员列表</a></h3>
+                <div>
+                    <ul class="sub-menu">
+                        <li><span class="ui-icon ui-icon-suitcase"></span>
+                          <a href="/home/searchadmin" target="main">查找管理员</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!----}}}side-bar---->
+    </div>
+    <!----}}bd---->
+</div>
+<!----}doc-main---->

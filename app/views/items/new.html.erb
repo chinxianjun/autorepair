@@ -1,0 +1,26 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "item" %>
+<% end %>
+<div class="main-content">
+  <div class="admin-content" id="oldpart_content">
+    <h2>创建配件库<span class="info"></span></h2>
+      <!----J-ind_new{{---->
+      <div class="form-oldpart ui-widget" id="J-item_new" style="height: 190px;">
+        <form method="" action="">
+          <dl>
+            <dt>配件厂家名称</dt>
+            <dd>
+              <input type="text" class="inp inp2" id="J-item_name"/></dd>
+            <dt>配件厂家代码</dt>
+            <dd>
+              <input type="text" class="inp inp2" id="J-item_code"/></dd>
+          </dl>
+        </form>
+        <div class="tool-bar clrfix">
+          <button class="submit-btn" id="J-item_save">保存</button>
+          <button class="cancel-btn" >取消</button>
+        </div>
+    </div>
+  </div>
+</div>

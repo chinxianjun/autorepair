@@ -1,0 +1,57 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "customer" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <!--客户信息{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2><%=  link_to "客户列表", customers_path %>&gt;&gt;编辑客户信息<span class="info"></span></h2>
+            </div>
+            <div class="bd">
+              <%= form_for @customer, :url => customer_path(@customer), :method => :put do |f| %>
+                  <dl>
+                      <dt><%= f.label "姓名" %></dt>
+                      <dd><%= f.text_field :fullname, :class=>"inp inp2" %></dd>
+                      <br/><dt><%= f.label "性别" %></dt>
+                      <dd>
+                          <div class="">
+                              <input type="radio" id="U-gender1" name="gender" value="男" /><label for="U-gender1">男</label>
+                              <input type="radio" id="U-gender2" name="gender" value="女" /><label for="U-gender2">女</label>
+                          </div>
+                      </dd>
+                    <br/><dt>
+                        客户级别
+                      </dt>
+                      <dd>
+                        <select name="" id="J-select_category">
+                            <option value="无">无</option>
+                            <% if @categories.any? %>
+                                  <% @categories.each do |category| %>
+                                    <option value="<%= category.category %>"><%= category.category %></option>
+                                  <% end %>
+                            <% end %>
+                        </select>
+                      </dd>
+                    <br/><dt><%= f.label "电话" %></dt>
+                      <dd><%= f.text_field :phone, :class=>"inp inp2" %></dd>
+                    <br/><dt><%= f.label "地址" %></dt>
+                      <dd><%= f.text_field :address, :class=>"inp inp2" %></dd>
+                    <br/><dt><%= f.label "生日" %></dt>
+                      <dd><input type="text" id="U-datepicker" class="inp inp2 datepicker" value="<%= @customer.birthday %>"/></dd>
+                  </dl>
+              <% end %>
+            </div>
+        </div>
+        <div class="tool-bar clrfix">
+            <button class="submit-btn ">保存</button>
+            <button class="cancel-btn">返回</button>
+        </div>
+        <!----}}}}}}content-set---->
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

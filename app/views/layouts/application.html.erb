@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AutoRepair</title>
+  <%#= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "common" %>
+  <%= stylesheet_link_tag "flick/jquery-ui-1.8.21.custom" %>
+  <%#= javascript_include_tag "application" %>
+  <%= javascript_include_tag "jquery-1.7.2.min" %>
+  <%= javascript_include_tag "jquery-ui-1.8.21.custom" %>
+  <%= javascript_include_tag "jquery.inputfocus-0.9.min" %>
+  <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+  <%= javascript_include_tag "base" %>
+  <%= yield :head %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <!-- doc-main{ -->
+    <div id="doc-main">
+      <div id="main" class="clearfix">
+        <%= yield %>
+      </div>
+    </div>
+    <!-- }doc-main -->
+    <!--<div id="ft">-->
+        <!--<div class="ft-hd">-->
+            <!--&lt;!&ndash;<a href="#" class="feedback">意见反馈</a>&ndash;&gt;-->
+            <!--<a href="#" class="go-top">返回页顶&uarr;</a>-->
+        <!--</div>-->
+        <!--<div class="ft-bd">-->
+            <!--<p class="about"><a href="http://www.ht4s.com" class="first">海泰首页</a><a href="/abouts/privacy">隐私政策</a><a href="/abouts/services">服务条款</a><a href="/abouts/contact">联系我们</a><span>客服电话：<strong>0472-7918272</strong></span></p>-->
+            <!--<p class="copyright">Copyright © 2012 包头海泰汽修有限公司 版权所有 蒙ICP备12000266号</p>-->
+        <!--</div>-->
+    <!--</div>-->
+</body>
+</html>

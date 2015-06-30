@@ -1,0 +1,32 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "oldpart" %>
+<% end %>
+<div class="main-content">
+  <div class="admin-content" id="oldpart_content">
+    <h2>添加旧件品牌<span class="info"></span></h2>
+    <!--新增旧件框{-->
+    <div class="oldpart_window">
+      <!----J-ind_new{{---->
+      <div class="form-oldpart" id="J-oldparthouse_new">
+        <form method="" action="">
+          <dl>
+            <dt>名称</dt>
+            <dd>
+              <input type="text" class="inp inp2" id="J-house_name" value=""/></dd>
+            <dt>管理员</dt>
+            <dd>
+              <input type="text" class="inp inp2" id="J-house_manager"/></dd>
+          </dl>
+        </form>
+        <div class="tool-bar clrfix">
+          <button class="submit-btn" id="J-ind_save" >保存</button>
+          <button class="cancel-btn" >取消</button>
+        </div>
+      </div>
+      <!----}}J-ind_new---->
+    </div>
+    <!--新增旧件弹框{-->
+  </div>
+</div>

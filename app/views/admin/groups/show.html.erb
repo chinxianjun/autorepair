@@ -1,0 +1,115 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "common" %>
+    <%= javascript_include_tag "group" %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>组详情<span class="info"></span></h2>
+        <!--组信息{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>组信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>组名称</th>
+                                    <td><%= @group.name %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <!----}}}}}}}content-set---->
+        <!----content-set{{{{{{{---->
+        <div class="content-set">
+            <div class="hd">
+                <h2>用户信息</h2>
+            </div>
+            <!----bd{{{{{{{{---->
+            <div class="bd">
+                <dl class="details-info">
+                    <% if @group.users.any? %>
+                    <dd>
+                        <table>
+                            <tbody>
+                            <% @group.users.each do |user| %>
+                                <tr>
+                                    <th>姓名</th>
+                                    <td><%= user.fullname %></td>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                        </table>
+                    </dd>
+                    <% else %>
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <td>此组没有任何用户</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <% end %>
+                </dl>
+            </div>
+            <!----}}}}}}}}}bd---->
+        </div>
+        <!----}}}}}}}content-set---->
+        <!----content-set{{{{{{{---->
+        <div class="content-set">
+            <div class="hd">
+                <h2>角色信息</h2>
+            </div>
+            <!----bd{{{{{{{{---->
+            <div class="bd">
+                <dl class="details-info">
+                    <% if @group.roles.any? %>
+                    <dd>
+                        <table>
+                            <tbody>
+                            <% @group.roles.each do |role| %>
+                                <tr>
+                                    <th>角色名称</th>
+                                    <td><%= role.name %></td>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                        </table>
+                    </dd>
+                    <% else %>
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <td>此组没有任何角色</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <% end %>
+                </dl>
+            </div>
+            <!----}}}}}}}}}bd---->
+            <div class="tool-bar tr clrfix">
+                <input type="hidden" id="J-cid" value="<%= @company.id %>" />
+                <button class="edit-btn editGroup" id="<%= @group.id %>">编辑</button>
+                <button class="cancel-btn">返回</button>
+            </div>
+        </div>
+        <!----}}}}}}content-set---->
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

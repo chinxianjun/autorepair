@@ -1,0 +1,58 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "group" %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+
+<div class="main-content">
+  <div class="admin-content">
+    <h2><%= link_to "#{@company.name}", setting_admin_company_path(@company) %>&gt;&gt;<%= @warehouse.name %><span class="info"></span></h2>
+    <div class="tool-bar clrfix">
+      <button class="submit-btn">保存</button>
+      <button class="cancel-btn">取消</button>
+    </div>
+    <div id="follows_table" style="height:400px;  overflow-y: scroll;">
+      <%= form_tag({:action=> 'follows'}, :id=> 'follows_form', :method=> "post") do %>
+          <!--table样式{-->
+          <table class="acl-table admin-table table-style1">
+            <thead>
+            <tr>
+              <td>公司名称</td>
+              <td colspan="6"><%= I18n.t('field.label_warehouse') %></td>
+            </tr>
+            </thead>
+            <tbody>
+            <% companies = Company.all %>
+            <% companies.each do |company| %>
+                <% unless company.blank? %>
+                    <tr class="group open">
+                      <td>
+                        <%= l_or_humanize(company.name, :prefix=> 'company_') %>
+                      </td>
+                <% end %>
+                <% company.warehouses.delete_if { |x| x == @warehouse }.each do |warehouse| %>
+                    <td>
+                      <% if @warehouse.follows.include? warehouse %>
+                          <%= check_box_tag "follows[#{@warehouse.id}][]", warehouse.id,
+                              (@warehouse.follows.include? warehouse.id.to_s.to_sym), true %>
+                      <% else %>
+                          <%= check_box_tag "follows[#{@warehouse.id}][]", warehouse.id,
+                              (@warehouse.follows.include? warehouse.id.to_s.to_sym) %>
+                      <% end %>
+                      <%= l_or_humanize(warehouse.name, :prefix => 'warehouse_') %>
+                    </td>
+                <% end %>
+                </tr>
+            <% end %>
+            </table>
+          <!--}table样式-->
+          <div class="tool-bar tr clrfix">
+            <%= button_tag "保存", :class =>"submit-btn" %>
+            <%= button_tag "取消", :class => "cancel-btn" %>
+          </div>
+      <% end %>
+      <!----form---->
+    </div>
+  </div>
+  <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

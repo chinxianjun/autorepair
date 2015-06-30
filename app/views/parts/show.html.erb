@@ -1,0 +1,46 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "part" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+    <h2>配件库详情<span class="info"></span></h2>
+    <!--基本信息{-->
+    <div class="content-set">
+      <div class="hd">
+        <h2>基本信息</h2>
+      </div>
+      <div class="bd">
+        <dl class="details-info">
+          <dd>
+            <table>
+              <tbody>
+              <tr>
+                <th>配件库名称</th>
+                <td><%= @part.name %></td>
+              </tr>
+              <tr>
+                <th>配件库管理员</th>
+                <td><%= @part.manager %></td>
+              </tr>
+                <th>配件库类别</th>
+                <td><%= @part.category %></td>
+                <input type="hidden" id="J-part_id" value="<%= @part.id %>"/>
+              </tr>
+              </tbody>
+            </table>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="tool-bar tr clrfix">
+      <button class="edit-btn editPart">编辑</button>
+      <button class="cancel-btn">返回</button>
+    </div>
+    <!----}}}}}}content-set---->
+  </div>
+  <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

@@ -1,0 +1,33 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.md5" %>
+    <%= javascript_include_tag "message" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+<h2>选择发送部门<span class="info"></span></h2>
+<div class="form-set">
+  <ul>
+    <dt class="selectDepart">
+      <label for="J-select_depart">选择部门</label>
+    </dt>
+    <dd class="selectDepart">
+      <div class="">
+        <% if @groups.any? %>
+          <% @groups.each do |group| %>
+                <input type="checkbox" id="<%= group.id %>"
+                       name="group" value="<%= group.name %>" />
+                <label for="<%= group.id %>">
+                       <%= group.name %></label>
+          <% end %>
+        <% end %>
+      </div>
+    </dd>
+    <div class="tool-bar clrfix">
+      <button class="submit-btn" id="J-go_send">下一步</button>
+      <button class="cancel-btn">取消</button>
+    </div>
+  </ul>
+</div>
+        </div></div>

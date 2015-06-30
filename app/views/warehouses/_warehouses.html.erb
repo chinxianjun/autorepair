@@ -1,0 +1,7 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+<div class="warehouses">
+    <h2>配件库</h2>
+    <%= render_warehouse_hierarchy(@warehouses) %>
+</div>

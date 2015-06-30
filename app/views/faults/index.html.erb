@@ -1,0 +1,47 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "fault" %>
+<% end %>
+
+<div class="main-content">
+    <div class="admin-content">
+        <h2>故障列表<span class="info"></span></h2>
+      <%= form_tag faults_path, :method => "get", :id => "faults-search" do %>
+        <%= hidden_field_tag :direction, params[:direction] %>
+        <%= hidden_field_tag :sort, params[:sort] %>
+        <div class="tool-bar clrfix">
+            <%= label_tag :faults, "故障信息" %>
+            <%= text_field_tag :faults, params[:faults], :class => "inp" %>
+            <%= button_tag "查询", :name => nil, :class => "search-btn" %>
+        </div>
+        <div id="faults"><%= render 'faults' %></div>
+      <% end %>
+    </div>
+    <!--编辑故障弹框{-->
+    <!--<div id="J-Fault_update">-->
+        <!--<div class="form-set">-->
+            <!--<form method="post" action="">-->
+                <!--<dl>-->
+                    <!--<dt>故障描述</dt>-->
+                    <!--<dd>-->
+                      <!--<textarea class="textarea textarea2" id="U-fault_desc"></textarea></dd>-->
+                    <!--<dt>故障分析</dt>-->
+                    <!--<dd>-->
+                      <!--<textarea class="textarea textarea2" id="U-fault_analyse"></textarea></dd>-->
+                    <!--<dt>处理措施</dt>-->
+                    <!--<dd>-->
+                        <!--<div class="radio">-->
+                            <!--<input type="radio" id="U-measure1" name="measure" value="检修" /><label for="U-measure1">检修</label>-->
+                            <!--<input type="radio" id="U-measure2" name="measure" value="更换" /><label for="U-measure2">更换</label>-->
+                            <!--<input type="radio" id="U-measure3" name="measure" value="调整" /><label for="U-measure3">调整</label>-->
+                        <!--</div>-->
+                    <!--</dd>-->
+                    <!--<dt hidden="hidden">ID</dt>-->
+                    <!--<dd hidden="hidden"><input type="hidden" class="inp inp2" id="U-Fault_id" value=""/></dd>-->
+                <!--</dl>-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--}编辑故障弹框-->
+</div>

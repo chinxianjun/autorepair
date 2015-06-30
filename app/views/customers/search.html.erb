@@ -1,0 +1,65 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "customer" %>
+<% end %>
+
+
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>查询客户<span class="info"></span></h2>
+        <!----J-repair_show{---->
+        <div id="J-repair_show">
+            <div class="tool-bar clrfix">
+                <label for="J-search_field">输入客户电话或姓名</label>
+                <input  type="text" id="J-search_field" />
+              <button class="searchCustomer search-btn">查询</button>
+            </div>
+            <!--table样式{-->
+            <table class="admin-table table-style1">
+                <thead>
+                <tr>
+                    <th class="sa lt">&nbsp;</th>
+                    <th>ID</th>
+                    <td colspan="3">姓名</td>
+                    <td>性别</td>
+                    <td>联系电话</td>
+                    <td>地址</td>
+                    <td>生日</td>
+                </tr>
+                </thead>
+                <tbody>
+                <% if @customers.nil? %>
+                    <tr></tr>
+                <% else %>
+                    <% @customers.each do |customer| %>
+                        <tr>
+                            <th class="sa">
+                              <input type="checkbox" name="order" value="1" class="select-all"/>
+                            </th>
+                            <th><%= customer.id %></th>
+                          <% if current_user.allowed_to?(current_user, :view_customer, @current_company) %>
+                            <td><%= link_to "#{customer.fullname}", customer_path(customer), :class => "fun-link text12 product-name" %></td>
+                          <% end %>
+                          <% if current_user.allowed_to?(current_user, :edit_customer, @current_company) %>
+                            <td><a href="javascript:void(0)" id="<%= customer.id %>" class="editCustomerLink fun-link text2 product-name">编辑</a></td>
+                          <% end %>
+                          <% if current_user.allowed_to?(current_user, :destroy_customer, @current_company) %>
+                            <td><%= link_to "删除", customer_path(customer), :class=>"deleteItem fun-link text2 product-name" %></td>
+                          <% end %>
+                            <td><%= customer.gender %></td>
+                            <td><%= customer.phone %></td>
+                            <td><%= customer.address %></td>
+                            <td><%= customer.birthday %></td>
+                        </tr>
+                    <% end %>
+                <% end %>
+                </tbody>
+            </table>
+            <!--}table样式-->
+        </div>
+    </div>
+</div>
+<!----main-content---->

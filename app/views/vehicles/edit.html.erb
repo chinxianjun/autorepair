@@ -1,0 +1,224 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%#= javascript_include_tag "vehicle" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+  <!----info-content{{{{{---->
+  <div class="admin-content">
+    <% if @workflow %>
+        <input type="hidden" id="J-workflow_id" value="<%= @workflow.id %>"/>
+    <% end %>
+    <input type="hidden" id="J-vehicle_id" value="<%= @vehicle.id %>" />
+    <h2>车辆详情<span class="info"></span></h2>
+    <div class="content-set">
+      <div class="hd">
+        <h2>用户信息</h2>
+      </div>
+      <div class="bd">
+        <table>
+          <tr class="vehicle_tr">
+            <td>
+              <label for="J-owner_name">车主姓名<b class="ftx04">*</b></label>
+              <input type="text" name="" value="<%= @owner.fullname unless @owner.nil? %>"
+                       class="inp16 inp4 " id="J-owner_name"/>
+            </td>
+            <td>
+              <label for="J-owner_phone">联系电话<b class="ftx04">*</b></label>
+              <input type="text" name="" value="<%= @owner.phone unless @owner.nil? %>"
+                       class="inp16 inp4 " id="J-owner_phone"/>
+            </td>
+            <td>
+              <label for="J-workplace">作业地点<b class="ftx04">*</b></label>
+              <input type="text" name="" value="<%= @owner.workplace unless @owner.nil? %>"
+                       class="inp16 inp4 " id="J-workplace"/>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="content-set">
+      <div class="hd">
+        <h2>保修信息</h2>
+      </div>
+      <div class="bd">
+        <table>
+          <tr class="vehicle_tr">
+            <td>
+              <label for="J-driving_range">行驶里程<b class="ftx04">*</b></label>
+              <input type="text" name="" value="<%= @vehicle.driving_range %>"
+                       class="inp16 inp4 " id="J-driving_range"/>
+            </td>
+            <td>
+              <label for="J-purchase_on">购车日期<b class="ftx04">*</b></label>
+              <input type="text" name="" value="<%= @vehicle.purchase_on %>"
+                       class="inp16 inp4 datepicker" id="J-purchase_on"/>
+            </td>
+            <td>
+              <label for="J-warranty_card">保修卡号</label>
+              <input type="text" name="" value="<%= @vehicle.warranty_card %>"
+                       class="inp16 inp4 " id="J-warranty_card"/>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="content-set">
+      <div class="hd">
+        <h2>发动机信息</h2>
+      </div>
+      <div class="bd">
+        <table>
+          <tr class="vehicle_tr">
+            <td>
+              <label for="J-engine_number">发动机编号<b class="ftx04">*</b></label>
+              <input type="text" name="" value="<%= @vehicle.engine_number %>"
+                       class="inp16 inp4 " id="J-engine_number"/>
+            </td>
+            <td>
+              <label for="J-engine">发动机型号<b class="ftx04">*</b></label>
+              <input type="text" name="" value="<%= @vehicle.engine %>"
+                       class="inp16 inp4 " id="J-engine"/>
+            </td>
+            <td>
+              <label for="J-owner_number">订货单号</label>
+              <input type="text" name="" value="<%= @vehicle.order_number %>"
+                       class="inp16 inp4 " id="J-order_number"/>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="content-set">
+      <div class="hd">
+        <h2>变速箱信息</h2>
+      </div>
+      <div class="bd">
+        <table>
+          <tr>
+            <td>
+              <label for="J-gearbox_drawing">变速箱编号</label>
+              <input type="text" name="" value="<%= @vehicle.gearbox_drawing %>"
+                     class="inp16 inp4 " id="J-gearbox_drawing"/>
+            </td>
+            <td>
+              <label for="J-gearbox_type">变速箱型号</label>
+              <input type="text" name="" value="<%= @vehicle.gearbox_type %>"
+                       class="inp16 inp4 " id="J-gearbox_type"/>
+            </td>
+            <td>
+              <label for="J-user_number">用户编号</label>
+              <input type="text" name="" value="<%= @vehicle.user_number %>"
+                       id="J-user_number" class="inp16 inp4 "/>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="content-set">
+      <div class="hd">
+        <h2>整车信息</h2>
+      </div>
+      <div class="bd">
+        <table>
+          <tr class="vehicle_tr">
+            <td align="right">
+                <label for="J-chassis_number">底盘号<b class="ftx04">*</b></label>
+                <input type="text" name="" value="<%= @vehicle.chassis_number %>"
+                       class="inp16 inp6 " id="J-chassis_number"/>
+            </td>
+            <td align="right">
+                <label for="J-model">车型<b class="ftx04">*</b></label>
+                <input type="text" name="" value="<%= @vehicle.model %>"
+                       class="inp16 inp6 " id="J-model"/>
+            </td>
+            <td align="right">
+                <label for="J-first_drive_shaft_drawing">第一传动图号</label>
+                <input type="text" name="" value="<%= @vehicle.first_drive_shaft_drawing %>"
+                       class="inp16 inp6 " id="J-first_drive_shaft_drawing"/>
+            </td>
+            <td align="right">
+                <label for="J-first_drive_shaft_code">第一传动厂家代码</label>
+                <input type="text" name="" value="<%= @vehicle.first_drive_shaft_code %>"
+                       class="inp16 inp6 " id="J-first_drive_shaft_code"/>
+            </td>
+          </tr>
+          <tr class="vehicle_tr">
+            <td align="right">
+                <label for="J-second_drive_shaft_drawing">第二传动图号</label>
+                <input type="text" name="" value="<%= @vehicle.second_drive_shaft_drawing %>"
+                       class="inp16 inp6 " id="J-second_drive_shaft_drawing"/>
+            </td>
+            <td align="right">
+                <label for="J-second_drive_shaft_code">第二传动厂家代码</label>
+                <input type="text" name="" value="<%= @vehicle.second_drive_shaft_code %>"
+                       class="inp16 inp6 " id="J-second_drive_shaft_code"/>
+            </td>
+            <td align="right">
+                <label for="J-third_drive_shaft_drawing">第三传动图号</label>
+                <input type="text" name="" value="<%= @vehicle.third_drive_shaft_drawing %>"
+                       class="inp16 inp6 " id="J-third_drive_shaft_drawing"/>
+            </td>
+            <td align="right">
+                <label for="J-third_drive_shaft_code">第三传动厂家代码</label>
+                <input type="text" name="" value="<%= @vehicle.third_drive_shaft_code %>"
+                       class="inp16 inp6 " id="J-third_drive_shaft_code"/>
+            </td>
+          </tr>
+          <tr class="vehicle_tr">
+            <td align="right">
+                <label for="J-tank_drawing">水箱图号</label>
+                <input type="text" name="" value="<%= @vehicle.tank_drawing %>"
+                       class="inp16 inp6 " id="J-tank_drawing"/>
+            </td>
+            <td align="right">
+                <label for="J-tank_code">水箱厂家代码</label>
+                <input type="text" name="" value="<%= @vehicle.tank_code %>"
+                       class="inp16 inp6 " id="J-tank_code"/>
+            </td>
+            <td align="right">
+                <label for="J-spring_drawing">板簧图号</label>
+                <input type="text" name="" value="<%= @vehicle.spring_drawing %>"
+                       class="inp16 inp6 " id="J-spring_drawing"/>
+            </td>
+            <td align="right">
+                <label for="J-spring_code">板簧厂家代码</label>
+                <input type="text" name="" value="<%= @vehicle.spring_code %>"
+                       class="inp16 inp6 " id="J-spring_code"/>
+            </td>
+          </tr>
+          <tr class="vehicle_tr">
+            <td align="right">
+                <label for="J-car_number">车牌号</label>
+                <input type="text" name="" value="<%= @vehicle.car_number %>"
+                       class="inp16 inp7 " id="J-car_number"/>
+            </td>
+            <td align="right">
+                <label for="J-first_bridge">第一桥</label>
+                <input type="text" name="" value="<%= @vehicle.first_bridge %>"
+                       class="inp16 inp7 " id="J-first_bridge"/>
+            </td>
+            <td align="right">
+                <label for="J-second_bridge">第二桥</label>
+                <input type="text" name="" value="<%= @vehicle.second_bridge %>"
+                       class="inp16 inp7 " id="J-second_bridge"/>
+            </td>
+            <td align="right">
+                <label for="J-third_bridge">第三桥</label>
+                <input type="text" name="" value="<%= @vehicle.third_bridge %>"
+                       class="inp16 inp7 " id="J-third_bridge"/>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!----}}}}bd---->
+    </div>
+    <!----}}}content-set---->
+    <div class="tool-bar tr clrfix">
+      <button class="submit-btn" id="J-editVehicleSubmit" >保存</button>
+      <button class = "cancel-btn">取消</button>
+    </div>
+  </div>
+  <!----}}admin-content---->
+</div>
+<!----}main-content---->

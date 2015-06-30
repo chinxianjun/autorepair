@@ -1,0 +1,95 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "customer" %>
+<% end %>
+
+
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>客户级别列表<span class="info"></span>
+          <% if current_user.allowed_to?(current_user, :add_customer, @current_company) %>
+              <button class="newCategory add-btn fr">新建客户级别</button>
+          <% end %>
+        </h2>
+        <%= form_tag category_customers_path, :method => "get", :id => "J-customers_categories" do %>
+            <div class="tool-bar clrfix">
+                <%#= label_tag :column, "客户姓名或电话" %>
+                <%= text_field_tag :search, params[:search], :class => "inp" %>
+                <%= button_tag "查询", :name => nil, :class => "search-btn" %>
+            </div>
+            <div id="J-categories">
+              <!--table样式{-->
+              <table class="admin-table table-style1">
+                  <thead>
+                  <tr>
+                      <th class="sa lt">&nbsp;</th>
+                      <th>ID</th>
+                      <td>级别</td>
+                      <td colspan="2">操作</td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% if @categories.nil? %>
+                      <tr></tr>
+                  <% else %>
+                      <% @categories.each do |category| %>
+                          <tr>
+                              <th class="sa">
+                                <input type="checkbox" name="order" value="1" class="select-all"/>
+                              </th>
+                              <th><%= category.id %></th>
+                            <% if current_user.allowed_to?(current_user, :view_customer, @current_company) %>
+                              <td><%= category.category %></td>
+                            <% end %>
+                            <% if current_user.allowed_to?(current_user, :edit_customer, @current_company) %>
+                              <td><a href="javascript:void(0)" id="<%= category.id %>" class="editCategoryLink fun-link text2 product-name">编辑</a></td>
+                              <td><a href="/customers/category_destroy/?id=<%= category.id %>" class="deleteItem fun-link text2 product-name" >删除</a></td>
+                            <% end %>
+                          </tr>
+                      <% end %>
+                  <% end %>
+                  </tbody>
+              </table>
+              <%= will_paginate @categories %>
+              <!--}table样式-->
+            </div>
+        <% end %>
+    </div>
+    <!----}admin-content---->
+    <!--新增级别弹框{-->
+    <div id="J-category_create">
+        <div class="form-set">
+            <form method="post" action="">
+                <dl>
+                    <dt>级别</dt>
+                    <dd><input type="text" name="" value=""
+                               class="inp inp2" id="J-category"/>
+                    </dd>
+                </dl>
+            </form>
+        </div>
+    </div>
+    <!--}新增级别弹框-->
+    <!--编辑级别弹框{-->
+    <div id="J-category_update">
+        <div class="form-set">
+            <form method="post" action="">
+                <dl>
+                    <dt>级别</dt>
+                    <dd>
+                      <input type="text" name="" value=""
+                               class="inp inp2" id="U-category"/>
+                    </dd>
+                    <dt hidden="hidden">ID</dt>
+                    <dd hidden="hidden">
+                      <input type="hidden" class="inp inp2" id="U-category_id" value=""/>
+                    </dd>
+                </dl>
+            </form>
+        </div>
+    </div>
+    <!--}编辑级别弹框-->
+</div>
+<!----main-content---->

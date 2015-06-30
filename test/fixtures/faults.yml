@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  fault_type: MyString
+  fault_analyse: MyText
+  oldpard_id: 1
+  vehicle_id: 1
+
+two:
+  fault_type: MyString
+  fault_analyse: MyText
+  oldpard_id: 1
+  vehicle_id: 1

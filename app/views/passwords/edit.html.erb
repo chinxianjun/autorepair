@@ -1,0 +1,73 @@
+<!----doc-main{---->
+<div id="doc-main">
+    <!----hd{{---->
+    <div id="hd">
+        <h1>
+			<%= image_tag("logo-write-200x40.png") %>
+        </h1>
+    </div>
+    <!----}}hd---->
+    <!----bd{{---->
+    <div id="bd" class="clrfix">
+        <!----main-block{{{---->
+        <div class="main-block">
+            <!----main-content{{{{---->
+            <div class="main-content">
+                <!----info-content{{{{{---->
+                <div class="info-content">
+                    <!----form-set{{{{{{---->
+                    <div class="form-set">
+                        <%= form_for(@manager, :as => @manager, :url => password_path, :html => { :method => :put }) do |f| %>
+                          <ul>
+                              <dt><%= f.label :current_password, "当前密码" %></dt>
+                              <dd><%= f.text_field :current_password, :class=>"inp inp2" %></dd>
+
+                              <dt><%= f.label :password, "新密码", :class=>"inp inp2" %></dt>
+                              <dd><%= f.password_field :password, :class=>"inp inp2" %></dd>
+
+                              <dd><%= f.text_field :password_confirmation, "确认密码", :class=>"inp inp2" %></dd>
+                              <dd><%= f.password_field :password_confirmation, :class=>"inp inp2" %></dd>
+
+                              <div class="tool-bar tr clrfix">
+                                  <%= button_tag "保存", :class =>"submit-btn" %>
+                                  <%= button_tag "取消", :class => "cancel-btn" %>
+                              </div>
+                          </ul>
+                        <% end %>
+                    </div>
+                    <p class="notice"><%= notice %></p>
+                    <p class="alert"><%= alert %></p>
+
+                    <!----}}}}}}}form-set---->
+                </div>
+                <!----}}}}}info-content---->
+            </div>
+            <!----}}}}main-content---->
+        </div>
+        <!----}}}main-block---->
+    </div>
+    <!----}}bd---->
+</div>
+<!----}doc-main---->
+
+
+
+<h2><%=	 I18n.t("views.user.change_password") %></h2>
+
+<div class="form_div">
+<%= form_for(@user, :as => @user, :url => password_path, :html => { :method => :put }) do |f| %>
+
+  <p>
+   <%= f.label :current_password %>
+   <br />
+   <%= f.password_field :current_password %></p>
+
+  <p><%= f.label :password, I18n.t("views.user.new_password") %><br />
+  <%= f.password_field :password %></p>
+
+  <p><%= f.label :password_confirmation, I18n.t("views.user.confirm_password") %><br />
+  <%= f.password_field :password_confirmation %></p>
+
+  <p><%= f.submit I18n.t("devise.button.save") %></p>
+  <%end%>
+ </div>

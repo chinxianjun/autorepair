@@ -1,0 +1,35 @@
+<!--table样式{-->
+<table class="admin-table table-style1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <td colspan="3">分类</td>
+        <td>创建人</td>
+        <td>内容</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @messages.nil? %>
+        <tr></tr>
+    <% else %>
+        <% @messages.each do |message| %>
+            <tr>
+                <th><%= message.id %></th>
+              <% if current_user.allowed_to?(current_user, :view_message, @current_company) %>
+                <td><%= link_to "#{message.category}", message_path(message), :class => "fun-link text2 product-name" %></td>
+              <% end %>
+              <% if current_user.allowed_to?(current_user, :edit_message, @current_company) %>
+                <td><a href="javascript:void(0)" id="<%= message.id %>" class="editMessageLink fun-link text2 product-name">编辑</a></td>
+              <% end %>
+              <% if current_user.allowed_to?(current_user, :destroy_message, @current_company) %>
+                <td><%= link_to "删除", message_path(message), :class=>"deleteItem fun-link text2 product-name" %></td>
+              <% end %>
+                <td><%= message.creator %></td>
+                <td><%= message.content %></td>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+</table>
+<%= will_paginate @messages %>
+<!--}table样式-->

@@ -1,0 +1,50 @@
+<!----doc-main{---->
+<div id="doc-main">
+    <!----hd{{---->
+    <div id="hd">
+        <h1>
+			<%= image_tag("logo-write-200x40.png") %>
+        </h1>
+    </div>
+    <!----}}hd---->
+    <!----bd{{---->
+    <div id="bd" class="clrfix">
+        <!----main-block{{{---->
+        <div class="main-block">
+            <!----main-content{{{{---->
+            <div class="main-content">
+                <!----info-content{{{{{---->
+                <div class="info-content" style="margin-left: 12%;">
+                    <!----form-set{{{{{{---->
+                    <div class="form-set">
+                        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+                          <ul>
+                            <% if resource_name.equal?(:user) %>
+                              <dt><%= f.label :login %></dt>
+                              <dd><%= f.text_field :login, :class=>"inp" %></dd>
+
+                              <dt><%= f.label :password %></dt>
+                              <dd><%= f.password_field :password, :class=>"inp" %></dd>
+                            <% end %>
+                              <div class="tool-bar tr clrfix">
+                                  <%= button_tag "登录", :class =>"submit-btn" %>
+                                <% if current_user %>
+                                  <%= link_to "退出已登录用户", destroy_user_session_path %>
+                                <% end %>
+                              </div>
+                          </ul>
+                        <% end %>
+                    </div>
+                    <p class="notice"><%= notice %></p>
+                    <p class="alert"><%= alert %></p>
+                    <!----}}}}}}}form-set---->
+                </div>
+                <!----}}}}}info-content---->
+            </div>
+            <!----}}}}main-content---->
+        </div>
+        <!----}}}main-block---->
+    </div>
+    <!----}}bd---->
+</div>
+<!----}doc-main---->

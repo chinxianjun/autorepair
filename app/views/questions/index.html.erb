@@ -1,0 +1,55 @@
+<%= content_for :head do %>
+<meta http-equiv="refresh" content="60" />
+<% end %>
+
+<!---main-content{{{{--->
+<div class="main-content">
+    <!---admin-content{{{{{--->
+    <div class="admin-content">
+        <h2>问题列表<span class="info"></span></h2>
+        <p><%#= current_user.companies %></p>
+        <div class="question_menu">
+             <ul>
+               <% if  current_user.allowed_to?(current_user, :view_workflow, @current_company) %>
+                 <li class="flowbar"><a href="/questions/repair" id="J-repair" class=""><span>维修</span></a></li>
+               <% end %>
+               <% if current_user.allowed_to?(current_user, :add_car_buying, @current_company) %>
+                 <li class="flowbar"><a href="/questions/buy_car" id="J-car_buying" class=""><span>购车</span></a></li>
+               <% end %>
+               <% if current_user.allowed_to?(current_user, :add_part_buying, @current_company) %>
+                 <li class="flowbar"><a href="/questions/buy_part" id="J-part_buying" class=""><span>购件</span></a></li>
+               <% end %>
+               <% if current_user.allowed_to?(current_user, :add_consulting, @current_company) %>
+                 <li class="flowbar"><a href="/questions/consulting" id="J-consulting" class=""><span>咨询</span></a></li>
+               <% end %>
+               <% if current_user.allowed_to?(current_user, :add_complaint, @current_company) %>
+                 <li class="flowbar"><a href="/questions/complaint" id="J-complaint" class=""><span>投诉</span></a></li>
+               <% end %>
+             </ul>
+        </div>
+        <!---}}}}}}tool-bar clrfix--->
+      <!--<h2>维修列表<span class="info"></span></h2>-->
+      <div class="admin-content">
+      <!--table样式{-->
+        <table class="admin-table table-style1">
+          <thead>
+              <tr>
+                  <td>ID</td>
+                  <td>客户姓名</td>
+                  <td>联系电话</td>
+                  <td>创建人</td>
+                  <td>处理人</td>
+                  <td>状态</td>
+                  <td>创建时间</td>
+              </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+        <!--}table样式-->
+      </div>
+    </div>
+    <!---}}}}admin-content--->
+</div>
+<!---}}}}main-content--->

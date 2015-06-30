@@ -1,0 +1,82 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "jquery.ui.all" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "oldpart" %>
+<% end %>
+<div class="main-content">
+  <div class="admin-content">
+    <h2>添加旧件<span class="info"></span></h2>
+    <div class="">
+      <!----J-newpart_new{{---->
+      <form method="" action="">
+        <dl>
+          <dt>旧件品牌<b class="ftx04">*</b></dt>
+          <dd>
+            <div class="radio" id="J-category">
+              <% @category.each do |cate| %>
+                  <input type="radio" id="J-category<%= cate.id %>" name="category" value="<%= cate.name %>" />
+                  <label for="J-category<%= cate.id %>"><%= cate.name %></label>
+              <% end %>
+            </div>
+          </dd>
+          <div class="ui-widget">
+            <dt class="oldpart_table">
+              <dd align="right">
+                <label for="J-part_name">旧件名称<b class="ftx04">*</b></label>
+                <input type="text" class="inp inp2a" id="J-part_name"/>
+              </dd>
+            </dt>
+          </div>
+          <dt>
+            <dd align="right">
+                <label for="J-drawing">旧件图号<b class="ftx04">*</b></label>
+                <input type="text" class="inp inp2a" id="J-drawing"/>
+            </dd>
+          </dt>
+          <dt>
+              <dd align="right">
+                <label for="J-drawing">旧件价格<b class="ftx04">*</b></label>
+                <input type="text" class="inp inp2a" id="J-price" value="<%= @oldpart.price %>"/>
+              </dd>
+          </dt>
+          <dt>
+            <dd align="right">
+                <label for="J-factory">厂家名称&nbsp;</label>
+                <input type="text" class="inp inp2a inp2b" id="J-factory"/>
+            </dd>
+          </dt>
+          <dt>
+          <dd align="right">
+            <label for="J-fault_desc" class="question_desc">故障简述<b class="ftx04">*</b></label>
+            <textarea class="textarea textarea2" id="J-fault_desc"></textarea>
+          </dd>
+          </dt>
+          <dt>
+            <dd align="right">
+              <label for="J-factory_code">厂家代码&nbsp;</label>
+              <input type="text" class="inp inp2a inp2b" id="J-factory_code"/>
+            </dd>
+          </dt>
+          <dt>
+            <dd align="right">
+              <label for="J-count">旧件数量<b class="ftx04">*</b></label>
+              <input type="text" class="inp inp2a inp2b" id="J-count"/>
+            </dd>
+          </dt>
+          <dt>
+          <dd align="right">
+            <label for="J-note" class="question_desc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;备注</label>
+            <textarea class="textarea textarea2" id="J-note"></textarea>
+          </dd>
+          </dt>
+          <div class="blank"></div>
+        </dl>
+      </form>
+      <div class="tool-bar clrfix">
+        <button class="submit-btn" id="J-oldpart_save">保存</button>
+        <button class="cancel-btn" >取消</button>
+      </div>
+      <!----}}J-newpart_new---->
+    </div>
+  </div>
+</div>

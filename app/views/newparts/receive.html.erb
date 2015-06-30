@@ -1,0 +1,156 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "newpart" %>
+<% end %>
+<!----main-block{{{---->
+<div class="main-block">
+    <!----main-content{{{{---->
+    <div class="main-content">
+        <!----admin-content{{{{{---->
+        <div class="admin-content">
+          <!--新件信息{-->
+          <div class="content-set">
+              <div class="hd">
+                  <h2>流程信息</h2>
+              </div>
+              <div class="bd">
+                  <dl class="details-info">
+                      <dd>
+                          <table>
+                          <input type="hidden" id="J-wid" value="<%= @workflow.id %>"/>
+                                  <tbody>
+                                    <tr>
+                                      <th>流程编号</th>
+                                      <th>客户姓名</th>
+                                      <th>维修工程师</th>
+                                      <th>旧件管理员</th>
+                                      <th>创建日期</th>
+                                    </tr>
+                                    <tr>
+                                      <td><%= @workflow.id %></td>
+                                      <td><%= @workflow.customer_workflow.customer.fullname %></td>
+                                      <td><%= @workflow.users.first.fullname unless @workflow.users.blank? %></td>
+                                      <td><%= @workflow.oldparter %></td>
+                                      <td><%= @workflow.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+                                    </tr>
+                              </tbody>
+                          </table>
+                      </dd>
+                  </dl>
+              </div>
+          </div>
+          <!--<div class="tool-bar tr clrfix">-->
+              <!--<button class="submit-btn" id="J-receiveNewpart">确认</button>-->
+              <!--<button class="edit-btn editNewpart">编辑</button>-->
+              <!--<button class="cancel-btn">返回</button>-->
+          <!--</div>-->
+          <!----}}}}}}content-set---->
+            <h2>故障旧件列表<span class="info"></span></h2>
+            <!--新件信息{-->
+            <div class="content-set">
+                <div class="hd">
+                    <h2></h2>
+                </div>
+                <div class="bd">
+                  <% if @fault.any? %>
+                    <%# @fault.each do |fault| %>
+                      <dl class="details-info">
+                        <dd>
+                            <table>
+                                <tbody>
+                                      <tr>
+                                        <th>故障分析</th>
+                                        <th>处理措施</th>
+                                        <th>旧件名称</th>
+                                        <th>旧件图号</th>
+                                        <th>旧件数量</th>
+                                        <th>旧件厂家名称</th>
+                                        <th>旧件厂家代码</th>
+                                        <th>操作</th>
+                                      </tr>
+                                    <% @fault.each do |fault| %>
+                                      <tr>
+                                        <td><%= fault.fault_analyse %></td>
+                                        <td><%= fault.measure %></td>
+                                        <% if fault.oldpart.nil? %>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                        <% else %>
+                                          <td><%= fault.oldpart.name %></td>
+                                          <td><%= fault.oldpart.drawing %></td>
+                                          <td><%= fault.oldpart.count %></td>
+                                          <td><%= fault.oldpart.factory %></td>
+                                          <td><%= fault.oldpart.factory_code %></td>
+                                          <td><a href="javascript:void(0)" class="newPartReceive">领件</a></td>
+                                        <% end %>
+                                      </tr>
+                                      <% if fault.indfaults.any? %>
+                                          <% fault.indfaults.each do |indfault| %>
+                                            <tr>
+                                                <td><%= indfault.fault_analyse %></td>
+                                                <td><%= indfault.measure %></td>
+                                                <% if indfault.indirectpart.nil? %>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                <% else %>
+                                                    <td><%= indfault.indirectpart.ind_name %></td>
+                                                    <td><%= indfault.indirectpart.ind_drawing %></td>
+                                                    <td><%= indfault.indirectpart.ind_count %></td>
+                                                    <td><%= indfault.indirectpart.ind_factory %></td>
+                                                    <td><%= indfault.indirectpart.ind_factory_code %></td>
+                                                    <td><a href="javascript:viod(0)" class="newPartReceive">领件</a></td>
+                                                <% end %>
+                                            </tr>
+                                          <% end %>
+                                      <% end %>
+                                    <% end %>
+                                </tbody>
+                            </table>
+                        </dd>
+                      </dl>
+                  <% end %>
+                </div>
+            </div>
+        </div>
+        <!----}}}}}admin-content---->
+    </div>
+    <!----}}}}main-content---->
+    <!--领取新件弹框{-->
+    <div id="J-newpart_receive">
+        <div class="form-set">
+            <form method="put" action="">
+                <dl>
+                    <dt>新件品牌</dt>
+                    <dd><div class="radio" id="J-category">
+                      <% @category.each do |cg| %>
+                          <input type="radio" id="J-category<%= cg.id %>" name="category" value="<%= cg.name %>" />
+                          <label for="J-category<%= cg.id %>"><%= cg.name %></label>
+                      <% end %>
+                    </div></dd>
+                    <dt>新件名称</dt>
+                    <dd><input type="text" class="inp inp2" id="J-name" /></dd>
+                    <dt>新件图号</dt>
+                    <dd><input type="text" class="inp inp2" id="J-drawing"/></dd>
+                    <dt>厂家名称</dt>
+                    <dd><input type="text" class="inp inp2" id="J-factory"/></dd>
+                    <dt>厂家代码</dt>
+                    <dd><input type="text" class="inp inp2" id="J-factory_code"/></dd>
+                    <dt>流水号</dt>
+                    <dd><input type="text" class="inp inp2" id="J-running_number"/></dd>
+                    <dt>数量</dt>
+                    <dd><input type="text" class="inp inp2" id="J-count"/></dd>
+                </dl>
+            </form>
+        </div>
+    </div>
+    <!--}编辑新件弹框-->
+</div>
+<!----}}}main-block---->

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  service_number: MyString
+  fault_id: 1
+  vehicle_id: 1
+
+two:
+  service_number: MyString
+  fault_id: 1
+  vehicle_id: 1

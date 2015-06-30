@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  drawing: MyString
+  price: 1.5
+  factory: MyString
+  newpart_manage: MyString
+
+two:
+  name: MyString
+  drawing: MyString
+  price: 1.5
+  factory: MyString
+  newpart_manage: MyString

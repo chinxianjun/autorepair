@@ -1,0 +1,64 @@
+<% content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "customer" %>
+    <%= javascript_include_tag "workflow" %>
+    <%= javascript_include_tag "dispatching" %>
+<% end %>
+
+<!---main-content{{{{--->
+<div class="main-content">
+    <!---admin-content{{{{{--->
+    <div class="admin-content">
+        <h2>流程列表<span class="info"></span></h2>
+        <div class="tool-bar clrfix">
+          <% if current_user.allowed_to?(current_user, :search_vehicle, @current_company) %>
+              <div id="search">
+              </div>
+          <% end %>
+        </div>
+        <!---}}}}}}tool-bar clrfix--->
+        <!--table样式{-->
+        <table class="admin-table table-style1">
+            <thead>
+            <tr>
+                <th class="sa lt">&nbsp;</th>
+                <th>ID</th>
+                <td>状态</td>
+                <td>维修工</td>
+                <td>创建时间</td>
+                <td>创建人</td>
+                <td>派工人</td>
+                <td>旧件管理员</td>
+                <td>新件管理员</td>
+            </tr>
+            </thead>
+            <tbody>
+            <% if @workflows.any? %>
+                <% @workflows.each do |workflow| %>
+                    <tr>
+                        <th class="sa">
+                          <input type="checkbox" name="order" value="1" class="select-all"/>
+                        </th>
+                        <th><%= workflow.id %></th>
+                        <td><%= workflow.status %></td>
+                        <td>
+                          <% if workflow.users.any? %>
+                            <%= workflow.users.first.fullname %>
+                          <% end %>
+                        </td>
+                        <td><%= workflow.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+                        <td><%= workflow.creator %></td>
+                        <td><%= workflow.dispatching.dispatcher %></td>
+                        <td><%= workflow.oldparter %></td>
+                        <td><%= workflow.newparter %></td>
+                    </tr>
+                <% end %>
+            <% end %>
+            </tbody>
+        </table>
+        <%= will_paginate @workflows %>
+        <!--}table样式-->
+    </div>
+</div>
+<!---}}}}main-content--->

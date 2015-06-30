@@ -1,0 +1,35 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "group" %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+
+<div id="createUser" title="创建用户">
+    <div class="form-set">
+        <form method="post" action="">
+            <dl>
+                <dt><b class="stars">*</b><label for="J-username">登录名</label></dt>
+                <dd><input type="text" class = "inp" id = "J-username" value=""/></dd>
+
+                <dt><b class="stars">*</b><label for="J-username">密码</label></dt>
+                <dd><input type="password" class = "inp" id = "J-password" value=""/></dd>
+
+                <dt><b class="stars">*</b><label for="J-username">确认密码</label></dt>
+                <dd><input type="password" class = "inp" id= "J-confirm_password" value=""/></dd>
+
+                <dt><b class="stars">*</b><label for="J-fullname">姓名</label></dt>
+                <dd><input type="text" class="inp" id="J-fullname" value=""/></dd>
+
+                <dt><b class="stars">*</b><label for="J-phone">电话</label></dt>
+                <dd><input type="text" class="inp" id="J-phone" value=""/></dd>
+
+                <!--<dt><b class="stars">*</b><%#= f.label :email %></dt>-->
+                <!--<dd><%#= f.text_field :email, :class => "inp", :type => "hidden", :id=>"J-mail" %></dd>-->
+            </dl>
+            <div class="tool-bar tr clrfix">
+                <button class="submit-btn" id="J-new_user">注册</button>
+                <button class="cancel-btn">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+

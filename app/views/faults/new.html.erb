@@ -1,0 +1,336 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "jquery.ui.selectmenu" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "fault" %>
+<% end %>
+<div class="main-content">
+<div class="admin-content">
+  <div class="content-set">
+    <input type="hidden" value="<%= @workflow.id %>" id="J-workflow_id"/>
+
+    <div class="hd">
+      <h2>故障描述</h2>
+    </div>
+    <div class="bd">
+      <ul class="consulting-list">
+        <li>流程编号: <%= @workflow.id %></li>
+        <li>故障描述: <%= @workflow.faultdesc.description %></li>
+      </ul>
+    </div>
+  </div>
+  <!----}}content-set---->
+  <div class="form-set">
+    <h3>添加故障信息</h3>
+      <dl>
+        <dt>故障分析</dt>
+        <dd>
+          <textarea class="textarea textarea2" id="J-fault_analyse"></textarea>
+        </dd>
+        <dt>处理措施</dt>
+        <dd>
+          <div class="radio">
+            <input type="radio" id="J-measure1" name="measure" value="更换" checked="checked"/><label for="J-measure1">更换</label>
+            <input type="radio" id="J-measure2" name="measure" value="检修"/><label for="J-measure2">检修</label>
+            <input type="radio" id="J-measure3" name="measure" value="调整"/><label for="J-measure3">调整</label>
+          </div>
+        </dd>
+        <!----J-add_budget{---->
+        <div id="J-add_oldpart">
+            <h3 class="">添加旧件信息</h3>
+            <dl class="details-info">
+              <dd>
+                <div id="J-part"
+                     class="order-pnum order-confirm-mod clrfix">
+                </div>
+                <div id="J-select_part">
+                    <p>
+                      <label for="J-category">旧件品牌</label>
+                      <!--<input value="" id="J-category" type="text" class="inp inp2"/>-->
+                      <%= select_tag "J-category", options_for_select([["选择分类", "0"]] + @categories, "0") %>
+                      <br/>
+                      <div class="ui-widget">
+                      <label for="J-name">旧件名称</label>
+                      <input value="" id="J-name" type="text" class="inp inp2"/><br/>
+                      </div>
+                      <%#= select_tag "J-name", options_for_select([["选择名称", "0"]] + @names, "0") %>
+                    <!--</p><br/>-->
+                    <!--<p>-->
+                      <label for="J-drawing">旧件图号</label>
+                      <input value="" id="J-drawing" type="text" class="inp inp2"/>
+                      <!--<%#= select_tag "J-drawing", options_for_select([["选择图号", "0"]] + @drawings, "0") %>-->
+                      <label for="J-part_count">旧件数量</label>
+                      <input value="" id="J-part_count" type="text" class="inp"/>
+                    </p>
+                    <br/>
+                </div>
+                <p>
+                  <label for="J-factory_name">厂家名称</label>
+                  <input value="" id="J-factory_name" class="inp"/>
+                  <label for="J-factory_code">厂家代码</label>
+                  <input value="" id="J-factory_code" class="inp"/>
+                </p><br/>
+              </dd>
+            </dl>
+        </div>
+        <!----}content-set ---->
+      </dl>
+      <button class="submit-btn" id="J-fault_save_continue">添加故障</button>
+  </div>
+  <!----}}}form-set---->
+  <div class="content-set">
+    <div class="hd">
+      <h2>故障列表</h2>
+    </div>
+    <% if @workflow.faults.any? %>
+        <% @workflow.faults.each do |fault| %>
+            <div class="bd">
+              <ul class="consulting-list" id="J-consult">
+                <li class="consulting-title clrfix">
+                  <span class="consultingQuestion">故障分析</span>
+                  <span class="customer">处理措施</span>
+                  <span class="customer">配件分类</span>
+                  <span class="consultingQuestion">配件名称</span>
+                  <span class="phone">配件图号</span>
+                  <span class="phone">模式</span>
+                  <span class="tool">操作</span>
+                </li>
+                <li class="workflow-item clrfix">
+                  <span class="consultingQuestion"><%= fault.fault_analyse %></span>
+                  <span class="customer"><%= fault.measure %></span>
+                  <% if fault.oldpart.nil? %>
+                      <span class="customer"></span>
+                      <span class="consultingQuestion"></span>
+                      <span class="phone"></span>
+                      <span class=""><a href="javascript:void(0)" class="edit-workflow">编辑</a><%= link_to "删除", fault_path(fault), :class => "deleteItem text2 product-name edit-workflow" %></span>
+                  <% else %>
+                      <span class="customer"><%= fault.oldpart.category %></span>
+                      <span class="consultingQuestion"><%= fault.oldpart.name %></span>
+                      <span class="phone"><%= fault.oldpart.drawing %></span>
+                      <span class="phone"><%= fault.oldpart.pattern %></span>
+                      <span class=""><a href="javascript:void(0)" id="<%= fault.id %>" class="edit-workflow edit_fault">编辑</a><%= link_to "删除", fault_path(fault), :class => "deleteItem text2 product-name edit-workflow" %>
+                        <a href="javascript:void(0)" class="edit-workflow add-ind-fault" id="<%= fault.id %>">添加间接故障</a></span>
+                  <% end %>
+                </li>
+                <% if fault.indfaults.any? %>
+                    <% fault.indfaults.each do |indfault| %>
+                        <li class="workflow-item clrfix">
+                          <span class="consultingQuestion"><%= indfault.fault_analyse %></span>
+                          <span class="customer"><%= indfault.measure %></span>
+                          <% if indfault.indirectpart.nil? %>
+                              <span class="customer"></span>
+                              <span class="consultingQuestion"></span>
+                              <span class="phone"></span>
+                              <span class=""><a href="javascript:void(0)" id="<%= indfault.id %>" class="edit-workflow edit_ind_fault">编辑</a><%= link_to "删除", ind_fault_destroy_faults_path(indfault), :class => "deleteItem text2 product-name" %></span>
+                          <% else %>
+                              <span class="customer"><%= indfault.indirectpart.category %></span>
+                              <span class="consultingQuestion"><%= indfault.indirectpart.ind_name %></span>
+                              <span class="phone"><%= indfault.indirectpart.ind_drawing %></span>
+                              <span class="phone"><%= indfault.indirectpart.ind_pattern %></span>
+                              <span class=""><a href="javascript:void(0)" id="<%= indfault.id %>" class="edit-workflow edit_ind_fault">编辑</a><a href="/faults/ind_fault_destroy?ind_id=<%= indfault.id %>" class="text2 product-name">删除</a></span>
+                          <% end %>
+                        </li>
+                    <% end %>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+    <% end %>
+  </div>
+  <div class="tool-bar clrfix">
+    <button class="submit-btn" id="J-fault_save">完成</button>
+  </div>
+</div>
+<!----}}admin-content---->
+<!----添加间接故障弹窗I-add_ind_fault{{---->
+<div id="I-add_ind_fault">
+  <!----}}content-set---->
+  <div class="form-set">
+    <h3>添加间接故障</h3>
+      <input type="hidden" value="" id="J-fault_id"/>
+      <dl>
+        <dt>故障分析</dt>
+        <dd>
+          <textarea class="textarea textarea2" id="I-fault_analyse"></textarea>
+        </dd>
+        <dt>处理措施</dt>
+        <dd>
+          <div class="radio">
+            <input type="radio" id="I-measure1" name="measure" value="overhaul"/><label for="I-measure1">检修</label>
+            <input type="radio" id="I-measure2" name="measure" value="replace" checked="checked"/><label for="I-measure2">更换</label>
+            <input type="radio" id="I-measure3" name="measure" value="adjust"/><label for="I-measure3">调整</label>
+          </div>
+        </dd>
+        <!----I-add_budget{---->
+        <div class="content-set" id="I-add_oldpart" style="left: 145px;">
+          <div class="bd">
+            <h3 class="">添加间接旧件</h3>
+            <dl class="details-info">
+              <dd>
+                <div id="I-part"
+                     class="order-pnum order-confirm-mod clrfix">
+                </div>
+                <%= form_for(:oldpart, :url => {:controller => :oldparts, :action => 'ind_new'},
+                             :html => {:method => "post"}) do |f| %>
+                    <p>
+                      <label for="I-category">旧件分类</label>
+                      <!--<input type="text" id="I-category" value="" class="inp"/>-->
+                      <%= select_tag "I-category", options_for_select([["选择分类", "0"]] + @categories, "0") %>
+                      <label for="I-name">旧件名称</label>
+                      <input type="text" id="I-name" value="" class="inp"/>
+                    <!--</p><br/>-->
+                    <!--<p>-->
+                      <!--<%#= select_tag "I-name", options_for_select([["选择名称", "0"]] + @names, "0") %>-->
+                      <label for="I-drawing">旧件图号</label>
+                      <input type="text" id="I-drawing" value="" class="inp"/>
+                      <!--<%#= select_tag "I-drawing", options_for_select([["选择图号", "0"]] + @drawings, "0") %>-->
+                      <label for="I-part_count">旧件数量</label>
+                      <input type="text" id="I-part_count" value="" class="inp"/>
+                    </p><br/>
+
+                    <p>
+                      <label>厂家名称</label>
+                      <input value="" id="I-factory_name" class="inp"/>
+                      <label>厂家代码</label>
+                      <input value="" id="I-factory_code" class="inp"/>
+                    </p><br/>
+                <% end %>
+              </dd>
+            </dl>
+          </div>
+          <!--bd-->
+        </div>
+        <!----}content-set ---->
+      </dl>
+  </div>
+  <!----}}}form-set---->
+</div>
+<!----}}J-add_fault---->
+<!----编辑间接故障弹窗I-update_ind_fault{{---->
+<input type="hidden" value="" id="U-ind_fault_id"/>
+<div id="I-update_ind_fault">
+  <!----}}content-set---->
+  <div class="form-set">
+    <h3>编辑间接故障</h3>
+      <dl>
+        <dt>故障分析</dt>
+        <dd>
+          <textarea class="textarea textarea2" id="I-update_fault_analyse"></textarea>
+        </dd>
+        <dt>处理措施</dt>
+        <dd>
+          <div class="radio">
+            <input type="radio" id="I-update_measure1" name="measure" value="检修"/><label for="I-update_measure1">检修</label>
+            <input type="radio" id="I-update_measure2" name="measure" value="更换" checked="checked"/><label for="I-update_measure2">更换</label>
+            <input type="radio" id="I-update_measure3" name="measure" value="调整"/><label for="I-update_measure3">调整</label>
+          </div>
+        </dd>
+        <!----I-add_budget{---->
+        <div class="content-set" id="I-update_oldpart" style="left: 145px;">
+          <div class="bd">
+            <h3 class="">编辑间接旧件</h3>
+            <dl class="details-info">
+              <dd>
+                <div id="I-part_1">
+                     class="order-pnum order-confirm-mod clrfix">
+                </div>
+                    <p>
+                      <label for="I-update_category">旧件分类</label>
+                      <!--<input type="text" class="inp" id="I-update_category" value=""/>-->
+                      <%= select_tag "I-category", options_for_select([["选择分类", "0"]] + @categories, "0") %>
+                      <label for="I-update_name">旧件名称</label>
+                      <input type="text" class="inp" id="I-update_name" value=""/>
+                      <!--<%#= select_tag "I-name", options_for_select([["选择名称", "0"]] + @names, "0") %>-->
+                    <!--</p><br/>-->
+                    <!--<p>-->
+                      <label for="I-update_drawing">旧件图号</label>
+                      <input class="inp" id="I-update_drawing" type="text" value=""/>
+                      <!--<%#= select_tag "I-drawing", options_for_select([["选择图号", "0"]] + @drawings, "0") %>-->
+                      <label for="I-update_part_count">旧件数量</label>
+                      <input value="1" id="I-update_part_count" type="text" class="inp"/>
+                    </p><br/>
+
+                    <p>
+                      <label>厂家名称</label>
+                      <input value="" id="I-update_factory_name" class="inp"/>
+                      <label>厂家代码</label>
+                      <input value="" id="I-update_factory_code" class="inp"/>
+                    </p><br/>
+              </dd>
+            </dl>
+          </div>
+          <!--bd-->
+        </div>
+        <!----}content-set ---->
+      </dl>
+  </div>
+  <!----}}}form-set---->
+</div>
+<!----}}U-add_fault---->
+<!----编辑故障弹窗I-update_fault{{---->
+<div id="U-update_fault">
+  <!----}}content-set---->
+  <div class="form-set">
+    <h3>编辑故障</h3>
+      <input type="hidden" value="" id="U-fault_id"/>
+      <dl>
+        <dt>故障分析</dt>
+        <dd>
+          <textarea class="textarea textarea2" id="U_fault_analyse"></textarea>
+        </dd>
+        <dt>处理措施</dt>
+        <dd>
+          <div class="radio">
+            <input type="radio" id="U_measure1" name="measure" value="overhaul"/><label for="U_measure1">检修</label>
+            <input type="radio" id="U_measure2" name="measure" value="replace" checked="checked"/><label for="U_measure2">更换</label>
+            <input type="radio" id="U_measure3" name="measure" value="adjust"/><label for="U_measure3">调整</label>
+          </div>
+        </dd>
+        <!----U-oldpart{---->
+        <div class="content-set" id="U_oldpart" style="left: 145px;">
+          <div class="bd">
+            <h3 class="">添加间接旧件</h3>
+            <dl class="details-info">
+              <dd>
+                <div id="I-part"
+                     class="order-pnum order-confirm-mod clrfix">
+                </div>
+                <%= form_for(:oldpart, :url => {:controller => :oldparts, :action => 'new'},
+                             :html => {:method => "post"}) do |f| %>
+                    <p>
+                      <label for="U-category">旧件分类</label>
+                      <!--<input class="inp" id="U-part_category" type="text" value=""/>-->
+                      <%= select_tag "U-category", options_for_select([["选择分类", "0"]] + @categories, "0") %>
+                      <label for="U-name">旧件名称</label>
+                      <input class="inp" id="U-part_name" type="text" value=""/>
+                      <!--<%#= select_tag "U-name", options_for_select([["选择名称", "0"]] + @names, "0") %>-->
+                      <!--</p><br/>-->
+                      <!--<p>-->
+                      <label for="U-drawing">旧件图号</label>
+                      <input class="inp" id="U-part_drawing" type="text" value=""/>
+                      <!--<%#= select_tag "U-drawing", options_for_select([["选择图号", "0"]] + @drawings, "0") %>-->
+                      <label for="U-part_count">旧件数量</label>
+                      <input value="" id="U-part_count" type="text" class="inp"/>
+                    </p><br/>
+
+                    <p>
+                      <label for="U-factory_name">厂家名称</label>
+                      <input value="" id="U-factory_name" class="inp"/>
+                      <label for="U-factory_code">厂家代码</label>
+                      <input value="" id="U-factory_code" class="inp"/>
+                    </p><br/>
+                <% end %>
+              </dd>
+            </dl>
+          </div>
+          <!--bd-->
+        </div>
+        <!----}content-set ---->
+      </dl>
+  </div>
+  <!----}}}form-set---->
+</div>
+<!----}}U-add_fault---->
+</div>
+<!----main-content---->

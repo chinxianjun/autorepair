@@ -1,0 +1,48 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "jquery.ui.all" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "newpart" %>
+<% end %>
+<div class="main-content">
+    <div class="admin-content" id="newpart_content">
+        <h2>添加新件<span class="info"></span></h2>
+        <input type="hidden" class="inp inp2" id="J-newpart_id" value=""/>
+        <div class="oldpart_window">
+            <!----J-newpart_new{{---->
+            <form method="" action="">
+                <dl>
+                    <dt>新件品牌</dt>
+                    <dd>
+                      <div class="radio" id="J-category">
+                        <% @category.each do |cate| %>
+                            <input type="radio" id="J-category<%= cate.id %>" name="category" value="<%= cate.name %>" />
+                            <label for="J-category<%= cate.id %>"><%= cate.name %></label>
+                        <% end %>
+                      </div>
+                    </dd>
+                    <div class="ui-widget">
+                    <dt>新件名称</dt>
+                    <dd><input type="text" class="inp inp2" id="J-part_name"/></dd>
+                    </div>
+                    <dt>新件图号</dt>
+                    <dd><input type="text" class="inp inp2" id="J-drawing"/></dd>
+                    <dt>厂家名称</dt>
+                    <dd><input type="text" class="inp inp2" id="J-factory"/></dd>
+                    <dt>厂家代码</dt>
+                    <dd><input type="text" class="inp inp2" id="J-factory_code"/></dd>
+                    <dt>流水号</dt>
+                    <dd><input type="text" class="inp inp2" id="J-running_number"/></dd>
+                    <dt>数量</dt>
+                    <dd><input type="text" class="inp inp2" id="J-count"/></dd>
+                    <dt>单价</dt>
+                    <dd><input type="text" class="inp inp2" id="J-price"/></dd>
+                </dl>
+            </form>
+            <div class="tool-bar clrfix">
+                <button class="submit-btn" id="J-newpart_save">保存</button>
+                <button class="cancel-btn" >取消</button>
+            </div>
+            <!----}}J-newpart_new---->
+        </div>
+    </div>
+</div>

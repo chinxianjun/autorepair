@@ -1,0 +1,90 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "newpart" %>
+<% end %>
+
+<div class="main-content">
+    <div class="admin-content">
+        <h2>新件列表<span class="info"></span></h2>
+        <%= form_tag newparts_path, :method => "get", :id => "J-faults" do %>
+          <%= hidden_field_tag :direction, params[:direction] %>
+          <%= hidden_field_tag :sort, params[:sort] %>
+          <div class="tool-bar clrfix">
+              <%= label_tag :newparts, "新件信息" %>
+              <%= text_field_tag :newparts, params[:newparts], :class => "inp" %>
+              <%= button_tag "查询", :name => nil, :class => "search-btn" %>
+          </div>
+          <div id="newparts"><%= render 'newparts' %></div>
+        <% end %>
+
+    </div>
+    <!--新增新件弹框{-->
+    <div id="J-Newpart_create">
+        <div class="form-set">
+            <form method="post" action="">
+                <dl>
+                    <dt>新件品牌</dt>
+                    <dd>
+                      <div class="radio" id="J-category">
+                        <% @category.each do |cate| %>
+                            <input type="radio" id="J-category<%= cate.id %>" name="category" value="<%= cate.name %>" />
+                            <label for="J-category<%= cate.id %>"><%= cate.name %></label>
+                        <% end %>
+                      </div>
+                    </dd>
+                    <dt>新件名称</dt>
+                    <dd><input type="text" class="inp inp2" id="J-name"/></dd>
+                    <dt>新件图号</dt>
+                    <dd><input type="text" class="inp inp2" id="J-drawing"/></dd>
+                    <dt>厂家名称</dt>
+                    <dd><input type="text" class="inp inp2" id="J-factory"/></dd>
+                    <dt>厂家代码</dt>
+                    <dd><input type="text" class="inp inp2" id="J-factory_code"/></dd>
+                    <dt>流水号</dt>
+                    <dd><input type="text" class="inp inp2" id="J-running_number"/></dd>
+                    <dt>数量</dt>
+                    <dd><input type="text" class="inp inp2" id="J-count"/></dd>
+                    <dt>单价</dt>
+                    <dd><input type="text" class="inp inp2" id="J-price"/></dd>
+                </dl>
+            </form>
+        </div>
+    </div>
+    <!--}新增新件弹框-->
+    <!--编辑新件弹框{-->
+    <div id="J-Newpart_update">
+        <div class="form-set">
+            <form method="post" action="">
+                <dl>
+                  <dt>新件品牌</dt>
+                  <dd>
+                    <div class="radio" id="U-category">
+                        <% @category.each do |cg| %>
+                          <input type="radio" id="U-category<%= cg.id %>" name="category" value="<%= cg.name %>" />
+                          <label for="U-category<%= cg.id %>"><%= cg.name %></label>
+                        <% end %>
+                    </div>
+                  </dd>
+                    <dt>新件名称</dt>
+                    <dd><input type="text" class="inp inp2" id="U-name"/></dd>
+                    <dt>新件图号</dt>
+                    <dd><input type="text" class="inp inp2" id="U-drawing"/></dd>
+                    <dt>厂家名称</dt>
+                    <dd><input type="text" class="inp inp2" id="U-factory"/></dd>
+                    <dt>厂家代码</dt>
+                    <dd><input type="text" class="inp inp2" id="U-factory_code"/></dd>
+                    <dt>流水号</dt>
+                    <dd><input type="text" class="inp inp2" id="U-running_number"/></dd>
+                    <dt>数量</dt>
+                    <dd><input type="text" class="inp inp2" id="U-count"/></dd>
+                    <dt>单价</dt>
+                    <dd><input type="text" class="inp inp2" id="U-price"/></dd>
+                    <dt hidden="hidden">ID</dt>
+                    <dd hidden="hidden"><input type="hidden" class="inp inp2" id="U-Newpart_id" value=""/></dd>
+                </dl>
+            </form>
+        </div>
+    </div>
+    <!--}编辑新件弹框-->
+</div>

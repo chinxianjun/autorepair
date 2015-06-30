@@ -1,0 +1,73 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= stylesheet_link_tag "jquery.tooltip" %>
+    <%= javascript_include_tag "jquery.tooltip" %>
+    <%= stylesheet_link_tag "common" %>
+    <%= javascript_include_tag "group" %>
+    <%= javascript_include_tag "company" %>
+    <%= javascript_include_tag "warehouse" %>
+<% end %>
+
+<!----main-content{{{{---->
+<div class="main-content">
+<!----admin-content{{{{{---->
+<div class="admin-content">
+  <h2><%=  link_to "#{@company.name}", admin_company_path(@company) %>&gt;&gt;配件库列表<span class="info"></span></h2>
+    <input hidden="hidden" value="<%= @company.id %>" id="J_company_id" />
+    <button class="newWarehouse add-btn fr">添加配件库</button><% url = request.url %>
+  </h2>
+  <%= form_tag admin_company_warehouses_path, :method => "get", :id => "warehouses_search" do %>
+      <div class="tool-bar clrfix">
+        <%#= label_tag :column, "客户姓名或电话" %>
+        <%= text_field_tag :column, params[:column], :class => "inp" %>
+        <%= button_tag "查询", :name => nil, :class => "search-btn" %>
+      </div>
+      <div id="warehouses"><%= render 'warehouses' %></div>
+  <% end %>
+  <!--新增配件库弹框{-->
+  <div id="createWarehouse" title="添加配件库">
+    <div class="form-set">
+      <form method="post" action="">
+        <dl>
+          <table>
+            <tr>
+              <td>
+                <label for="J-warehouse_name">配件库名称<b class="ftx04">*</b></label>
+                <input type="text" class="inp inp2b" id="J-warehouse_name" value="" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="float:left;">配件库类别<b class="ftx04">*</b></div>
+                <div class="radio inp2b" id="J-warehouse_category" style="float:left;">
+                  <input type="radio" id="J-warehouse_category1" name="warehouse_category" value="旧件" />
+                  <label for="J-warehouse_category1">旧件</label>
+                  <input type="radio" id="J-warehouse_category2" name="warehouse_category" value="新件" />
+                  <label for="J-warehouse_category2">新件</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="J-identifier">配件库标识<b class="ftx04">*</b></label>
+                <input type="text" id="J-identifier" class="inp inp2b" value=""/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div>所属配件库</div>
+                <div class="radio" id="J-parent_warehouse">
+                  <%= select("warehouse", "warehouse_id", @company.warehouses.collect {|w| [ w.name, w.id ] }, {:include_blank => '无'}) %>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </dl>
+      </form>
+    </div>
+  </div>
+  <!--}新增组弹框-->
+</div>
+<!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->

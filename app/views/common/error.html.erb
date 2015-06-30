@@ -1,0 +1,21 @@
+<div id="doc-main">
+    <div id="hd">
+        <h1>
+            <a href="index.html">
+                <%= image_tag("logo-write-200x40.png") %>
+            </a>
+        </h1>
+    </div>
+    <div id="bd" class="clrfix">
+        <div class="main-block">
+            <div class="main-content">
+                <h2><%=raw @status %></h2>
+
+                <p id="errorExplanation"><%=h @message %></p>
+                <p><a href="/workflows/workflow_flow"><%= I18n.t("views.links.home") %></a></p>
+
+                <% html_title @status %>
+            </div>
+        </div>
+    </div>
+</div>

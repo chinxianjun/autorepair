@@ -1,0 +1,87 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "expense" %>
+<% end %>
+<!----main-content{{{{---->
+<div class="main-content">
+    <!----admin-content{{{{{---->
+    <div class="admin-content">
+        <h2>费用详情<span class="info"></span></h2>
+        <!--费用信息{-->
+        <div class="content-set">
+            <div class="hd">
+                <h2>费用信息</h2>
+            </div>
+            <div class="bd">
+                <dl class="details-info">
+                    <dd>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>材料费</th>
+                                    <td><%= @expense.material_cost %></td>
+                                </tr>
+                                <tr>
+                                    <th>工时费</th>
+                                    <td><%= @expense.working_hours_cost %></td>
+                                </tr>
+                                <tr>
+                                    <th>通讯费</th>
+                                    <td><%= @expense.communication_cost %></td>
+                                </tr>
+                                <tr>
+                                    <th>服务车费</th>
+                                    <td><%= @expense.service_car_cost %></td>
+                                </tr>
+                                <tr>
+                                    <th>在途餐补</th>
+                                    <td><%= @expense.meal_cost %></td>
+                                </tr>
+                                <tr>
+                                    <th>差旅费</th>
+                                    <td><%= @expense.travel_expense %></td>
+                                </tr>
+                                <tr>
+                                    <th>合计</th>
+                                    <td><%= @expense.total %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="tool-bar tr clrfix">
+            <button class="edit-btn editExpense">编辑</button>
+            <button class="cancel-btn">返回</button>
+        </div>
+        <!----}}}}}}content-set---->
+    </div>
+    <!----}}}}}admin-content---->
+</div>
+<!----}}}}main-content---->
+<!--编辑新件弹框{-->
+<div id="J-Expense_edit">
+    <div class="form-set">
+        <form method="put" action="">
+            <dl>
+                <dt>材料费</dt>
+                <dd><input type="text" class="inp inp2" id="J-material_cost"/></dd>
+                <dt>工时费</dt>
+                <dd><input type="text" class="inp inp2" id="J-working_hours_cost"/></dd>
+                <dt>通讯费</dt>
+                <dd><input type="text" class="inp inp2" id="J-communication_cost"/></dd>
+                <dt>服务车费</dt>
+                <dd><input type="text" class="inp inp2" id="J-service_car_cost"/></dd>
+                <dt>在途餐补</dt>
+                <dd><input type="text" class="inp inp2" id="J-meal_cost"/></dd>
+                <dt>差旅费</dt>
+                <dd><input type="text" class="inp inp2" id="J-travel_expense"/></dd>
+                <dt>合计</dt>
+                <dd><input type="text" readonly="readonly" class="inp inp2" id="J-total"/></dd>
+            </dl>
+        </form>
+    </div>
+</div>
+<!--}编辑新件弹框-->

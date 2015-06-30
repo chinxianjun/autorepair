@@ -1,0 +1,86 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= javascript_include_tag "jquery.md5" %>
+    <%= javascript_include_tag "sendMSG" %>
+    <%= javascript_include_tag "message" %>
+    <%= javascript_include_tag "question" %>
+<% end %>
+
+<!---main-content{{{{--->
+<div class="main-content">
+    <!---admin-content{{{{{--->
+    <div class="admin-content">
+        <h2>选择客户问题类别<span class="info"></span></h2>
+        <div class="question_tabs">
+            <ul>
+                <div class="radio" id="J-question_type">
+                    <input type="radio" id="J-flowCreate" name="question_type" value="repair"/>
+                    <label for="J-flowCreate">维修</label>
+                    <input type="radio" id="J-carBuying" name="question_type" value="buy_car"/>
+                    <label for="J-carBuying">购车</label>
+                    <input type="radio" id="J-partBuying" name="question_type" value="buy_part"/>
+                    <label for="J-partBuying">购件</label>
+                    <input type="radio" id="J-consulting" name="question_type" value="consulting"/>
+                    <label for="J-consulting">咨询</label>
+                    <input type="radio" id="J-complaint" name="question_type" value="complaint" CHECKED="checked"/>
+                    <label for="J-complaint">投诉</label>
+                </div>
+            </ul>
+        </div>
+        <input type="hidden" id="J-customer_id" value="<%= @customer.id %>"/>
+        <input type="hidden" id="J-current_user" value="<%= current_user.fullname %>"/>
+        <!----J-complaint_create{{---->
+        <div id="J-complaint_create">
+            <div class="content-set">
+                <div class="hd"><h2>客户信息</h2></div>
+                <div class="bd">
+                    <dl class="details-info">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="J-customer_name">客户姓名</label>
+                                    <input id="J-complaint_customer_name" value="<%= @customer.fullname %>" class="inp16" type="text"/>
+                                </td>
+                                <td>
+                                    <label for="">客户电话</label>
+                                    <input id="J-complaint_customer_phone" value="<%= @customer.phone %>" class="inp16" type="text"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </dl>
+                </div>
+                <!----bd{{{---->
+            </div>
+            <div class="content-set">
+                <div class="bd">
+                  <dl class="details-info">
+                    <tabel>
+                      <tr>
+                        <td>
+                          <label for="J-complaintQuestion" class="question_desc">投诉信息</label>
+                          <textarea type="text" id="J-complaintQuestion" class="textarea1 textarea-business"></textarea>
+                        </td>
+                      </tr>
+                    </tabel>
+                        	<dt>发送业务信息</dt>
+                        	<dd id="J-is_send">
+                        		<input type="radio" name="is_send" value="0" checked="checked"/>
+                        		<label>否</label>
+                        		<input type="radio" name="is_send" value="1"/>
+                        		<label>是</label>
+                        	</dd>
+                  </dl>
+                </div>
+                <!----}}}bd---->
+                <div class="save-complaint-btn">
+                    <button type="submit" id="J-add-complaint-save">保存</button>
+                    <button type="cancel" id="J-add-complaint-cancel" class="cancel-btn">取消</button>
+                </div>
+            </div>
+            <!----}}consent-set---->
+        </div>
+        <!----}J-complaint_create---->
+    </div>
+    <!---}}}}admin-content--->
+</div>
+<!---}}}}main-content--->

@@ -1,0 +1,840 @@
+# Chinese (China) translations for Ruby on Rails
+# by tsechingho (http://github.com/tsechingho)
+
+zh-CN:
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b%d日"
+      long: "%Y年%b%d日"
+    day_names:
+      - 星期日
+      - 星期一
+      - 星期二
+      - 星期三
+      - 星期四
+      - 星期五
+      - 星期六
+    abbr_day_names:
+      - 日
+      - 一
+      - 二
+      - 三
+      - 四
+      - 五
+      - 六
+    month_names:
+      - ~
+      - 一月
+      - 二月
+      - 三月
+      - 四月
+      - 五月
+      - 六月
+      - 七月
+      - 八月
+      - 九月
+      - 十月
+      - 十一月
+      - 十二月
+    abbr_month_names:
+      - ~
+      - 1月
+      - 2月
+      - 3月
+      - 4月
+      - 5月
+      - 6月
+      - 7月
+      - 8月
+      - 9月
+      - 10月
+      - 11月
+      - 12月
+    order:
+      - :year
+      - :month
+      - :day
+
+  time:
+    formats:
+      default: "%Y年%b%d日 %A %H:%M:%S %Z"
+      short: "%b%d日 %H:%M"
+      long: "%Y年%b%d日 %H:%M"
+    am: "上午"
+    pm: "下午"
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "半分钟"
+      less_than_x_seconds:
+        one: "不到一秒"
+        other: "不到 %{count} 秒"
+      x_seconds:
+        one: "一秒"
+        other: "%{count} 秒"
+      less_than_x_minutes:
+        one: "不到一分钟"
+        other: "不到 %{count} 分钟"
+      x_minutes:
+        one: "一分钟"
+        other: "%{count} 分钟"
+      about_x_hours:
+        one: "大约一小时"
+        other: "大约 %{count} 小时"
+      x_days:
+        one: "一天"
+        other: "%{count} 天"
+      about_x_months:
+        one: "大约一个月"
+        other: "大约 %{count} 个月"
+      x_months:
+        one: "一个月"
+        other: "%{count} 个月"
+      about_x_years:
+        one: "大约一年"
+        other: "大约 %{count} 年"
+      over_x_years:
+        one: "一年多"
+        other: "%{count} 年多"
+      almost_x_years:
+        one: "接近一年"
+        other: "接近 %{count} 年"
+    prompts:
+      year: "年"
+      month: "月"
+      day: "日"
+      hour: "时"
+      minute: "分"
+      second: "秒"
+
+  number:
+    format:
+      separator: "."
+      delimiter: ","
+      precision: 3
+      significant: false
+      strip_insignificant_zeros: false
+    currency:
+      format:
+        format: "%u %n"
+        unit: "CN¥"
+        separator: "."
+        delimiter: ","
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+    percentage:
+      format:
+        delimiter: ""
+    precision:
+      format:
+        delimiter: ""
+    human:
+      format:
+        delimiter: ""
+        precision: 1
+        significant: false
+        strip_insignificant_zeros: false
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+      decimal_units:
+        format: "%n %u"
+        units:
+          # 10^-21 zepto, 10^-24 yocto
+          atto: "渺" # 10^-18
+          femto: "飞" # 10^-15 毫微微
+          pico: "漠" # 10^-12 微微
+          nano: "奈" # 10^-9 毫微
+          micro: "微" # 10^-6
+          mili: "毫" # 10^-3 milli
+          centi: "厘" # 10^-2
+          deci: "分" # 10^-1
+          unit: ""
+          ten:
+            one: "十"
+            other: "十" # 10^1
+          hundred: "百" # 10^2
+          thousand: "千" # 10^3 kilo
+          million: "百万" # 10^6 mega
+          billion: "十亿" # 10^9 giga
+          trillion: "兆" # 10^12 tera
+          quadrillion: "千兆" # 10^15 peta
+          # 10^18 exa, 10^21 zetta, 10^24 yotta
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " 和 "
+      last_word_connector: ", 和 "
+    select:
+      prompt: "请选择"
+
+  activerecord:
+    attributes:
+      user:
+        username: "登录名"
+        fullname: "姓名"
+        user_number: "员工编号"
+        email: "邮箱"
+        phone: "联系电话"
+        address: "住址"
+        birthday: "生日"
+        gender: "性别"
+        login: "用户名或邮箱"
+        password: "密码"
+        password_confirmation: "确认密码"
+        remember_me: "记住我"
+      manager:
+        username: "登录名"
+        fullname: "姓名"
+        user_number: "员工编号"
+        email: "邮箱"
+        phone: "联系电话"
+        address: "住址"
+        birthday: "生日"
+        gender: "性别"
+        login: "用户名或邮箱"
+        password: "密码"
+        password_confirmation: "确认密码"
+        remember_me: "记住我"
+      role:
+        name: "角色名称"
+      group:
+        name: "组名称"
+      company:
+        name: "公司名称"
+        state: "公司所在地"
+        address: "公司地址"
+        phone: "电话"
+        simply: "公司简称"
+        company_code: "公司识别码"
+      customer:
+        username: "姓名"
+        phone: "电话"
+        address: "住址"
+        birthday: "生日"
+        gender: "性别"
+      vehicle:
+        model: "车型"
+        chassis_number: "地盘号"
+        engine: "发动机型号"
+        engine_number: "发动机编号"
+        order_number: "订货号"
+        purchase_on: "购车时间"
+        warranty_card: "保修卡号"
+        driving_range: "行驶里程"
+        fast_type: "法士特型号"
+        production_number: "出厂编号"
+        user_number: "用户编号"
+        first_bridge: "第一桥"
+        second_bridge: "第二桥"
+        third_bridge: "第三桥"
+      fault:
+        fault_type: "故障类型"
+        fault_analyse: "故障分析"
+      oldpart:
+        name: "旧件名称"
+        drawing: "旧件图号"
+        count: "数量"
+        factory: "厂家代码"
+        pattern: "损坏模式"
+        depot: "所在仓库"
+        status: "旧件状态"
+        occupy: "占用人"
+        occupytime: "占用时间"
+        warehousing_at: "入库时间"
+        warehousing_on: "出库时间"
+      newpart:
+        list: "新件列表"
+        name: "新件名称"
+        drawing: "新件图号"
+        price: "价格"
+        factory: "厂家代码"
+        newpart_manage: "新件管理员"
+      repair:
+        service_numver: "维修服务号"
+        fault: "故障"
+        vehicle: "车辆"
+    errors:
+      template: # ~ 2.3.5 backward compatible
+        header:
+          one: "有 1 个错误发生导致「%{model}」无法被保存。"
+          other: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
+        body: "如下字段出现错误："
+      full_messages:
+        format: "%{attribute} %{message}"
+      messages:
+        inclusion: "不包含于列表中"
+        exclusion: "是保留关键字"
+        invalid: "是无效的"
+        confirmation: "与确认值不匹配"
+        accepted: "必须是可被接受的"
+        empty: "不能留空"
+        blank: "不能为空字符"
+        too_long: "过长（最长为 %{count} 个字符）"
+        too_short: "过短（最短为 %{count} 个字符）"
+        wrong_length: "长度非法（必须为 %{count} 个字符）"
+        not_a_number: "不是数字"
+        not_an_integer: "必须是整数"
+        greater_than: "必须大于 %{count}"
+        greater_than_or_equal_to: "必须大于或等于 %{count}"
+        equal_to: "必须等于 %{count}"
+        less_than: "必须小于 %{count}"
+        less_than_or_equal_to: "必须小于或等于 %{count}"
+        odd: "必须为单数"
+        even: "必须为双数"
+        taken: "已经被使用"
+        record_invalid: "校验失败: %{errors}"
+
+  activemodel:
+    errors:
+      template:
+        header:
+          one: "有 1 个错误发生导致「%{model}」无法被保存。"
+          other: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
+        body: "如下字段出现错误："
+
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      inclusion: "不包含于列表中"
+      exclusion: "是保留关键字"
+      invalid: "是无效的"
+      confirmation: "与确认值不匹配"
+      accepted: "必须是可被接受的"
+      empty: "不能留空"
+      blank: "不能为空字符"
+      too_long: "过长（最长为 %{count} 个字符）"
+      too_short: "过短（最短为 %{count} 个字符）"
+      wrong_length: "长度非法（必须为 %{count} 个字符）"
+      not_a_number: "不是数字"
+      not_an_integer: "必须是整数"
+      greater_than: "必须大于 %{count}"
+      greater_than_or_equal_to: "必须大于或等于 %{count}"
+      equal_to: "必须等于 %{count}"
+      less_than: "必须小于 %{count}"
+      less_than_or_equal_to: "必须小于或等于 %{count}"
+      odd: "必须为单数"
+      even: "必须为双数"
+      #To use devise
+      expired: "您已过期，请重新申请"
+      not_found: "没有找到"
+      already_confirmed: "已经确认"
+      not_locked: "未锁定"
+      not_saved:
+        one: "因为1个错误导致此%{resource}保存失败:"
+        other: "因为%{count}个错误导致此%{resource}保存失败:"
+
+  helpers:
+    select:
+      prompt: "请选择"
+#    submit:
+#      create: "新增%{model}"
+#      update: "更新%{model}"
+#      submit: "储存%{model}"
+#      search: "查询"
+
+  will_paginate:
+    previous_label: "&#8592; 上一页"
+    next_label: "下一页 &#8594;"
+    page_gap: "&hellip;"
+
+  views:
+    captcha:
+      captcha: "验证码"
+      valid: "有效的"
+      invalid: "无效的"
+    checkall_uncheckall: "全选/全不选"
+    nodata: "没有数据!"
+    header:
+      site: "jartai汽修综合管理平台"
+      current_user: "当前用户:"
+      rolename: "用户角色:"
+    menu:
+      user_manage: "用户管理"
+      profile: "我的帐号"
+      customers: "客户管理"
+      vehicles:  "车辆管理"
+      faults: "故障管理"
+      old_parts: "旧件管理"
+      new_parts: "新件管理"
+      repairs:  "维修单管理"
+      expenses:  "费用管理"
+      work_flow: "流程管理"
+    sidebar:
+      workflow: "新建流程"
+      flow_view: "查看"
+      flow_new: "新建"
+      dispatching: "派工"
+      dispatch_new: "新建派工"
+      dispatch_order: "查看派工"
+      vehicle_information: "车辆信息"
+      vehicle_add: "车辆添加"
+      vehicle_view: "车辆查看"
+      fault_infomation: "故障信息"
+      fault_add: "故障添加"
+      fault_view: "故障查看"
+      part_warehousing: "旧件入库"
+      warehousing_view: "入库查看"
+      warehousing_add: "录入旧件信息"
+      newpart: "领取新件"
+      newpart_receive: "新件信息录入"
+      newpart_view: "新件信息查看"
+      report_information: "上报信息"
+      report_new: "添加上报信息"
+      report_view: "查看上报信息"
+      expenses: "费用管理"
+      expenses_add: "费用添加"
+      expenses_view: "费用查看"
+      workflow_finished: "流程完结"
+      workflow_acceptance: "完工验收"
+      workflow_view: "完工查看"
+    links:
+      home: "首页"
+      add: "新建"
+      back: "返回"
+      show: "查看"
+      edit: "编辑"
+      delete: "删除"
+      users:
+        add: "新建用户"
+        list: "用户列表"
+        change_password: "修改密码"
+    home:
+      index: "首页样式"
+      workflow: "流程样式"
+    user:
+      username: "登录名"
+      fullname: "姓名"
+      user_number: "员工编号"
+      email: "邮箱"
+      phone: "联系电话"
+      address: "住址"
+      birthday: "生日"
+      gender: "性别"
+      man: "男士"
+      lady: "女士"
+      profile: "我的帐号"
+    profile:
+      index: "我的帐号"
+      edit: "编辑"
+    groups:
+      edit: "编辑组"
+      users: "用户"
+      roles: "角色"
+      show: "管理组"
+      list: "组列表"
+    roles:
+      name: "角色名称"
+      add: "新建角色"
+      edit: "编辑角色"
+      list: "角色列表"
+    customers:
+      username: "姓名"
+      customer: "客户信息"
+      phone: "电话"
+      address: "地址"
+      birthday: "生日"
+      gender: "性别"
+      man: "男"
+      lady: "女"
+      add: "新建"
+      show: "查看"
+      edit: "编辑"
+      delete: "删除"
+    vehicle:
+      list: "车辆信息"
+      model: "车型"
+      chassis_number: "底盘号"
+      engine: "发动机型号"
+      engine_number: "发动机编号"
+      order_number: "订货号"
+      purchase_on: "购车时间"
+      warranty_card: "保修卡号"
+      driving_range: "行驶里程"
+      fast_type: "法士特型号"
+      production_number: "出厂编号"
+      user_number: "用户编号"
+      first_bridge: "第一桥"
+      second_bridge: "第二桥"
+      third_bridge: "第三桥"
+    expense:
+      expenses: "费用列表"
+      material: "材料费"
+      working_hour: "工时费"
+      communication: "通讯费"
+      service_car: "服务车费"
+      meal: "在途餐补"
+      travel: "差旅费"
+    faults:
+      faults: "故障列表"
+      type: "故障类型"
+      analyse: "故障分析"
+      oldpart: "旧件信息"
+      vehicle: "车辆信息"
+      change: "更换"
+      overhauling: "检修"
+      adjusting: "调整"
+    oldparts:
+      list: "旧件列表"
+      name: "旧件名称"
+      drawing: "旧件图号"
+      count: "数量"
+      factory: "厂家代码"
+      pattern: "损坏模式"
+      depot: "所在仓库"
+      status: "旧件状态"
+      occupy: "占用人"
+      occupytime: "占用时间"
+      warehousing_at: "入库时间"
+      warehousing_on: "出库时间"
+    newparts:
+      list: "新件列表"
+      name: "新件名称"
+      drawing: "新件图号"
+      price: "价格"
+      factory: "厂家代码"
+      newpart_manage: "新件管理员"
+    repairs:
+      list: "维修单列表"
+      service_number: "维修服务单号"
+      fault: "故障"
+      vehicle: "车辆"
+  field:
+    id: "ID"
+    label_no_data: "no data to display"
+    label_company_repairer: "维修工列表"
+    label_group: "组"
+    label_group_new: "新建组"
+    label_general: "一般"
+    label_user: "用户"
+    label_user_add: "增加用户"
+    label_user_new: "新建用户"
+    label_user_plural: "用户"
+    label_user_search: "搜索"
+    label_user_anonymous: "匿名用户"
+    label_project: "项目"
+    label_project_plural: "项目"
+    label_group_plural: "组"
+    label_role: "角色"
+    label_role_new: "新建角色"
+    label_role_add: "添加角色"
+    label_role_plural: "角色"
+    label_administration: "管理"
+    label_warehouse: "库房名称"
+    label_permissions: "权限"
+    label_permissions_report: "权限报表"
+    label_sort_highest: "移动到顶部"
+    label_sort_higher: "上移"
+    label_sort_lower: "下移"
+    label_sort_lowest: "移动到底部"
+    button_create: "创建"
+    button_submit: "提交"
+    button_delete: "删除"
+    button_add: "新增"
+    button_change: "修改"
+    button_edit: "编辑"
+    button_cancel: "取消"
+    button_search: "查询"
+    button_sort: "排序"
+    button_check_all: "全选"
+    button_uncheck_all: "清除"
+    new: "新建"
+    update: "编辑"
+    destroy: "删除"
+    show: "查看"
+    save: "保存"
+    cancel: "取消"
+    operate: "操作"
+    back: "返回"
+    workflow:
+      dispatch: "派工"
+      vehicle: "登记车辆"
+      fault: "登记故障"
+      oldpart: "登记旧件"
+      newpart: "领取新件"
+      report: "上报信息"
+      expense: "费用信息"
+    property:
+      into_factory: "进厂"
+      rescue: "救援"
+    user:
+      current_user: "当前用户"
+      administrator: "系统管理员"
+      ordinary_user: "普通用户"
+      groupname: "组名称"
+      groupmanage: "管理组"
+      rolename: "角色名"
+      users: "用户"
+      regist: "注册"
+      forgot_pwd: "忘记密码?"
+      logout_confirm: "确定要注销么"
+      operate_select: "操作选项"
+      add_despatching: "新建派工单"
+      index_despatching: "所有派工单"
+      can_be_assigned_users: "可分配用户"
+      can_be_assigned_roles: "可分配角色"
+      can_be_assigned_group: "可分配组"
+      assigned_users: "已分配用户"
+      assigned_roles: "已分配角色"
+      assigned_groups: "已分配组"
+      add_user: "添加用户"
+      destroy_user: "删除用户"
+      user_manage: "管理用户"
+      reg_time: "注册时间: "
+      cancle: "取消"
+      loginname: "登录名: "
+      username: "用户名: "
+      nickname: "昵称: "
+      phone: "电话: "
+      email: "E-mail: "
+      show: "查看"
+      update: "更新"
+      delete: "删除"
+      confirm_delete: "确定要删除么!"
+      manage_roles: "管理角色"
+      login: "登录"
+      password: "密码"
+      password_confirm: "确认密码"
+      logout: "注销"
+      BatchNumer: "维修批号"
+      OddNumber: "维修单号"
+      Mechanic: "维修工程师"
+      CreateTime: "创建时间"
+      UpdateTime: "更新时间"
+      CustomID: "客户ID"
+      back_to_index: "返回主页"
+      home:
+        welcome: "欢迎登录本系统"
+        new_despatching: "新建派工单"
+        user_list: "用户列表"
+        group_list: "组列表"
+        role_list: "角色列表"
+
+  txt:
+    resend_mail: "重新发送激活邮件"
+    resend: "发送"
+    notice_not_authorized: "你没有权限访问这个页面."
+    notice_file_not_found: "你访问的页面不存在或者已经被删除."
+    register: "注册新用户"
+    account_welcome: "欢迎"
+    account_logout: "用户已注销"
+    no_login: "用户没有登录"
+    no_login_or_perm: "用户没有登录或者没有权限"
+    password_not_match: "密码前后不一致"
+    length_not_match: "字段长度超出规定的范围"
+    loginname_exist: "用户登录名已经存在"
+    edit_and_retry: "请编辑后在再试一次."
+    error_info: "您提交的内容包含下面这些错误: "
+    destroy_confirm: "确定要删除？"
+    create_success: "创建成功"
+    update_success: "更新成功"
+    destroy_success: "删除成功"
+    logo: "AutoRepaire"
+    sub_logo: "AutoRepaire"
+    main_title: "AutoRepaire"
+    no_perm: "您没有权限做此操作"
+    app_name: "样例应用"
+    sub_title: "怎样使用Rails的i18n新特性本地化你的应用"
+    contents: "内容"
+    are_you_sure: "确定要删除?"
+
+# 权限列表
+  permission_flow_dispatch: 查看流程派工任务
+  permission_flow_vehicle: 查看流程车辆任务
+  permission_flow_fault: 查看流程故障任务
+  permission_flow_oldpart: 查看流程旧件任务
+  permission_flow_newpart: 查看流程新件任务
+  permission_flow_report: 查看流程上报任务
+  permission_flow_expense: 查看流程费用任务
+  permission_flow_workflow: 查看流程状态
+  permission_view_customer: 查看客户信息
+  permission_view_dispatching: 查看派工信息
+  permission_view_vehicle: 查看车辆信息
+  permission_view_owner: 查看车主信息
+  permission_view_fault: 查看故障信息
+  permission_view_oldpart: 查看旧件信息
+  permission_view_indirectpart: 查看间接旧件
+  permission_view_newpart: 查看新件信息
+  permission_view_contrast: 查看新旧件校对信息
+  permission_view_report: 查看上报信息
+  permission_view_expense: 查看费用信息
+  permission_view_workflow: 查看流程信息
+  permission_view_car_buying: 查看购车信息
+  permission_view_part_buying: 查看购件信息
+  permission_view_complaint: 查看投诉信息
+  permission_view_consulting: 查看咨询信息
+  permission_view_question: 查看问题信息
+  permission_view_message: 查看短信
+  permission_view_item: 查看配件厂家设置
+  permission_view_warehouse: 查看配件库设置
+
+  permission_add_customer: 新建客户信息
+  permission_add_dispatching: 新建派工信息
+  permission_add_vehicle: 新建车辆信息
+  permission_add_owner: 添加车主信息
+  permission_add_fault: 新建故障信息
+  permission_add_oldpart: 新建旧件信息
+  permission_add_indirectpart: 新建间接旧件
+  permission_add_newpart: 新建新件信息
+  permission_add_contrast: 新建新旧件校对信息
+  permission_add_report: 新建上报信息
+  permission_add_expense: 新建费用信息
+  permission_add_workflow: 新建流程信息
+  permission_add_car_buying: 新建购车信息
+  permission_add_part_buying: 新建购件信息
+  permission_add_complaint: 新建投诉信息
+  permission_add_consulting: 新建咨询信息
+  permission_add_question: 新建问题信息
+  permission_add_message: 新建短信
+  permission_add_item: 新建配件厂家
+  permission_add_warehouse: 新建配件库
+
+  permission_edit_customer: 编辑客户信息
+  permission_edit_dispatching: 编辑派工信息
+  permission_edit_vehicle: 编辑车辆信息
+  permission_edit_owner: 编辑车主信息
+  permission_edit_fault: 编辑故障信息
+  permission_edit_oldpart: 编辑旧件信息
+  permission_edit_indirectpart: 编辑间接旧件
+  permission_edit_newpart: 编辑新件信息
+  permission_edit_contrast: 编辑新旧件校对信息
+  permission_edit_expense: 编辑费用信息
+  permission_edit_report: 编辑上报信息
+  permission_edit_workflow: 编辑流程信息
+  permission_edit_car_buying: 编辑购车信息
+  permission_edit_part_buying: 编辑购件信息
+  permission_edit_complaint: 编辑投诉信息
+  permission_edit_consulting: 编辑咨询信息
+  permission_edit_question: 编辑问题信息
+  permission_edit_message: 编辑短信
+  permission_edit_item: 编辑配件厂家
+  permission_edit_warehouse: 编辑配件库
+
+  permission_destroy_customer: 删除客户信息
+  permission_destroy_dispatching: 删除派工信息
+  permission_destroy_vehicle: 删除车辆信息
+  permission_destroy_owner: 删除车主信息
+  permission_destroy_fault: 删除故障信息
+  permission_destroy_oldpart: 删除旧件信息
+  permission_destroy_indirectpart: 删除间接旧件
+  permission_destroy_newpart: 删除新件信息
+  permission_destroy_contrast: 删除新旧件校对
+  permission_destroy_report: 删除上报信息
+  permission_destroy_expense: 删除费用信息
+  permission_destroy_workflow: 删除流程信息
+  permission_destroy_car_buying: 删除购车信息
+  permission_destroy_part_buying: 删除购件信息
+  permission_destroy_complaint: 删除投诉信息
+  permission_destroy_consulting: 删除咨询信息
+  permission_destroy_question: 删除问题信息
+  permission_destroy_message: 删除短信
+  permission_destroy_item: 删除配件厂家
+  permission_destroy_warehouse: 删除配件库
+
+  permission_search_customer: 查询客户信息
+  permission_search_dispatching: 查询派工信息
+  permission_search_vehicle: 查询车辆信息
+  permission_search_owner: 查询车主信息
+  permission_search_fault: 查询故障信息
+  permission_search_oldpart: 查询旧件信息
+  permission_search_indirectpart: 查询间接旧件
+  permission_search_newpart: 查询新件信息
+  permission_search_contrast: 查询新旧件校对信息
+  permission_search_report: 查询上报信息
+  permission_search_expense: 查询费用信息
+  permission_search_workflow: 查询流程信息
+  permission_receive_newpart: 领取新件确认
+  permission_search_car_buying: 查询购车信息
+  permission_search_part_buying: 查询购件信息
+  permission_search_complaint: 查询投诉信息
+  permission_search_consulting: 查询咨询信息
+  permission_search_question: 查询问题信息
+  permission_search_message: 查询短信
+  permission_search_item: 查询配件厂家设置
+  permission_search_warehouse: 查询配件库
+  permission_home_workflow: 首页
+
+  feature_module_customers: 客户模块
+  feature_module_dispatchings: 派工模块
+  feature_module_vehicles: 车辆模块
+  feature_module_owners: 车主模块
+  feature_module_faults: 故障模块
+  feature_module_oldparts: 旧件模块
+  feature_module_indirectparts: 间接旧件模块
+  feature_module_newparts: 新件模块
+  feature_module_contrasts: 新旧件校对模块
+  feature_module_reports: 上报模块
+  feature_module_expenses: 费用模块
+  feature_module_workflows: 流程模块
+  feature_module_car_buyings: 购车问题模块
+  feature_module_complaints: 投诉问题模块
+  feature_module_consultings: 咨询问题模块
+  feature_module_part_buyings: 购件问题模块
+  feature_module_questions: 客户问题模块
+  feature_module_messages: 短信模块
+  feature_module_items: 配件厂家设置模块
+  feature_module_warehouses: 配件库模块
+# 权限列表结束
+# devise 汉化
+  devise:
+    button:
+      sign_in: "登录"
+      sign_out: "退出"
+      sign_up: "注册"
+      save: "保存"
+    links:
+      sign_in: "登录"
+      sign_up: "注册"
+      sign_out: "退出"
+      forget_password: "忘记密码?"
+      sign_in_with: "登录为"   #好晕
+      didnot_receive_confirmation_instructions: "没有收到确认信息"
+      didnot_receive_unlock_instructions: "没有收到解锁信息"
+    failure:
+      already_authenticated: "你已经登录。"
+      unauthenticated: "继续操作前请注册或者登录."
+      unconfirmed: "请先激活您的帐号"
+      locked: "您的帐号已被锁定."
+      invalid: "邮箱或密码错误"
+      invalid_token: "认证码无效."
+      timeout: "您已登录超时，请重新登录."
+      inactive: "您还没有激活帐户."
+    sessions:
+      signin: "登录"
+      signup: "注册用户"
+      signed_in: "登录成功."
+      signed_out: "退出成功."
+    passwords:
+      send_instructions: "几分后，您将收到重置密码的电子邮件."
+      updated: "您的密码已修改成功，请重新登录."
+    confirmations:
+      send_instructions: "几分后，您将收到帐号激活的电子邮件."
+      confirmed: "您的帐号已经激活，请登录."
+    registrations:
+      destroy: "删除"
+      sign_up: "注册"
+      signed_up: "您的帐号已注册成功，如无意外，您将地收到一封确认邮件."
+      updated: "帐号资料更新成功."
+      destroyed: "再见！您的帐户已成功注销。我们希望很快可以再见到您."
+      inactive_signed_up: "虽然您已经注册成功,但因为%{reason},所以您依然无法登录."
+    unlocks:
+      send_instructions: "几分后，您将收到一封帐号解锁的邮件."
+      unlocked: "您的帐号已成功解锁，请登录."
+    mailer:
+      confirmation_instructions:
+        subject: "确认信息"
+      reset_password_instructions:
+        subject: "重置密码信息"
+      unlock_instructions:
+        subject: "解锁信息"
+# devise汉化结束

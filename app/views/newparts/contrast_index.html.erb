@@ -1,0 +1,86 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "newpart" %>
+<% end %>
+<div class="main-content">
+    <div class="admin-content" id="oldpart_content">
+        <h2>新旧件校对表<span class="info"></span></h2>
+        <input type="hidden" class="inp inp2" id="J-oldpart_id" value=""/>
+        <!--新增校对框{-->
+        <div class="oldpart_window">
+            <!----J-ind_new{{---->
+            <div class="form-oldpart" id="J-ind_new">
+                <h3>添加可替换新件</h3>
+                <form method="" action="">
+                    <dl>
+                        <dt>新件名称</dt>
+                        <dd>
+                          <input type="text" class="inp inp2" id="J-new_name" value="newpart"/></dd>
+                        <dt>新件图号</dt>
+                        <dd>
+                          <input type="text" class="inp inp2" id="J-new_drawing"/></dd>
+                        <dt>新件类别</dt>
+                        <dd>
+                            <div class="radio" id="J-new_category">
+                                <input type="radio" id="J-new_category1" name="new_category" value="潍柴" /><label for="J-new_category1">潍柴</label>
+                                <input type="radio" id="J-new_category2" name="new_category" value="北奔" /><label for="J-new_category2">北奔</label>
+                                <input type="radio" id="J-new_category3" name="new_category" value="陕汽" /><label for="J-new_category3">陕汽</label>
+                                <input type="radio" id="J-new_category4" name="new_category" value="法士特" /><label for="J-new_category4">法士特</label>
+                            </div>
+                        </dd>
+                        <dt>厂家名称</dt>
+                        <dd><input type="text" class="inp inp2" id="J-new_factory"/></dd>
+                        <dt>厂家代码</dt>
+                        <dd><input type="text" class="inp inp2" id="J-new_factory_code"/></dd>
+                        <dt>新件流水号</dt>
+                        <dd><input type="text" class="inp inp2" id="J-new_running_number"/></dd>
+                        <dt>新件价格</dt>
+                        <dd><input tyep="text" class="inp inp2" id="J-new_price" value=""/></dd>
+                    </dl>
+                </form>
+                <div class="tool-bar clrfix">
+                    <button class="submit-btn" id="J-new_save" >保存</button>
+                    <button class="submit-btn" id="J-new_continue" >继续添加可替换新件</button>
+                    <button class="cancel-btn" >取消</button>
+                </div>
+            </div>
+            <!----}}J-new---->
+            <!----J-oldpart{{---->
+            <div class="form-oldpart" id="J-oldpart_new">
+                <h3>添加旧件</h3>
+                <form method="" action="">
+                    <dl>
+                        <dt>旧件名称</dt>
+                        <dd>
+                          <input type="text" class="inp inp2" id="J-name" value="oldpart"/></dd>
+                        <dt>旧件图号</dt>
+                        <dd>
+                          <input type="text" class="inp inp2" id="J-drawing"/></dd>
+                        <dt>旧件类别</dt>
+                        <dd>
+                            <div class="radio" id="J-category">
+                                <input type="radio" id="J-category1" name="category" value="潍柴" /><label for="J-category1">潍柴</label>
+                                <input type="radio" id="J-category2" name="category" value="北奔" /><label for="J-category2">北奔</label>
+                                <input type="radio" id="J-category3" name="category" value="陕汽" /><label for="J-category3">陕汽</label>
+                                <input type="radio" id="J-category4" name="category" value="法士特" /><label for="J-category4">法士特</label>
+                            </div>
+                        </dd>
+                        <dt>厂家名称</dt>
+                        <dd><input type="text" class="inp inp2" id="J-factory"/></dd>
+                        <dt>厂家代码</dt>
+                        <dd><input type="text" class="inp inp2" id="J-factory_code"/></dd>
+                        <dt>旧件流水号</dt>
+                        <dd><input type="text" class="inp inp2" id="J-running_number"/></dd>
+                    </dl>
+                </form>
+                <div class="tool-bar clrfix">
+                    <button class="submit-btn" id="J-direct_continue">添加替换新件</button>
+                    <button class="cancel-btn" >取消</button>
+                </div>
+            </div>
+            <!----}}J-oldpar_new---->
+        </div>
+        <!--}新增校对框-->
+    </div>
+</div>

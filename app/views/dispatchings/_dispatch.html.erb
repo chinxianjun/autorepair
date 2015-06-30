@@ -1,0 +1,30 @@
+<!----J-add_dispatching{---->
+<div class="content-set" id="J-add_dispatching" style="display: none;">
+    <div class="hd">
+        <h2>派工</h2>
+    </div>
+    <div class="bd">
+        <dl>
+            <dt>维修工程师</dt>
+            <dd>
+                <div class="checkbox">
+                  <% if @repairer.users.any? %>
+                    <% @repairer.users.each do |user| %>
+                      <% unless user.status == "busy" %>
+                          <input type="checkbox" id="<%= user.id %>"
+                                 name="" value="<%= user.fullname %>" />
+                          <label for="<%= user.id %>">
+                                 <%= user.fullname %></label>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </div>
+            </dd><br/>
+            <dt>派工管理员</dt>
+            <dd><input type="text" readonly="readonly" class="inp inp2"
+                id = "J-dispatcher"
+                value="<%= current_user.fullname %>" />
+            </dd>
+        </dl><br/>
+    </div>
+</div>

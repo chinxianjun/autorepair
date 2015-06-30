@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  model: MyString
+  chassis_number: MyString
+  engine: MyString
+  engine_number: MyString
+  repair_id: 1
+  fault_id: 1
+  customer_id: 1
+  owner_id: 1
+
+two:
+  model: MyString
+  chassis_number: MyString
+  engine: MyString
+  engine_number: MyString
+  repair_id: 1
+  fault_id: 1
+  customer_id: 1
+  owner_id: 1

@@ -1,0 +1,86 @@
+<% content_for :head do %>
+    <%= javascript_include_tag "jquery.ui.datepicker-zh-CN" %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "customer" %>
+    <%= javascript_include_tag "workflow" %>
+    <%= javascript_include_tag "dispatching" %>
+    <%= javascript_include_tag "vehicle" %>
+    <%= javascript_include_tag "oldpart" %>
+<% end %>
+
+<!---main-content{{{{--->
+<div class="main-content">
+  <!---admin-content{{{{{--->
+  <div class="admin-content">
+    <h2>我的流程<span class="info"></span></h2>
+
+    <p><%#= current_user.companies %></p>
+
+    <div class="question_menu">
+      <ul>
+        <% if current_user.allowed_to?(current_user, :view_dispatching, @current_company) %>
+            <li class="flowbar">
+              <a href="/dispatchings/dispatch_flow" id="dispatching" class="flow"><span>派工信息(0)</span></a></li>
+        <% end %>
+        <% if current_user.allowed_to?(current_user, :view_vehicle, @current_company) %>
+            <li class="flowbar">
+              <a href="/vehicles/vehicle_flow" id="vehicle" class="flow-button flow"><span>登记车辆(0)</span></a></li>
+        <% end %>
+        <% if current_user.allowed_to?(current_user, :view_fault, @current_company) %>
+            <li class="flowbar"><a href="/faults/fault_flow" id="fault" class="flow"><span>故障处理(0)</span></a>
+            </li>
+        <% end %>
+        <% if current_user.allowed_to?(current_user, :view_newpart, @current_company) %>
+            <li class="flowbar">
+              <a href="/newparts/newpart_flow" id="newpart" class="flow"><span>领取新件(0)</span></a></li>
+        <% end %>
+        <%# if current_user.allowed_to?(current_user, :view_report, @current_company) %>
+        <!--<li class="flowbar"><a href="/reports/report_flow" id="report" class=""><span>上报信息(0)</span></a></li>-->
+        <%# end %>
+        <%# if current_user.allowed_to?(current_user, :view_expense, @current_company) %>
+        <!--<li class="flowbar"><a href="/expenses/expense_flow" id="expense" class=""><span>费用管理(0)</span></a></li>-->
+        <%# end %>
+      </ul>
+    </div>
+    <!---}}}}}}tool-bar clrfix--->
+    <!--table样式{-->
+    <table class="admin-table table-style1">
+        <thead>
+            <tr>
+                <th class="sa lt">&nbsp;</th>
+                <th>流程号</th>
+                <td>状态</td>
+                <td>创建人</td>
+                <td>维修工程师</td>
+                <td>创建时间</td>
+            </tr>
+        </thead>
+        <tbody>
+          <% if @workflow_vehicle.size > 0 %>
+            <% @workflow_vehicle.each do |workflow| %>
+                <tr>
+                    <th class="sa"><input type="checkbox" name="order" value="1" class="select-all" /></th>
+                    <th><%= workflow.id %></th>
+                    <td>
+                      <a href="/vehicles/<%= workflow.vehicle_workflowship.vehicle.id %>/edit?wid=<%= workflow.id %>" class="fun-link text4 product-name">
+                      <span class="ui-icon ui-icon-pencil"></span>登记车辆</a>
+                    </td>
+                    <td><%= workflow.creator %></td>
+                    <td>
+                      <% if workflow.users.any? %>
+                        <%= workflow.users.first.fullname %>
+                      <% end %>
+                    </td>
+                    <td><%= workflow.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+                </tr>
+            <% end %>
+          <% else %>
+            <tr></tr>
+          <% end %>
+        </tbody>
+    </table>
+    <!--}table样式-->
+</div>
+<!---}}}}admin-content--->
+</div>
+<!---}}}}main-content--->

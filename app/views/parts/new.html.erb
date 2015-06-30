@@ -1,0 +1,33 @@
+<%= content_for :head do %>
+    <%= javascript_include_tag "user" %>
+    <%= javascript_include_tag "part" %>
+<% end %>
+<div class="main-content">
+  <div class="admin-content" id="oldpart_content">
+    <h2>创建配件库<span class="info"></span></h2>
+      <!----J-ind_new{{---->
+      <div class="form-oldpart ui-widget" id="J-part_new" style="height: 190px;">
+        <form method="" action="">
+          <dl>
+            <dt>配件库名称</dt>
+            <dd>
+              <input type="text" class="inp inp2 autocomplete" id="J-part_name" value="" /></dd>
+            <dt>配件库管理员</dt>
+            <dd>
+              <input type="text" class="inp inp2" id="J-part_manager"/></dd>
+            <dt>配件库类别</dt>
+            <dd>
+              <div class="radio" id="J-part_category">
+                <input type="radio" id="J-part_category1" name="part_category" value="旧件" /><label for="J-part_category1">旧件</label>
+                <input type="radio" id="J-part_category2" name="part_category" value="新件" /><label for="J-part_category2">新件</label>
+              </div>
+            </dd>
+          </dl>
+        </form>
+        <div class="tool-bar clrfix">
+          <button class="submit-btn" id="J-part_save">保存</button>
+          <button class="cancel-btn" >取消</button>
+        </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= stylesheet_link_tag "jquery.tooltip" %>
+    <%= javascript_include_tag "jquery.tooltip" %>
+<% end %>
+
+<!----main-content{{{{---->
+<div class="main-content">
+  <!----admin-content{{{{{---->
+  <div class="admin-content">
+    <h2>状态列表<span class="info"></span>
+      <% if current_user.allowed_to?(current_user, :add_customer, @current_company) %>
+          <button class="newStatus add-btn fr">添加状态</button><% url = request.url %>
+      <% end %>
+    </h2>
+    <%= form_tag statuses_path, :method => "get", :id => "statuses_search" do %>
+        <div class="tool-bar clrfix">
+          <%#= label_tag :column, "客户姓名或电话" %>
+          <%= text_field_tag :column, params[:column], :class => "inp" %>
+          <%= button_tag "查询", :name => nil, :class => "search-btn" %>
+        </div>
+        <div id="statuses"><%= render 'statuses' %></div>
+    <% end %>
+  </div>
+  <!----}admin-content---->
+</div>
+<!----main-content---->

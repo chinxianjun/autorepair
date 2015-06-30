@@ -1,0 +1,48 @@
+<%= content_for :head do %>
+    <%= stylesheet_link_tag "customer_business" %>
+    <%= stylesheet_link_tag "jquery.tooltip" %>
+    <%= javascript_include_tag "jquery.tooltip" %>
+    <%= stylesheet_link_tag "common" %>
+    <%= javascript_include_tag "member" %>
+    <%= javascript_include_tag "company" %>
+<% end %>
+
+<!----main-content{---->
+<div class="main-content" xmlns="http://www.w3.org/1999/html">
+  <!----admin-content{{---->
+  <div class="admin-content">
+    <h2>
+      <input type="hidden" id="J-company_id" value="<%= @company.id %>"/>
+      <input type="hidden" id="J-warehouse_id" value="<%= @warehouse.id %>"/>
+      <input type="hidden" id="J-member_id" value="<%= @member.id %>"/>
+      <%= link_to "#{@company.name}", setting_admin_company_path(@company) %>&gt;&gt;<%= link_to "#{@warehouse.name}", admin_company_warehouses_path %>&gt;&gt;<%= link_to "成员", admin_company_warehouse_members_path %>&gt;&gt;<%= @user.fullname %><span class="info"></span>
+    </h2>
+
+    <!--编辑成员信息{-->
+    <div>
+      <div class="form-set">
+        <form method="" action="">
+          <dl>
+            <table>
+              <tr>
+                <td>
+                  <% @roles.each do |role| %>
+                      <% if @member.roles.include?(role) %>
+                          <label><input type="checkbox" name="role" value="<%= role.id %>" checked="checked"/><%= role.name %></label>
+                      <% else %>
+                          <label><input type="checkbox" name="role" value="<%= role.id %>"/><%= role.name %></label>
+                      <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            </table>
+          </dl>
+        </form>
+        <div class="tool-bar">
+          <button class="submit-btn updateMember">保存</button>
+        </div>
+      </div>
+    </div>
+    <!--}编辑成员信息-->
+  </div>
+</div>
